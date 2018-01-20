@@ -52,30 +52,14 @@ Animation.prototype.isDone = function () {
     return (this.elapsedTime >= this.totalTime);
 }
 
-function Background(game) {
-    Entity.call(this, game, 0, 400);
-    this.radius = 200;
-}
-
-Background.prototype = new Entity();
-Background.prototype.constructor = Background;
-
-Background.prototype.update = function () {
-}
-
-Background.prototype.draw = function (ctx) {
-    ctx.fillStyle = "SaddleBrown";
-    ctx.fillRect(0,500,800,300);
-    Entity.prototype.draw.call(this);
-}
 
 function Unicorn(game) {
     this.animation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 0, 0, 206, 110, 0.02, 30, true, true);
     this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 618, 334, 174, 138, 0.02, 40, false, true);
     this.jumping = false;
     this.radius = 100;
-    this.ground = 400;
-    Entity.call(this, game, 0, 400);
+    this.ground = 430; // changed from 400
+    Entity.call(this, game, 0, 430); // changed from 400
 }
 
 Unicorn.prototype = new Entity();
@@ -111,11 +95,45 @@ Unicorn.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
+ function Background(game, spritesheet) {
+    this.speed = 1; 
+    this.backgroundWidth = 1018;
+    this.x = 0;
+    this.y = 0;
+    this.spritesheet = spritesheet;
+    this.game = game;
+    this.ctx = game.ctx;
+
+	this.draw = function() {
+        this.x += this.speed;
+         // Scrolling left
+		this.ctx.drawImage(spritesheet, -(this.x), this.y);
+	
+		// Draws image at edge of the first image
+		this.ctx.drawImage(spritesheet, -(this.x - this.backgroundWidth), this.y);
+
+		// Reset after image runs off screen
+		if (this.x >= this.backgroundWidth)
+			this.x = 0;
+	};
+}
+
+Background.prototype.draw = function () {
+    this.ctx.drawImage(this.spritesheet, this.x, this.y);
+};
+
+ Background.prototype.update = function () {
+};
+
+
 // the "main" code begins here
 
 var ASSET_MANAGER = new AssetManager();
 
 ASSET_MANAGER.queueDownload("./img/RobotUnicorn.png");
+ASSET_MANAGER.queueDownload("./img/test_tree_layer.jpg");
+//AM.queueDownload("./img/background_back.png");
+//AM.queueDownload("./img/background_front.png");
 
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
@@ -123,12 +141,12 @@ ASSET_MANAGER.downloadAll(function () {
     var ctx = canvas.getContext('2d');
 
     var gameEngine = new GameEngine();
-    var bg = new Background(gameEngine);
-    var unicorn = new Unicorn(gameEngine);
 
-    gameEngine.addEntity(bg);
-    gameEngine.addEntity(unicorn);
+    var unicorn = new Unicorn(gameEngine);
  
     gameEngine.init(ctx);
     gameEngine.start();
+
+    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/test_tree_layer.jpg")));
+    gameEngine.addEntity(unicorn);
 });
