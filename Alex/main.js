@@ -151,8 +151,8 @@ Bunny.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
- function Background(game, spritesheet) {
-    this.speed = 1; 
+function Background(game, spritesheet) {
+    this.speed = 2; 
     this.backgroundWidth = 1018;
     this.x = 0;
     this.y = 0;
@@ -181,6 +181,36 @@ Background.prototype.draw = function () {
  Background.prototype.update = function () {
 };
 
+function Background2(game, spritesheet) {
+    this.speed = 1; 
+    this.backgroundWidth = 1018;
+    this.x = 0;
+    this.y = 0;
+    this.spritesheet = spritesheet;
+    this.game = game;
+    this.ctx = game.ctx;
+
+	this.draw = function() {
+        this.x += this.speed;
+         // Scrolling left
+		this.ctx.drawImage(spritesheet, -(this.x), this.y);
+	
+		// Draws image at edge of the first image
+		this.ctx.drawImage(spritesheet, -(this.x - this.backgroundWidth), this.y);
+
+		// Reset after image runs off screen
+		if (this.x >= this.backgroundWidth)
+			this.x = 0;
+	};
+}
+
+Background2.prototype.draw = function () {
+    this.ctx.drawImage(this.spritesheet, this.x, this.y);
+};
+
+ Background2.prototype.update = function () {
+};
+
 
 // the "main" code begins here
 
@@ -189,9 +219,8 @@ var ASSET_MANAGER = new AssetManager();
 ASSET_MANAGER.queueDownload("./img/Rev_Bunny.png");
 ASSET_MANAGER.queueDownload("./imgs/Monster/wraith.png");
 ASSET_MANAGER.queueDownload("./imgs/Monster/knight.png");
-ASSET_MANAGER.queueDownload("./img/test_tree_layer.jpg");
-//AM.queueDownload("./img/background_back.png");
-//AM.queueDownload("./img/background_front.png");
+ASSET_MANAGER.queueDownload("./imgs/Background/top_tree_layer.png");
+ASSET_MANAGER.queueDownload("./imgs/Background/back_tree_layer.png");
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -210,7 +239,9 @@ ASSET_MANAGER.downloadAll(function () {
     var wraith = new Wraith(gameEngine, ASSET_MANAGER.getAsset("./imgs/Monster/wraith.png"));
     var mist = new Mist(gameEngine, ASSET_MANAGER.getAsset("./imgs/Monster/knight.png"));
 
-    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/test_tree_layer.jpg")));
+    gameEngine.addEntity(new Background2(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/back_tree_layer.png")));
+    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/top_tree_layer.png")));
+    
     if (getRandomInt(0, 1) === 0) {
         gameEngine.addEntity(wraith);
     } else {
