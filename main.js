@@ -13,7 +13,7 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDu
 }
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
-    var scaleBy = scaleBy || 1;
+    var scaleBy = scaleBy || 1; // make bunny smaller or bigger
     this.elapsedTime += tick;
     if (this.loop) {
         if (this.isDone()) {
@@ -52,20 +52,34 @@ Animation.prototype.isDone = function () {
     return (this.elapsedTime >= this.totalTime);
 }
 
+function Bunny(game) {
+    // bunny sprite: height = 57, width = 58, start frame = 16 to 4 more.
+    // 474w × 360h of sprite sheet
 
-function Unicorn(game) {
-    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 0, 0, 206, 110, 0.02, 30, true, true);
-    this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 618, 334, 174, 138, 0.02, 40, false, true);
+    // columns = 8, row = 6 
+    // frames = 4
+
+    // frameWidth: 474 / 8 = 59.25
+    // frameHeight: 360 / 6 = 60
+
+    // startX: 60 * 4 (5th column) = 240
+    // startY: 57 * 2 (3rd row) = 114
+    
+    // Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse) {
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/Rev_Bunny.png"), 240, 114, 58, 57, 0.15, 4, true, true);
+    //this.animation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 0, 0, 206, 110, 0.02, 30, true, true);
+    this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Rev_Bunny.png"), 0, 0, 62, 57, 0.12, 2, false, true);
+    //this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 618, 334, 174, 138, 0.02, 40, false, true);
     this.jumping = false;
     this.radius = 100;
-    this.ground = 430; // changed from 400
-    Entity.call(this, game, 0, 430); // changed from 400
+    this.ground = 475; // changed from 400
+    Entity.call(this, game, 0, 475); // changed from 400
 }
 
-Unicorn.prototype = new Entity();
-Unicorn.prototype.constructor = Unicorn;
+Bunny.prototype = new Entity();
+Bunny.prototype.constructor = Bunny;
 
-Unicorn.prototype.update = function () {
+Bunny.prototype.update = function () {
     if (this.game.space) this.jumping = true;
     if (this.jumping) {
         if (this.jumpAnimation.isDone()) {
@@ -85,7 +99,7 @@ Unicorn.prototype.update = function () {
     Entity.prototype.update.call(this);
 }
 
-Unicorn.prototype.draw = function (ctx) {
+Bunny.prototype.draw = function (ctx) {
     if (this.jumping) {
         this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x + 17, this.y - 34);
     }
@@ -130,7 +144,7 @@ Background.prototype.draw = function () {
 
 var ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.queueDownload("./img/RobotUnicorn.png");
+ASSET_MANAGER.queueDownload("./img/Rev_Bunny.png");
 ASSET_MANAGER.queueDownload("./img/test_tree_layer.jpg");
 //AM.queueDownload("./img/background_back.png");
 //AM.queueDownload("./img/background_front.png");
@@ -142,11 +156,11 @@ ASSET_MANAGER.downloadAll(function () {
 
     var gameEngine = new GameEngine();
 
-    var unicorn = new Unicorn(gameEngine);
+    var bunny = new Bunny(gameEngine);
  
     gameEngine.init(ctx);
     gameEngine.start();
 
     gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/test_tree_layer.jpg")));
-    gameEngine.addEntity(unicorn);
+    gameEngine.addEntity(bunny);
 });
