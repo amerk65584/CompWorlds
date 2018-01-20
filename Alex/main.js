@@ -13,7 +13,7 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDu
 }
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
-    var scaleBy = scaleBy || 1;
+    var scaleBy = scaleBy || 1; // make bunny smaller or bigger
     this.elapsedTime += tick;
     if (this.loop) {
         if (this.isDone()) {
@@ -52,20 +52,60 @@ Animation.prototype.isDone = function () {
     return (this.elapsedTime >= this.totalTime);
 }
 
+function Wraith(game, sprite) {
+    this.animation = new Animation(sprite, 0, 0, 90, 105, .15, 4, true, true);
+    this.ctx = game.ctx;
+    this.x = 0;
+    this.y = 0;
+    Entity.call(this, game, 0, 330);
+} 
 
-function Unicorn(game) {
-    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 0, 0, 206, 110, 0.02, 30, true, true);
-    this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 618, 334, 174, 138, 0.02, 40, false, true);
-    this.jumping = false;
-    this.radius = 100;
-    this.ground = 430; // changed from 400
-    Entity.call(this, game, 0, 430); // changed from 400
+Wraith.prototype = new Entity();
+Wraith.prototype.constructor = Wraith;
+
+Wraith.prototype.update = function () {
+    Entity.prototype.update.call(this);
 }
 
-Unicorn.prototype = new Entity();
-Unicorn.prototype.constructor = Unicorn;
 
-Unicorn.prototype.update = function () {
+Wraith.prototype.draw = function() {
+    console.log(this.game);
+    console.log(this.ctx);
+    console.log(this.x);
+    console.log(this.y);
+    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, 2);
+    Entity.prototype.draw.call(this);
+}
+
+
+function Bunny(game) {
+    // bunny sprite: height = 57, width = 58, start frame = 16 to 4 more.
+    // 474w × 360h of sprite sheet
+
+    // columns = 8, row = 6 
+    // frames = 4
+
+    // frameWidth: 474 / 8 = 59.25
+    // frameHeight: 360 / 6 = 60
+
+    // startX: 60 * 4 (5th column) = 240
+    // startY: 57 * 2 (3rd row) = 114
+    
+    // Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse) {
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/Rev_Bunny.png"), 240, 114, 58, 57, 0.15, 4, true, true);
+    //this.animation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 0, 0, 206, 110, 0.02, 30, true, true);
+    this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Rev_Bunny.png"), 0, 0, 62, 57, 0.12, 2, false, true);
+    //this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 618, 334, 174, 138, 0.02, 40, false, true);
+    this.jumping = false;
+    this.radius = 100;
+    this.ground = 475; // changed from 400
+    Entity.call(this, game, 300, 475); // changed from 400
+}
+
+Bunny.prototype = new Entity();
+Bunny.prototype.constructor = Bunny;
+
+Bunny.prototype.update = function () {
     if (this.game.space) this.jumping = true;
     if (this.jumping) {
         if (this.jumpAnimation.isDone()) {
@@ -85,7 +125,7 @@ Unicorn.prototype.update = function () {
     Entity.prototype.update.call(this);
 }
 
-Unicorn.prototype.draw = function (ctx) {
+Bunny.prototype.draw = function (ctx) {
     if (this.jumping) {
         this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x + 17, this.y - 34);
     }
@@ -130,7 +170,8 @@ Background.prototype.draw = function () {
 
 var ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.queueDownload("./img/RobotUnicorn.png");
+ASSET_MANAGER.queueDownload("./img/Rev_Bunny.png");
+ASSET_MANAGER.queueDownload("./imgs/Monster/wraith.png");
 ASSET_MANAGER.queueDownload("./img/test_tree_layer.jpg");
 //AM.queueDownload("./img/background_back.png");
 //AM.queueDownload("./img/background_front.png");
@@ -141,12 +182,13 @@ ASSET_MANAGER.downloadAll(function () {
     var ctx = canvas.getContext('2d');
 
     var gameEngine = new GameEngine();
-
-    var unicorn = new Unicorn(gameEngine);
- 
     gameEngine.init(ctx);
     gameEngine.start();
 
+    var bunny = new Bunny(gameEngine);
+    var wraith = new Wraith(gameEngine, ASSET_MANAGER.getAsset("./imgs/Monster/wraith.png"));
+
     gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/test_tree_layer.jpg")));
-    gameEngine.addEntity(unicorn);
+    gameEngine.addEntity(wraith);
+    gameEngine.addEntity(bunny);
 });
