@@ -53,8 +53,10 @@ Animation.prototype.isDone = function () {
 }
 
 function Wraith(game, sprite) {
+    // Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse)
     this.animation = new Animation(sprite, 0, 0, 90, 105, .15, 4, true, true);
     this.ctx = game.ctx;
+    //this.animation.scaleBy(-1);
     this.x = 0;
     this.y = 0;
     Entity.call(this, game, 0, 330);
@@ -67,16 +69,30 @@ Wraith.prototype.update = function () {
     Entity.prototype.update.call(this);
 }
 
-
 Wraith.prototype.draw = function() {
-    console.log(this.game);
-    console.log(this.ctx);
-    console.log(this.x);
-    console.log(this.y);
     this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, 2);
     Entity.prototype.draw.call(this);
 }
 
+function Mist(game, sprite) {
+    this.animation = new Animation(sprite, 0, 105, 104, 105, .15, 6, true, true);
+    this.ctx = game.ctx;
+    this.x = 0;
+    this.y = 0;
+    Entity.call(this, game, 0, 330);
+}
+
+Mist.prototype = new Entity();
+Mist.prototype.constructor = Mist;
+
+Mist.prototype.update = function() {
+    Entity.prototype.update.call(this);
+}
+
+Mist.prototype.draw = function() {
+    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, 2);
+    Entity.prototype.draw.call(this);
+}
 
 function Bunny(game) {
     // bunny sprite: height = 57, width = 58, start frame = 16 to 4 more.
@@ -99,7 +115,7 @@ function Bunny(game) {
     this.jumping = false;
     this.radius = 100;
     this.ground = 475; // changed from 400
-    Entity.call(this, game, 300, 475); // changed from 400
+    Entity.call(this, game, 200, 475); // changed from 400
 }
 
 Bunny.prototype = new Entity();
@@ -172,9 +188,14 @@ var ASSET_MANAGER = new AssetManager();
 
 ASSET_MANAGER.queueDownload("./img/Rev_Bunny.png");
 ASSET_MANAGER.queueDownload("./imgs/Monster/wraith.png");
+ASSET_MANAGER.queueDownload("./imgs/Monster/knight.png");
 ASSET_MANAGER.queueDownload("./img/test_tree_layer.jpg");
 //AM.queueDownload("./img/background_back.png");
 //AM.queueDownload("./img/background_front.png");
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
@@ -187,8 +208,13 @@ ASSET_MANAGER.downloadAll(function () {
 
     var bunny = new Bunny(gameEngine);
     var wraith = new Wraith(gameEngine, ASSET_MANAGER.getAsset("./imgs/Monster/wraith.png"));
+    var mist = new Mist(gameEngine, ASSET_MANAGER.getAsset("./imgs/Monster/knight.png"));
 
     gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/test_tree_layer.jpg")));
-    gameEngine.addEntity(wraith);
+    if (getRandomInt(0, 1) === 0) {
+        gameEngine.addEntity(wraith);
+    } else {
+        gameEngine.addEntity(mist);
+    }
     gameEngine.addEntity(bunny);
 });
