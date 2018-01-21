@@ -110,7 +110,7 @@ function Bunny(game) {
     // Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse) {
     this.animation = new Animation(ASSET_MANAGER.getAsset("./img/Rev_Bunny.png"), 240, 114, 58, 57, 0.15, 4, true, true);
     //this.animation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 0, 0, 206, 110, 0.02, 30, true, true);
-    this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Rev_Bunny.png"), 0, 0, 62, 57, 0.12, 2, false, true);
+    this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Rev_Bunny.png"), 0, 0, 62, 57, 0.25, 2, false, true);
     //this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 618, 334, 174, 138, 0.02, 40, false, true);
     this.jumping = false;
     this.radius = 100;
@@ -129,7 +129,7 @@ Bunny.prototype.update = function () {
             this.jumping = false;
         }
         var jumpDistance = this.jumpAnimation.elapsedTime / this.jumpAnimation.totalTime;
-        var totalHeight = 200;
+        var totalHeight = 100;
 
         if (jumpDistance > 0.5)
             jumpDistance = 1 - jumpDistance;
@@ -143,7 +143,7 @@ Bunny.prototype.update = function () {
 
 Bunny.prototype.draw = function (ctx) {
     if (this.jumping) {
-        this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x + 17, this.y - 34);
+        this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y - 34);
     }
     else {
         this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
