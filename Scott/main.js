@@ -95,6 +95,89 @@ Unicorn.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
+//------------------------------------------------------
+
+function Crow(game) {
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/crowFly.png"), 0, 0, 50, 50, 0.10, 5, true, true);
+    this.x = 0;
+    this.speed = 1;
+    Entity.call(this, game, 400, 200); // changed from 400
+    // this.draw = function() {
+    //     this.x += this.speed;
+    //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
+    // }
+}
+
+Crow.prototype = new Entity();
+Crow.prototype.constructor = Crow;
+
+Crow.prototype.update = function () {
+    if (this.x < -800) this.x = 230;
+
+   Entity.prototype.update.call(this);
+}
+
+Crow.prototype.draw = function (ctx) {
+   
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+
+
+//-----------------------------------------------------
+function Stumpy(game) {
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/stumpy.png"), 0, 60, 74, 60, 0.15, 4, true, true);
+    this.x = 0;
+    this.speed = 1;
+    Entity.call(this, game, 300, 430); // changed from 400
+    // this.draw = function() {
+    //     this.x += this.speed;
+    //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
+    // }
+}
+
+Stumpy.prototype = new Entity();
+Stumpy.prototype.constructor = Stumpy;
+
+Stumpy.prototype.update = function () {
+    if (this.x < -800) this.x = 230;
+
+   Entity.prototype.update.call(this);
+}
+
+Stumpy.prototype.draw = function (ctx) {
+   
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+//-------------------------------------------------------------------------
+function Bear(game) {
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/bear.png"), 0, 130, 98, 65, 0.10, 6, true, true);
+    this.x = 0;
+    this.speed = 1;
+    Entity.call(this, game, 400, 430); // changed from 400
+    // this.draw = function() {
+    //     this.x += this.speed;
+    //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
+    // }
+}
+
+Bear.prototype = new Entity();
+Bear.prototype.constructor = Bear;
+
+Bear.prototype.update = function () {
+    if (this.x < -800) this.x = 230;
+
+   Entity.prototype.update.call(this);
+}
+
+Bear.prototype.draw = function (ctx) {
+   
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+
+
  function Background(game, spritesheet) {
     this.speed = 1; 
     this.backgroundWidth = 1018;
@@ -131,6 +214,9 @@ Background.prototype.draw = function () {
 var ASSET_MANAGER = new AssetManager();
 
 ASSET_MANAGER.queueDownload("./img/RobotUnicorn.png");
+ASSET_MANAGER.queueDownload("./img/crowFly.png");
+ASSET_MANAGER.queueDownload("./img/stumpy.png");
+ASSET_MANAGER.queueDownload("./img/bear.png");
 ASSET_MANAGER.queueDownload("./img/test_tree_layer.jpg");
 //AM.queueDownload("./img/background_back.png");
 //AM.queueDownload("./img/background_front.png");
@@ -143,10 +229,17 @@ ASSET_MANAGER.downloadAll(function () {
     var gameEngine = new GameEngine();
 
     var unicorn = new Unicorn(gameEngine);
+    var crow = new Crow(gameEngine);
+    var stumpy = new Stumpy(gameEngine);
+    var bear = new Bear(gameEngine);
  
     gameEngine.init(ctx);
     gameEngine.start();
 
     gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/test_tree_layer.jpg")));
+
     gameEngine.addEntity(unicorn);
+    gameEngine.addEntity(crow);
+    gameEngine.addEntity(stumpy);
+    gameEngine.addEntity(bear);
 });
