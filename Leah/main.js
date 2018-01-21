@@ -55,6 +55,48 @@ Animation.prototype.isDone = function () {
     return (this.elapsedTime >= this.totalTime);
 }
 
+function Wraith(game, sprite) {
+    // Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse)
+    this.animation = new Animation(sprite, 0, 0, 90, 105, .15, 4, true, true);
+    this.ctx = game.ctx;
+    //this.animation.scaleBy(-1);
+    this.x = 0;
+    this.y = 0;
+    Entity.call(this, game, 0, 330);
+} 
+
+Wraith.prototype = new Entity();
+Wraith.prototype.constructor = Wraith;
+
+Wraith.prototype.update = function () {
+    Entity.prototype.update.call(this);
+}
+
+Wraith.prototype.draw = function() {
+    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, 2);
+    Entity.prototype.draw.call(this);
+}
+
+function Mist(game, sprite) {
+    this.animation = new Animation(sprite, 0, 105, 104, 105, .15, 6, true, true);
+    this.ctx = game.ctx;
+    this.x = 0;
+    this.y = 0;
+    Entity.call(this, game, 0, 330);
+}
+
+Mist.prototype = new Entity();
+Mist.prototype.constructor = Mist;
+
+Mist.prototype.update = function() {
+    Entity.prototype.update.call(this);
+}
+
+Mist.prototype.draw = function() {
+    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, 2);
+    Entity.prototype.draw.call(this);
+}
+
 function Bunny(game) {
     // bunny sprite: height = 57, width = 58, start frame = 16 to 4 more.
     // 474w × 360h of sprite sheet
@@ -71,12 +113,12 @@ function Bunny(game) {
     // Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse) {
     this.animation = new Animation(ASSET_MANAGER.getAsset("./img/Rev_Bunny.png"), 240, 114, 58, 57, 0.15, 4, true, true);
     //this.animation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 0, 0, 206, 110, 0.02, 30, true, true);
-    this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Rev_Bunny.png"), 0, 0, 62, 57, 0.12, 2, false, true);
+    this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Rev_Bunny.png"), 70, 0, 62, 57, .75, 1, false, true);
     //this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 618, 334, 174, 138, 0.02, 40, false, true);
     this.jumping = false;
     this.radius = 100;
     this.ground = 475; // changed from 400
-    Entity.call(this, game, 0, 475); // changed from 400
+    Entity.call(this, game, 200, 475); // changed from 400
 }
 
 Bunny.prototype = new Entity();
@@ -89,8 +131,8 @@ Bunny.prototype.update = function () {
             this.jumpAnimation.elapsedTime = 0;
             this.jumping = false;
         }
-        var jumpDistance = this.jumpAnimation.elapsedTime / this.jumpAnimation.totalTime;
-        var totalHeight = 200;
+        var jumpDistance = (this.jumpAnimation.elapsedTime / this.jumpAnimation.totalTime) * 1.12;
+        var totalHeight = 100;
 
         if (jumpDistance > 0.5)
             jumpDistance = 1 - jumpDistance;
@@ -98,13 +140,14 @@ Bunny.prototype.update = function () {
         //var height = jumpDistance * 2 * totalHeight;
         var height = totalHeight*(-4 * (jumpDistance * jumpDistance - jumpDistance));
         this.y = this.ground - height;
+        //console.log("Y axis" + this.y);
     }
     Entity.prototype.update.call(this);
 }
 
 Bunny.prototype.draw = function (ctx) {
     if (this.jumping) {
-        this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x + 17, this.y - 34);
+        this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y - 34);
     }
     else {
         this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
@@ -112,9 +155,12 @@ Bunny.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
- function Background(game, spritesheet) {
-    this.speed = 1; 
-    this.backgroundWidth = 1018;
+
+// Backgound Object
+
+ function Background(game, spritesheet, speed) {
+    this.speed = speed; 
+    this.backgroundWidth = 1017;
     this.x = 0;
     this.y = 0;
     this.spritesheet = spritesheet;
@@ -148,9 +194,13 @@ Background.prototype.draw = function () {
 var ASSET_MANAGER = new AssetManager();
 
 ASSET_MANAGER.queueDownload("./img/Rev_Bunny.png");
-ASSET_MANAGER.queueDownload("./img/test_tree_layer.jpg");
-//AM.queueDownload("./img/background_back.png");
-//AM.queueDownload("./img/background_front.png");
+ASSET_MANAGER.queueDownload("./img/tree_layer_0.png");
+ASSET_MANAGER.queueDownload("./img/tree_layer_1.png");
+ASSET_MANAGER.queueDownload("./img/tree_layer_2.png");
+ASSET_MANAGER.queueDownload("./img/tree_layer_3.png");
+ASSET_MANAGER.queueDownload("./img/tree_layer_4.png");
+ASSET_MANAGER.queueDownload("./img/tree_layer_5.png");
+
 
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
@@ -160,10 +210,26 @@ ASSET_MANAGER.downloadAll(function () {
     var gameEngine = new GameEngine();
 
     var bunny = new Bunny(gameEngine);
+    // var wraith = new Wraith(gameEngine, ASSET_MANAGER.getAsset("./imgs/Monster/wraith.png"));
+    // var mist = new Mist(gameEngine, ASSET_MANAGER.getAsset("./imgs/Monster/knight.png"));
+
  
     gameEngine.init(ctx);
     gameEngine.start();
 
-    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/test_tree_layer.jpg")));
+    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_5.png"), 0));
+    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_4.png"), 1.4));
+    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_3.png"), 1.5));
+    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_2.png"), 1.8));
+    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_1.png"), 1.9));
+    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_0.png"), .5));
+    
+    
+    // if (getRandomInt(0, 1) === 0) {
+    //     gameEngine.addEntity(wraith);
+    // } else {
+    //     gameEngine.addEntity(mist);
+    // }
+
     gameEngine.addEntity(bunny);
 });
