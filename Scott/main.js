@@ -51,29 +51,42 @@ Animation.prototype.currentFrame = function () {
 Animation.prototype.isDone = function () {
     return (this.elapsedTime >= this.totalTime);
 }
+function Bunny(game) {
+    // bunny sprite: height = 57, width = 58, start frame = 16 to 4 more.
+    // 474w × 360h of sprite sheet
 
+    // columns = 8, row = 6 
+    // frames = 4
 
-function Unicorn(game) {
-    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 0, 0, 206, 110, 0.02, 30, true, true);
-    this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 618, 334, 174, 138, 0.02, 40, false, true);
+    // frameWidth: 474 / 8 = 59.25
+    // frameHeight: 360 / 6 = 60
+
+    // startX: 60 * 4 (5th column) = 240
+    // startY: 57 * 2 (3rd row) = 114
+    
+    // Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse) {
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/Rev_Bunny.png"), 240, 114, 58, 57, 0.15, 4, true, true);
+    //this.animation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 0, 0, 206, 110, 0.02, 30, true, true);
+    this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Rev_Bunny.png"), 70, 0, 62, 57, .75, 1, false, true);
+    //this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 618, 334, 174, 138, 0.02, 40, false, true);
     this.jumping = false;
     this.radius = 100;
-    this.ground = 430; // changed from 400
-    Entity.call(this, game, 0, 430); // changed from 400
+    this.ground = 475; // changed from 400
+    Entity.call(this, game, 200, 475); // changed from 400
 }
 
-Unicorn.prototype = new Entity();
-Unicorn.prototype.constructor = Unicorn;
+Bunny.prototype = new Entity();
+Bunny.prototype.constructor = Bunny;
 
-Unicorn.prototype.update = function () {
+Bunny.prototype.update = function () {
     if (this.game.space) this.jumping = true;
     if (this.jumping) {
         if (this.jumpAnimation.isDone()) {
             this.jumpAnimation.elapsedTime = 0;
             this.jumping = false;
         }
-        var jumpDistance = this.jumpAnimation.elapsedTime / this.jumpAnimation.totalTime;
-        var totalHeight = 200;
+        var jumpDistance = (this.jumpAnimation.elapsedTime / this.jumpAnimation.totalTime) * 1.12;
+        var totalHeight = 100;
 
         if (jumpDistance > 0.5)
             jumpDistance = 1 - jumpDistance;
@@ -81,19 +94,63 @@ Unicorn.prototype.update = function () {
         //var height = jumpDistance * 2 * totalHeight;
         var height = totalHeight*(-4 * (jumpDistance * jumpDistance - jumpDistance));
         this.y = this.ground - height;
+        //console.log("Y axis" + this.y);
     }
     Entity.prototype.update.call(this);
 }
 
-Unicorn.prototype.draw = function (ctx) {
+Bunny.prototype.draw = function (ctx) {
     if (this.jumping) {
-        this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x + 17, this.y - 34);
+        this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y - 34);
     }
     else {
         this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
     }
     Entity.prototype.draw.call(this);
 }
+
+
+// function Unicorn(game) {
+//     this.animation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 0, 0, 206, 110, 0.02, 30, true, true);
+//     this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 618, 334, 174, 138, 0.02, 40, false, true);
+//     this.jumping = false;
+//     this.radius = 100;
+//     this.ground = 430; // changed from 400
+//     Entity.call(this, game, 0, 430); // changed from 400
+// }
+
+// Unicorn.prototype = new Entity();
+// Unicorn.prototype.constructor = Unicorn;
+
+// Unicorn.prototype.update = function () {
+//     if (this.game.space) this.jumping = true;
+//     if (this.jumping) {
+//         if (this.jumpAnimation.isDone()) {
+//             this.jumpAnimation.elapsedTime = 0;
+//             this.jumping = false;
+//         }
+//         var jumpDistance = this.jumpAnimation.elapsedTime / this.jumpAnimation.totalTime;
+//         var totalHeight = 200;
+
+//         if (jumpDistance > 0.5)
+//             jumpDistance = 1 - jumpDistance;
+
+//         //var height = jumpDistance * 2 * totalHeight;
+//         var height = totalHeight*(-4 * (jumpDistance * jumpDistance - jumpDistance));
+//         this.y = this.ground - height;
+//     }
+//     Entity.prototype.update.call(this);
+// }
+
+// Unicorn.prototype.draw = function (ctx) {
+//     if (this.jumping) {
+//         this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x + 17, this.y - 34);
+//     }
+//     else {
+//         this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+//     }
+//     Entity.prototype.draw.call(this);
+// }
 
 //------------------------------------------------------
 
@@ -152,7 +209,7 @@ Stumpy.prototype.draw = function (ctx) {
 }
 //-------------------------------------------------------------------------
 function Bear(game) {
-    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/bear.png"), 0, 130, 98, 65, 0.10, 6, true, true);
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/bearWalk.png"), 0, 0, 98, 65, 0.10, 5, true, true);
     this.x = 0;
     this.speed = 1;
     Entity.call(this, game, 400, 430); // changed from 400
@@ -213,13 +270,12 @@ Background.prototype.draw = function () {
 
 var ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.queueDownload("./img/RobotUnicorn.png");
+ASSET_MANAGER.queueDownload("./img/Rev_Bunny.png");
 ASSET_MANAGER.queueDownload("./img/crowFly.png");
 ASSET_MANAGER.queueDownload("./img/stumpy.png");
-ASSET_MANAGER.queueDownload("./img/bear.png");
+ASSET_MANAGER.queueDownload("./img/bearWalk.png");
 ASSET_MANAGER.queueDownload("./img/test_tree_layer.jpg");
-//AM.queueDownload("./img/background_back.png");
-//AM.queueDownload("./img/background_front.png");
+
 
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
@@ -228,7 +284,7 @@ ASSET_MANAGER.downloadAll(function () {
 
     var gameEngine = new GameEngine();
 
-    var unicorn = new Unicorn(gameEngine);
+    var bunny = new Bunny(gameEngine);
     var crow = new Crow(gameEngine);
     var stumpy = new Stumpy(gameEngine);
     var bear = new Bear(gameEngine);
@@ -238,7 +294,7 @@ ASSET_MANAGER.downloadAll(function () {
 
     gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/test_tree_layer.jpg")));
 
-    gameEngine.addEntity(unicorn);
+    gameEngine.addEntity(bunny);
     gameEngine.addEntity(crow);
     gameEngine.addEntity(stumpy);
     gameEngine.addEntity(bear);
