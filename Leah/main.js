@@ -155,6 +155,37 @@ Bunny.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
+/* Dead bunny Object
+
+function DeadBunny(game, spritesheet) {
+    this.animation = new Animation(spritesheet, 0, 0, 65, 60, 1, 4, false, false);
+    this.spriteSheet = spritesheet;
+    this.x = 500;
+    this.y = 250;
+    this.isDone = false;
+    this.game = game;
+    this.ctx = game.ctx;
+}
+
+DeadBunny.prototype.draw = function () {
+    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+}
+
+DeadBunny.prototype.update = function () {
+    if (this.animation.isDone()) {
+        this.animation.spriteSheet = this.spriteSheet;
+        this.animation.startX = 195;
+        this.animation.startY = 0;
+        this.animation.frameWidth = 65;
+        this.animation.frameHeight = 60;
+        this.animation.frameDuration = 9999;
+        this.animation.frames = 1;
+        this.animation.loop = true;
+        this.animation.reverse = false;
+    }
+}
+*/
+
 
 // Backgound Object
 
@@ -194,13 +225,18 @@ Background.prototype.draw = function () {
 var ASSET_MANAGER = new AssetManager();
 
 ASSET_MANAGER.queueDownload("./img/Rev_Bunny.png");
-ASSET_MANAGER.queueDownload("./img/tree_layer_0.png");
+// ASSET_MANAGER.queueDownload("./img/wraith.png");
+// ASSET_MANAGER.queueDownload("./img/knight.png");
+ASSET_MANAGER.queueDownload("./img/test.png"); //tree_layer_0
 ASSET_MANAGER.queueDownload("./img/tree_layer_1.png");
 ASSET_MANAGER.queueDownload("./img/tree_layer_2.png");
 ASSET_MANAGER.queueDownload("./img/tree_layer_3.png");
 ASSET_MANAGER.queueDownload("./img/tree_layer_4.png");
 ASSET_MANAGER.queueDownload("./img/tree_layer_5.png");
-
+/*
+ASSET_MANAGER.queueDownload("./img/deathBackground.jpg");
+ASSET_MANAGER.queueDownload("./img/deadBunny.png");
+*/
 
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
@@ -210,20 +246,18 @@ ASSET_MANAGER.downloadAll(function () {
     var gameEngine = new GameEngine();
 
     var bunny = new Bunny(gameEngine);
-    // var wraith = new Wraith(gameEngine, ASSET_MANAGER.getAsset("./imgs/Monster/wraith.png"));
-    // var mist = new Mist(gameEngine, ASSET_MANAGER.getAsset("./imgs/Monster/knight.png"));
 
- 
     gameEngine.init(ctx);
     gameEngine.start();
 
     gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_5.png"), 0));
-    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_4.png"), 1.4));
-    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_3.png"), 1.5));
-    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_2.png"), 1.8));
-    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_1.png"), 1.9));
-    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_0.png"), .5));
-    
+    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_4.png"), .5));
+    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_3.png"), 1));
+    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_2.png"), 2));
+    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/tree_layer_1.png"), 4));
+    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/test.png"), 6));
+    // var wraith = new Wraith(gameEngine, ASSET_MANAGER.getAsset("./img/wraith.png"));
+    // var mist = new Mist(gameEngine, ASSET_MANAGER.getAsset("./img/knight.png"));
     
     // if (getRandomInt(0, 1) === 0) {
     //     gameEngine.addEntity(wraith);
@@ -232,4 +266,9 @@ ASSET_MANAGER.downloadAll(function () {
     // }
 
     gameEngine.addEntity(bunny);
+
+    /*
+    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/deathBackground.jpg"), 0));
+    gameEngine.addEntity(new DeadBunny(gameEngine, ASSET_MANAGER.getAsset("./img/deadBunny.png")));
+    */
 });
