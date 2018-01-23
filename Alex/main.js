@@ -113,6 +113,7 @@ function Bunny(game) {
     this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Rev_Bunny.png"), 70, 0, 62, 57, .75, 1, false, true);
     //this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 618, 334, 174, 138, 0.02, 40, false, true);
     this.jumping = false;
+    this.pooping = false;
     this.radius = 100;
     this.ground = 475; // changed from 400
     Entity.call(this, game, 200, 475); // changed from 400
@@ -152,8 +153,8 @@ Bunny.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
-function Background(game, spritesheet) {
-    this.speed = 2; 
+function Background0(game, spritesheet) {
+    this.speed = 8; 
     this.backgroundWidth = 1018;
     this.x = 0;
     this.y = 0;
@@ -175,15 +176,45 @@ function Background(game, spritesheet) {
 	};
 }
 
-Background.prototype.draw = function () {
+Background0.prototype.draw = function () {
     this.ctx.drawImage(this.spritesheet, this.x, this.y);
 };
 
- Background.prototype.update = function () {
+ Background0.prototype.update = function () {
+};
+
+function Background1(game, spritesheet) {
+    this.speed = 4; 
+    this.backgroundWidth = 1018;
+    this.x = 0;
+    this.y = 0;
+    this.spritesheet = spritesheet;
+    this.game = game;
+    this.ctx = game.ctx;
+
+	this.draw = function() {
+        this.x += this.speed;
+         // Scrolling left
+		this.ctx.drawImage(spritesheet, -(this.x), this.y);
+	
+		// Draws image at edge of the first image
+		this.ctx.drawImage(spritesheet, -(this.x - this.backgroundWidth), this.y);
+
+		// Reset after image runs off screen
+		if (this.x >= this.backgroundWidth)
+			this.x = 0;
+	};
+}
+
+Background1.prototype.draw = function () {
+    this.ctx.drawImage(this.spritesheet, this.x, this.y);
+};
+
+ Background1.prototype.update = function () {
 };
 
 function Background2(game, spritesheet) {
-    this.speed = 1; 
+    this.speed = 2; 
     this.backgroundWidth = 1018;
     this.x = 0;
     this.y = 0;
@@ -212,6 +243,95 @@ Background2.prototype.draw = function () {
  Background2.prototype.update = function () {
 };
 
+function Background3(game, spritesheet) {
+    this.speed = 1; 
+    this.backgroundWidth = 1018;
+    this.x = 0;
+    this.y = 0;
+    this.spritesheet = spritesheet;
+    this.game = game;
+    this.ctx = game.ctx;
+
+	this.draw = function() {
+        this.x += this.speed;
+         // Scrolling left
+		this.ctx.drawImage(spritesheet, -(this.x), this.y);
+	
+		// Draws image at edge of the first image
+		this.ctx.drawImage(spritesheet, -(this.x - this.backgroundWidth), this.y);
+
+		// Reset after image runs off screen
+		if (this.x >= this.backgroundWidth)
+			this.x = 0;
+	};
+}
+
+Background3.prototype.draw = function () {
+    this.ctx.drawImage(this.spritesheet, this.x, this.y);
+};
+
+ Background3.prototype.update = function () {
+};
+
+function Background4(game, spritesheet) {
+    this.speed = .5; 
+    this.backgroundWidth = 1018;
+    this.x = 0;
+    this.y = 0;
+    this.spritesheet = spritesheet;
+    this.game = game;
+    this.ctx = game.ctx;
+
+	this.draw = function() {
+        this.x += this.speed;
+         // Scrolling left
+		this.ctx.drawImage(spritesheet, -(this.x), this.y);
+	
+		// Draws image at edge of the first image
+		this.ctx.drawImage(spritesheet, -(this.x - this.backgroundWidth), this.y);
+
+		// Reset after image runs off screen
+		if (this.x >= this.backgroundWidth)
+			this.x = 0;
+	};
+}
+
+Background4.prototype.draw = function () {
+    this.ctx.drawImage(this.spritesheet, this.x, this.y);
+};
+
+ Background4.prototype.update = function () {
+};
+
+function Background5(game, spritesheet) {
+    this.speed = 0; 
+    this.backgroundWidth = 1018;
+    this.x = 0;
+    this.y = 0;
+    this.spritesheet = spritesheet;
+    this.game = game;
+    this.ctx = game.ctx;
+
+	this.draw = function() {
+        this.x += this.speed;
+         // Scrolling left
+		this.ctx.drawImage(spritesheet, -(this.x), this.y);
+	
+		// Draws image at edge of the first image
+		this.ctx.drawImage(spritesheet, -(this.x - this.backgroundWidth), this.y);
+
+		// Reset after image runs off screen
+		if (this.x >= this.backgroundWidth)
+			this.x = 0;
+	};
+}
+
+Background5.prototype.draw = function () {
+    this.ctx.drawImage(this.spritesheet, this.x, this.y);
+};
+
+ Background5.prototype.update = function () {
+};
 
 // the "main" code begins here
 
@@ -220,8 +340,12 @@ var ASSET_MANAGER = new AssetManager();
 ASSET_MANAGER.queueDownload("./img/Rev_Bunny.png");
 ASSET_MANAGER.queueDownload("./imgs/Monster/wraith.png");
 ASSET_MANAGER.queueDownload("./imgs/Monster/knight.png");
-ASSET_MANAGER.queueDownload("./imgs/Background/top_tree_layer.png");
-ASSET_MANAGER.queueDownload("./imgs/Background/back_tree_layer.png");
+ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_0.png");
+ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_1.png");
+ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_2.png");
+ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_3.png");
+ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_4.png");
+ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_5.png");
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -240,8 +364,14 @@ ASSET_MANAGER.downloadAll(function () {
     var wraith = new Wraith(gameEngine, ASSET_MANAGER.getAsset("./imgs/Monster/wraith.png"));
     var mist = new Mist(gameEngine, ASSET_MANAGER.getAsset("./imgs/Monster/knight.png"));
 
-    gameEngine.addEntity(new Background2(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/back_tree_layer.png")));
-    gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/top_tree_layer.png")));
+    gameEngine.addEntity(new Background5(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_5.png")));
+    gameEngine.addEntity(new Background4(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_4.png")));
+    gameEngine.addEntity(new Background3(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_3.png")));
+    gameEngine.addEntity(new Background2(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_2.png")));
+    gameEngine.addEntity(new Background1(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_1.png")));
+    gameEngine.addEntity(new Background0(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_0.png")));
+    
+    
     
     if (getRandomInt(0, 1) === 0) {
         gameEngine.addEntity(wraith);
