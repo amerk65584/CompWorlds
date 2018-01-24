@@ -108,9 +108,9 @@ function Bunny(game) {
     // startY: 57 * 2 (3rd row) = 114
     
     // Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse) {
-    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/Rev_Bunny.png"), 240, 114, 58, 57, 0.15, 4, true, true);
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png"), 240, 114, 58, 57, 0.15, 4, true, true);
     //this.animation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 0, 0, 206, 110, 0.02, 30, true, true);
-    this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Rev_Bunny.png"), 70, 0, 62, 57, .75, 1, false, true);
+    this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/Rabbit/Rev_Bunny.png"), 70, 0, 62, 57, .75, 1, false, true);
     //this.jumpAnimation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 618, 334, 174, 138, 0.02, 40, false, true);
     this.jumping = false;
     this.pooping = false;
@@ -337,7 +337,7 @@ Background5.prototype.draw = function () {
 
 var ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.queueDownload("./img/Rev_Bunny.png");
+ASSET_MANAGER.queueDownload("./imgs/Rabbit/Rev_Bunny.png");
 ASSET_MANAGER.queueDownload("./imgs/Monster/wraith.png");
 ASSET_MANAGER.queueDownload("./imgs/Monster/knight.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_0.png");
