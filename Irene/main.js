@@ -94,7 +94,60 @@ Unicorn.prototype.draw = function (ctx) {
     }
     Entity.prototype.draw.call(this);
 }
+/*****************************************************************************/
+function Carrot(game) {
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/carrot.png"), 0, 0, 39, 62, 0.15, 5, true, true);
+    this.x = 0;
+    this.speed = 1;
+    Entity.call(this, game, 300, 430); // changed from 400
+    // this.draw = function() {
+    //     this.x += this.speed;
+    //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
+    // }
+}
 
+Carrot.prototype = new Entity();
+Carrot.prototype.constructor = Carrot;
+
+Carrot.prototype.update = function () {
+    if (this.x < -800) this.x = 230;
+
+   Entity.prototype.update.call(this);
+}
+
+Carrot.prototype.draw = function (ctx) {
+   
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+/*****************************************************************************/
+/*****************************************************************************/
+function Mushroom(game) {
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/mushroom.png"), 0, 0, 33, 33, 0.15, 3, true, true);
+    this.x = 0;
+    this.speed = 1;
+    Entity.call(this, game, 300, 300); // changed from 400
+    // this.draw = function() {
+    //     this.x += this.speed;
+    //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
+    // }
+}
+
+Mushroom.prototype = new Entity();
+Mushroom.prototype.constructor = Mushroom;
+
+Mushroom.prototype.update = function () {
+    if (this.x < -800) this.x = 230;
+
+   Entity.prototype.update.call(this);
+}
+
+Mushroom.prototype.draw = function (ctx) {
+   
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+/*****************************************************************************/
  function Background(game, spritesheet) {
     this.speed = 1; 
     this.backgroundWidth = 1018;
@@ -131,22 +184,28 @@ Background.prototype.draw = function () {
 var ASSET_MANAGER = new AssetManager();
 
 ASSET_MANAGER.queueDownload("./img/RobotUnicorn.png");
+ASSET_MANAGER.queueDownload("./img/carrot.png");
+ASSET_MANAGER.queueDownload("./img/mushroom.png");
 ASSET_MANAGER.queueDownload("./img/test_tree_layer.jpg");
 //AM.queueDownload("./img/background_back.png");
 //AM.queueDownload("./img/background_front.png");
 
 ASSET_MANAGER.downloadAll(function () {
-    console.log("starting up da sheild");
+    console.log("starting up da shield");
     var canvas = document.getElementById('gameWorld');
     var ctx = canvas.getContext('2d');
 
     var gameEngine = new GameEngine();
 
     var unicorn = new Unicorn(gameEngine);
+    var carrot = new Carrot(gameEngine);
+    var mushroom = new Mushroom(gameEngine);
  
     gameEngine.init(ctx);
     gameEngine.start();
 
     gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/test_tree_layer.jpg")));
-    gameEngine.addEntity(unicorn);
+    //gameEngine.addEntity(unicorn);
+    gameEngine.addEntity(carrot);
+    gameEngine.addEntity(mushroom);
 });
