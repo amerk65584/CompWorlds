@@ -55,47 +55,47 @@ Animation.prototype.isDone = function () {
     return (this.elapsedTime >= this.totalTime);
 }
 
-function Wraith(game, sprite) {
-    // Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse)
-    this.animation = new Animation(sprite, 0, 0, 90, 105, .15, 4, true, true);
-    this.ctx = game.ctx;
-    //this.animation.scaleBy(-1);
-    this.x = 0;
-    this.y = 0;
-    Entity.call(this, game, 0, 330);
-} 
+// function Wraith(game, sprite) {
+//     // Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse)
+//     this.animation = new Animation(sprite, 0, 0, 90, 105, .15, 4, true, true);
+//     this.ctx = game.ctx;
+//     //this.animation.scaleBy(-1);
+//     this.x = 0;
+//     this.y = 0;
+//     Entity.call(this, game, 0, 330);
+// } 
 
-Wraith.prototype = new Entity();
-Wraith.prototype.constructor = Wraith;
+// Wraith.prototype = new Entity();
+// Wraith.prototype.constructor = Wraith;
 
-Wraith.prototype.update = function () {
-    Entity.prototype.update.call(this);
-}
+// Wraith.prototype.update = function () {
+//     Entity.prototype.update.call(this);
+// }
 
-Wraith.prototype.draw = function() {
-    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, 2);
-    Entity.prototype.draw.call(this);
-}
+// Wraith.prototype.draw = function() {
+//     this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, 2);
+//     Entity.prototype.draw.call(this);
+// }
 
-function Mist(game, sprite) {
-    this.animation = new Animation(sprite, 0, 105, 104, 105, .15, 6, true, true);
-    this.ctx = game.ctx;
-    this.x = 0;
-    this.y = 0;
-    Entity.call(this, game, 0, 330);
-}
+// function Mist(game, sprite) {
+//     this.animation = new Animation(sprite, 0, 105, 104, 105, .15, 6, true, true);
+//     this.ctx = game.ctx;
+//     this.x = 0;
+//     this.y = 0;
+//     Entity.call(this, game, 0, 330);
+// }
 
-Mist.prototype = new Entity();
-Mist.prototype.constructor = Mist;
+// Mist.prototype = new Entity();
+// Mist.prototype.constructor = Mist;
 
-Mist.prototype.update = function() {
-    Entity.prototype.update.call(this);
-}
+// Mist.prototype.update = function() {
+//     Entity.prototype.update.call(this);
+// }
 
-Mist.prototype.draw = function() {
-    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, 2);
-    Entity.prototype.draw.call(this);
-}
+// Mist.prototype.draw = function() {
+//     this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, 2);
+//     Entity.prototype.draw.call(this);
+// }
 
 function Bunny(game) {
     // bunny sprite: height = 57, width = 58, start frame = 16 to 4 more.
@@ -186,6 +186,93 @@ DeadBunny.prototype.update = function () {
 }
 */
 
+// Crow Object
+
+function Crow(game) {
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/crowFly.png"), 0, 0, 50, 50, 0.10, 5, true, true);
+    this.x = 0;
+    this.speed = 1;
+    this.ground = 250;
+    Entity.call(this, game, 400, 250); // changed from 400
+    // this.draw = function() {
+    //     this.x += this.speed;
+    //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
+    // }
+}
+
+Crow.prototype = new Entity();
+Crow.prototype.constructor = Crow;
+
+Crow.prototype.update = function () {
+    if (this.x < -800) this.x = 230;
+
+   Entity.prototype.update.call(this);
+}
+
+Crow.prototype.draw = function (ctx) {
+   
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+
+
+// Stumpy Object
+
+function Stumpy(game) {
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/stumpy.png"), 0, 60, 74, 60, 0.15, 4, true, true);
+    this.x = 0;
+    this.speed = 1;
+    Entity.call(this, game, 300, 430); // changed from 400
+    // this.draw = function() {
+    //     this.x += this.speed;
+    //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
+    // }
+}
+
+Stumpy.prototype = new Entity();
+Stumpy.prototype.constructor = Stumpy;
+
+Stumpy.prototype.update = function () {
+    if (this.x < -800) this.x = 230;
+
+   Entity.prototype.update.call(this);
+}
+
+Stumpy.prototype.draw = function (ctx) {
+   
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+
+// Bear Object
+
+ function Bear(game) {
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/bearWalk.png"), 0, 0, 98, 65, 0.10, 5, true, true);
+    this.x = 0;
+    this.speed = 1;
+    this.ground = 470;
+    Entity.call(this, game, 400, 470); // changed from 400
+    // this.draw = function() {
+    //     this.x += this.speed;
+    //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
+    // }
+}
+
+Bear.prototype = new Entity();
+Bear.prototype.constructor = Bear;
+
+Bear.prototype.update = function () {
+    if (this.x < -800) this.x = 230;
+
+   Entity.prototype.update.call(this);
+}
+
+Bear.prototype.draw = function (ctx) {
+   
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+
 
 // Backgound Object
 
@@ -225,6 +312,9 @@ Background.prototype.draw = function () {
 var ASSET_MANAGER = new AssetManager();
 
 ASSET_MANAGER.queueDownload("./img/Rev_Bunny.png");
+ASSET_MANAGER.queueDownload("./img/crowFly.png");
+//ASSET_MANAGER.queueDownload("./img/stumpy.png");
+ASSET_MANAGER.queueDownload("./img/bearWalk.png");
 // ASSET_MANAGER.queueDownload("./img/wraith.png");
 // ASSET_MANAGER.queueDownload("./img/knight.png");
 ASSET_MANAGER.queueDownload("./img/test.png"); //tree_layer_0
@@ -246,6 +336,9 @@ ASSET_MANAGER.downloadAll(function () {
     var gameEngine = new GameEngine();
 
     var bunny = new Bunny(gameEngine);
+    var crow = new Crow(gameEngine);
+    //var stumpy = new Stumpy(gameEngine);
+    var bear = new Bear(gameEngine);
 
     gameEngine.init(ctx);
     gameEngine.start();
@@ -266,6 +359,9 @@ ASSET_MANAGER.downloadAll(function () {
     // }
 
     gameEngine.addEntity(bunny);
+    gameEngine.addEntity(crow);
+    //gameEngine.addEntity(stumpy);
+    gameEngine.addEntity(bear);
 
     /*
     gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/deathBackground.jpg"), 0));
