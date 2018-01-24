@@ -106,6 +106,7 @@ function Bunny(game, spritesheet) {
 
     // startX: 60 * 4 (5th column) = 240
     // startY: 57 * 2 (3rd row) = 114
+    
     // Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse) {
     this.animation = new Animation(spritesheet, 240, 114, 58, 57, 0.15, 4, true, true);
     //this.animation = new Animation(ASSET_MANAGER.getAsset("./img/RobotUnicorn.png"), 0, 0, 206, 110, 0.02, 30, true, true);
@@ -152,8 +153,8 @@ Bunny.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
-function Background0(game, spritesheet) {
-    this.speed = 8; 
+function Background(game, spritesheet, speed) {
+    this.speed = speed; 
     this.backgroundWidth = 1018;
     this.x = 0;
     this.y = 0;
@@ -175,161 +176,11 @@ function Background0(game, spritesheet) {
 	};
 }
 
-Background0.prototype.draw = function () {
+Background.prototype.draw = function () {
     this.ctx.drawImage(this.spritesheet, this.x, this.y);
 };
 
- Background0.prototype.update = function () {
-};
-
-function Background1(game, spritesheet) {
-    this.speed = 4; 
-    this.backgroundWidth = 1018;
-    this.x = 0;
-    this.y = 0;
-    this.spritesheet = spritesheet;
-    this.game = game;
-    this.ctx = game.ctx;
-
-	this.draw = function() {
-        this.x += this.speed;
-         // Scrolling left
-		this.ctx.drawImage(spritesheet, -(this.x), this.y);
-	
-		// Draws image at edge of the first image
-		this.ctx.drawImage(spritesheet, -(this.x - this.backgroundWidth), this.y);
-
-		// Reset after image runs off screen
-		if (this.x >= this.backgroundWidth)
-			this.x = 0;
-	};
-}
-
-Background1.prototype.draw = function () {
-    this.ctx.drawImage(this.spritesheet, this.x, this.y);
-};
-
- Background1.prototype.update = function () {
-};
-
-function Background2(game, spritesheet) {
-    this.speed = 2; 
-    this.backgroundWidth = 1018;
-    this.x = 0;
-    this.y = 0;
-    this.spritesheet = spritesheet;
-    this.game = game;
-    this.ctx = game.ctx;
-
-	this.draw = function() {
-        this.x += this.speed;
-         // Scrolling left
-		this.ctx.drawImage(spritesheet, -(this.x), this.y);
-	
-		// Draws image at edge of the first image
-		this.ctx.drawImage(spritesheet, -(this.x - this.backgroundWidth), this.y);
-
-		// Reset after image runs off screen
-		if (this.x >= this.backgroundWidth)
-			this.x = 0;
-	};
-}
-
-Background2.prototype.draw = function () {
-    this.ctx.drawImage(this.spritesheet, this.x, this.y);
-};
-
- Background2.prototype.update = function () {
-};
-
-function Background3(game, spritesheet) {
-    this.speed = 1; 
-    this.backgroundWidth = 1018;
-    this.x = 0;
-    this.y = 0;
-    this.spritesheet = spritesheet;
-    this.game = game;
-    this.ctx = game.ctx;
-
-	this.draw = function() {
-        this.x += this.speed;
-         // Scrolling left
-		this.ctx.drawImage(spritesheet, -(this.x), this.y);
-	
-		// Draws image at edge of the first image
-		this.ctx.drawImage(spritesheet, -(this.x - this.backgroundWidth), this.y);
-
-		// Reset after image runs off screen
-		if (this.x >= this.backgroundWidth)
-			this.x = 0;
-	};
-}
-
-Background3.prototype.draw = function () {
-    this.ctx.drawImage(this.spritesheet, this.x, this.y);
-};
-
- Background3.prototype.update = function () {
-};
-
-function Background4(game, spritesheet) {
-    this.speed = .5; 
-    this.backgroundWidth = 1018;
-    this.x = 0;
-    this.y = 0;
-    this.spritesheet = spritesheet;
-    this.game = game;
-    this.ctx = game.ctx;
-
-	this.draw = function() {
-        this.x += this.speed;
-         // Scrolling left
-		this.ctx.drawImage(spritesheet, -(this.x), this.y);
-	
-		// Draws image at edge of the first image
-		this.ctx.drawImage(spritesheet, -(this.x - this.backgroundWidth), this.y);
-
-		// Reset after image runs off screen
-		if (this.x >= this.backgroundWidth)
-			this.x = 0;
-	};
-}
-
-Background4.prototype.draw = function () {
-    this.ctx.drawImage(this.spritesheet, this.x, this.y);
-};
-
- Background4.prototype.update = function () {
-};
-
-function Background5(game, spritesheet) {
-    this.speed = 0; 
-    this.backgroundWidth = 1018;
-    this.x = 0;
-    this.y = 0;
-    this.spritesheet = spritesheet;
-    this.game = game;
-    this.ctx = game.ctx;
-
-	this.draw = function() {
-        this.x += this.speed;
-         // Scrolling left
-		this.ctx.drawImage(spritesheet, -(this.x), this.y);
-	
-		// Draws image at edge of the first image
-		this.ctx.drawImage(spritesheet, -(this.x - this.backgroundWidth), this.y);
-
-		// Reset after image runs off screen
-		if (this.x >= this.backgroundWidth)
-			this.x = 0;
-	};
-}
-
-Background5.prototype.draw = function () {
-    this.ctx.drawImage(this.spritesheet, this.x, this.y);
-};
-
- Background5.prototype.update = function () {
+ Background.prototype.update = function () {
 };
 
 // the "main" code begins here
@@ -362,13 +213,19 @@ ASSET_MANAGER.downloadAll(function () {
     var bunny = new Bunny(gameEngine, ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png"));
     var wraith = new Wraith(gameEngine, ASSET_MANAGER.getAsset("./imgs/Monster/wraith.png"));
     var mist = new Mist(gameEngine, ASSET_MANAGER.getAsset("./imgs/Monster/knight.png"));
+    var back1 = new Background(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_5.png"), 0);
+    var back2 = new Background(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_4.png"), .5);
+    var back3 = new Background(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_3.png"), 1);
+    var back4 = new Background(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_2.png"), 2);
+    var back5 = new Background(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_1.png"), 4);
+    var back6 = new Background(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_0.png"), 8);
 
-    gameEngine.addEntity(new Background5(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_5.png")));
-    gameEngine.addEntity(new Background4(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_4.png")));
-    gameEngine.addEntity(new Background3(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_3.png")));
-    gameEngine.addEntity(new Background2(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_2.png")));
-    gameEngine.addEntity(new Background1(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_1.png")));
-    gameEngine.addEntity(new Background0(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_0.png")));
+    gameEngine.addEntity(back1);
+    gameEngine.addEntity(back2);
+    gameEngine.addEntity(back3);
+    gameEngine.addEntity(back4);
+    gameEngine.addEntity(back5);
+    gameEngine.addEntity(back6);
     
     
     
