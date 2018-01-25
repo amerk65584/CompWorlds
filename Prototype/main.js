@@ -287,7 +287,7 @@ function Bear(game, spritesheet) {
     this.x = 0;
     this.speed = 1;
     this.ground = 470;
-    Entity.call(this, game, 400, 470); // changed from 400
+    Entity.call(this, game, 400, 445); // changed from 400
     // this.draw = function() {
     //     this.x += this.speed;
     //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
@@ -305,7 +305,7 @@ Bear.prototype.update = function () {
 
 Bear.prototype.draw = function (ctx) {
    
-    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.5);
     Entity.prototype.draw.call(this);
 }
 
@@ -313,7 +313,7 @@ function Stumpy(game, spritesheet) {
     this.animation = new Animation(spritesheet, 0, 60, 74, 60, 0.15, 4, true, true);
     this.x = 0;
     this.speed = 1;
-    Entity.call(this, game, 300, 430); // changed from 400
+    Entity.call(this, game, 600, 470); // changed from 400
     // this.draw = function() {
     //     this.x += this.speed;
     //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
