@@ -1,5 +1,10 @@
-// Leahs sandbox
+/*****************
+ * Leahs SandBox *
+ *****************/
 
+/*********************
+ * Animantion Object *
+ *********************/
 
 function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse) {
     this.spriteSheet = spriteSheet;
@@ -164,9 +169,9 @@ Bunny.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
-/****************
- * Background
- ****************/
+/*********************
+ * Background Object *
+ *********************/
 
 function Background(game, spritesheet, speed) {
     this.speed = speed; 
@@ -206,7 +211,7 @@ function Carrot(game, spritesheet) {
     this.animation = new Animation(spritesheet, 0, 0, 39, 62, 0.15, 5, true, true);
     this.x = 0;
     this.speed = 1;
-    Entity.call(this, game, 300, 430); // changed from 400
+    Entity.call(this, game, 350, 500); // changed from 400
     // this.draw = function() {
     //     this.x += this.speed;
     //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
@@ -274,8 +279,8 @@ Crow.prototype = new Entity();
 Crow.prototype.constructor = Crow;
 
 Crow.prototype.update = function () {
-    if (this.x < -800) this.x = 230;
-
+    this.x -= this.game.clockTick * this.speed * 200;
+    if (this.x < -120) this.x = 1018;
    Entity.prototype.update.call(this);
 }
 
@@ -286,11 +291,11 @@ Crow.prototype.draw = function (ctx) {
 }
 
 function Bear(game, spritesheet) {
-    this.animation = new Animation(spritesheet, 0, 0, 98, 65, 0.10, 5, true, true);
+    this.animation = new Animation(spritesheet, 0, 0, 98, 65, 0.15, 5, true, true);
     this.x = 0;
     this.speed = 1;
     this.ground = 470;
-    Entity.call(this, game, 400, 470); // changed from 400
+    Entity.call(this, game, 400, 445); // changed from 400
     // this.draw = function() {
     //     this.x += this.speed;
     //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
@@ -301,22 +306,22 @@ Bear.prototype = new Entity();
 Bear.prototype.constructor = Bear;
 
 Bear.prototype.update = function () {
-    if (this.x < -800) this.x = 230;
-
+    this.x -= this.game.clockTick * this.speed * 100;
+    if (this.x < -120) this.x = 1018;
    Entity.prototype.update.call(this);
 }
 
 Bear.prototype.draw = function (ctx) {
    
-    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.5);
     Entity.prototype.draw.call(this);
 }
 
 function Stumpy(game, spritesheet) {
-    this.animation = new Animation(spritesheet, 0, 60, 74, 60, 0.15, 4, true, true);
+    this.animation = new Animation(spritesheet, 0, 60, 74, 60, 0.17, 4, true, true);
     this.x = 0;
     this.speed = 1;
-    Entity.call(this, game, 300, 430); // changed from 400
+    Entity.call(this, game, 600, 470); // changed from 400
     // this.draw = function() {
     //     this.x += this.speed;
     //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
@@ -327,8 +332,8 @@ Stumpy.prototype = new Entity();
 Stumpy.prototype.constructor = Stumpy;
 
 Stumpy.prototype.update = function () {
-    if (this.x < -800) this.x = 230;
-
+    this.x -= this.game.clockTick * this.speed * 75;
+    if (this.x < -120) this.x = 1018;
    Entity.prototype.update.call(this);
 }
 
@@ -338,7 +343,38 @@ Stumpy.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
-// the "main" code begins here
+/*********************
+ * Dead Bunny Object *
+ *********************/
+
+function DeadBunny(game, spritesheet) {
+    this.animation = new Animation(spritesheet, 0, 0, 65, 60, 1, 4, false, false);
+    this.spriteSheet = spritesheet;
+    this.x = 485;
+    this.y = 450;
+    this.isDone = false;
+    this.game = game;
+    this.ctx = game.ctx;
+}
+
+DeadBunny.prototype.draw = function () {
+    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+}
+
+DeadBunny.prototype.update = function () {
+    if (this.animation.elapsedTime > this.animation.totalTime * 3 / 4) {
+        this.animation.startX = 195;
+        this.animation.frameDuration = 9999;
+        this.animation.frames = 1;
+        this.animation.loop = true;
+    }
+    Entity.prototype.draw.call(this);
+}
+
+
+/*************************
+ * Main Code Begins Here *
+ *************************/
 
 var ASSET_MANAGER = new AssetManager();
 
@@ -365,6 +401,11 @@ ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_2.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_3.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_4.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_5.png");
+
+//Death screen
+ASSET_MANAGER.queueDownload("./imgs/Gameover/deathBackground.jpg");
+ASSET_MANAGER.queueDownload("./imgs/Gameover/game_over.png");
+ASSET_MANAGER.queueDownload("./imgs/Gameover/deadBunny.png");
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -403,7 +444,10 @@ ASSET_MANAGER.downloadAll(function () {
     var back5 = new Background(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_1.png"), 4);
     var back6 = new Background(gameEngine, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_0.png"), 8);
 
-
+    // //Gameover
+    // gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/Gameover/deathBackground.jpg"), 0));
+    // gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/Gameover/game_over.png"), 0));
+    // gameEngine.addEntity(new DeadBunny(gameEngine, ASSET_MANAGER.getAsset("./img/Gameover/deadBunny.png")));
 
     gameEngine.addEntity(back1);
     gameEngine.addEntity(back2);
