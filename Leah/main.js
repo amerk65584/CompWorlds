@@ -66,12 +66,12 @@ Animation.prototype.isDone = function () {
 
 function Wraith(game, sprite) {
     // Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse)
-    this.animation = new Animation(sprite, 0, 0, 90, 105, .15, 4, true, true);
+    this.animation = new Animation(sprite, 360, 0, 88.3, 105, .15, 4, true, true);
     this.ctx = game.ctx;
     //this.animation.scaleBy(-1);
     this.x = 0;
     this.y = 0;
-    Entity.call(this, game, 0, 330);
+    Entity.call(this, game, -50, 330);
 } 
 
 Wraith.prototype = new Entity();
@@ -87,11 +87,11 @@ Wraith.prototype.draw = function() {
 }
 
 function Mist(game, sprite) {
-    this.animation = new Animation(sprite, 0, 105, 104, 105, .15, 6, true, true);
+    this.animation = new Animation(sprite, 800, 105, 104, 105, .15, 6, true, true);
     this.ctx = game.ctx;
     this.x = 0;
     this.y = 0;
-    Entity.call(this, game, 0, 330);
+    Entity.call(this, game, -120, 330);
 }
 
 Mist.prototype = new Entity();
