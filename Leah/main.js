@@ -204,6 +204,34 @@ Background.prototype.draw = function () {
 };
 
 /***********************
+ * Platform Object
+ ************************/
+
+function Platform(game, spritesheet) {
+    //spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse
+    this.animation = new Animation(spritesheet, 0, 69, 132, 69, 0.15, 7, true, false);
+    this.x = 0;
+    this.speed = 1;
+    Entity.call(this, game, 350, 500); // x and y
+}
+
+Platform.prototype = new Entity();
+Platform.prototype.constructor = Platform;
+
+Platform.prototype.update = function () {
+    this.x -= this.game.clockTick * this.speed * 200;
+    if (this.x < -120) this.x = 1018;
+   Entity.prototype.update.call(this);
+}
+
+Platform.prototype.draw = function (ctx) {
+   
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+
+
+/***********************
  * Pickups
  ************************/
 
@@ -378,6 +406,9 @@ DeadBunny.prototype.update = function () {
 
 var ASSET_MANAGER = new AssetManager();
 
+//Platforms
+ASSET_MANAGER.queueDownload("./imgs/Platforms/WaterHole.png");
+
 //Rabbit
 ASSET_MANAGER.queueDownload("./imgs/Rabbit/Rev_Bunny.png");
 
@@ -419,6 +450,9 @@ ASSET_MANAGER.downloadAll(function () {
     var gameEngine = new GameEngine();
     gameEngine.init(ctx);
     gameEngine.start();
+
+    //Platforms
+    var hole = new Platform(gameEngine, ASSET_MANAGER.getAsset("./imgs/Platforms/WaterHole.png"));
 
     //Rabbits
     var bunny = new Bunny(gameEngine, ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png"));
@@ -462,6 +496,8 @@ ASSET_MANAGER.downloadAll(function () {
     
     gameEngine.addEntity(mushroom);
     gameEngine.addEntity(carrot);
+
+    gameEngine.addEntity(hole);
 
     if (getRandomInt(0, 1) === 0) {
         gameEngine.addEntity(wraith);
