@@ -282,33 +282,6 @@ Crow.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
-function Bear(game, spritesheet) {
-    this.animation = new Animation(spritesheet, 0, 0, 98, 65, 0.15, 5, true, true);
-    this.x = 0;
-    this.speed = 1;
-    this.ground = 470;
-    Entity.call(this, game, 400, 445); // changed from 400
-    // this.draw = function() {
-    //     this.x += this.speed;
-    //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
-    // }
-}
-
-Bear.prototype = new Entity();
-Bear.prototype.constructor = Bear;
-
-Bear.prototype.update = function () {
-    this.x -= this.game.clockTick * this.speed * 100;
-    if (this.x < -120) this.x = 1018;
-   Entity.prototype.update.call(this);
-}
-
-Bear.prototype.draw = function (ctx) {
-   
-    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.5);
-    Entity.prototype.draw.call(this);
-}
-
 function Stumpy(game, spritesheet) {
     this.animation = new Animation(spritesheet, 0, 60, 74, 60, 0.17, 4, true, true);
     this.x = 0;
@@ -387,9 +360,23 @@ ASSET_MANAGER.downloadAll(function () {
     var mushroom = new Mushroom(gameEngine, ASSET_MANAGER.getAsset("./imgs/Pickups/mushroom.png"));
     var carrot = new Carrot(gameEngine, ASSET_MANAGER.getAsset("./imgs/Pickups/carrot.png"));
 
+    /*
+     *  function Bear(game, spritesheet) {
+        this.animation = new Animation(spritesheet, 0, 0, 98, 65, 0.15, 5, true, true);
+        this.x = 0;
+        this.speed = 1;
+        this.ground = 470;
+        Entity.call(this, game, 400, 500); // changed from 400
+        // this.draw = function() {
+        //     this.x += this.speed;
+        //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
+        // }
+    }
+     */
+
     //Enemies
     var crow = new Crow(gameEngine, ASSET_MANAGER.getAsset("./imgs/Enemies/crowFly.png"));
-    var bear = new Bear(gameEngine, ASSET_MANAGER.getAsset("./imgs/Enemies/bearWalk.png"));
+    var bear = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/bearWalk.png"), 1.5, 0, 0, 98, 65, 0.15, 5, true, true);
     var stumpy = new Stumpy(gameEngine, ASSET_MANAGER.getAsset("./imgs/Enemies/stumpy.png"));
 
     //Background
