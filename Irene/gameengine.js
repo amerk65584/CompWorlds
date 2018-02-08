@@ -63,7 +63,7 @@ GameEngine.prototype.startInput = function () {
 
     this.ctx.canvas.addEventListener("keydown", function (e) {
         if (String.fromCharCode(e.which) === ' ') that.space = true;
-//        console.log(e);
+    //    console.log(e);
         e.preventDefault();
     }, false);
 
