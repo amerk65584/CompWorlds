@@ -1,4 +1,4 @@
-function Background(game, ctx, spritesheet, speed, name) {
+function Background(game, ctx, spritesheet, speed) {
     this.speed = speed; 
     this.backgroundWidth = 1018;
     this.x = 0;
@@ -9,7 +9,6 @@ function Background(game, ctx, spritesheet, speed, name) {
     this.pause = false;
     this.flag = false;
     this.entities_copy = [];
-    this.name = name;
 	this.draw = function() {
         this.x += this.speed;
          // Scrolling left

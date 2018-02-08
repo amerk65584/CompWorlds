@@ -52,9 +52,26 @@ Animation.prototype.isDone = function () {
     return (this.elapsedTime >= this.totalTime);
 }
 
-/******************
- * Rabbits
- *******************/
+//Temp button code
+function Pause(game, ctx, spriteSheet) {
+    this.game = game;
+    this.ctx = ctx;
+    this.animation = new Animation(spriteSheet, 16, 16, 480, 480, 1, 1, false, false);
+    Entity.call(this, this.game, 0, 0);
+}
+
+Pause.prototype = new Entity();
+Pause.prototype.constructor = Pause;
+
+Pause.prototype.update = function () {
+    Entity.prototype.update.call(this);
+};
+
+Pause.prototype.draw = function (ctx) {
+    this.animation.drawFrame(this.game.clockTick, this.ctx, 0, 0);
+    Entity.prototype.draw.call(this);
+};
+
 
 
 // the "main" code begins here
@@ -78,6 +95,7 @@ ASSET_MANAGER.queueDownload("./imgs/Pickups/carrot.png");
 ASSET_MANAGER.queueDownload("./imgs/Pickups/mushroom.png");
 
 //Background
+ASSET_MANAGER.queueDownload("./imgs/temp_pause.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/blank.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_0.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_1.png");
@@ -85,6 +103,9 @@ ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_2.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_3.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_4.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_5.png");
+
+//Buttons
+ASSET_MANAGER.queueDownload("./imgs/pause.png");
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -124,6 +145,8 @@ ASSET_MANAGER.downloadAll(function () {
     var back5 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_1.png"), 4);
     var back6 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_0.png"), 8);
 
+    var pause = new Pause(gameEngine, ctx, "./imgs/pause.png");
+
     gameEngine.addEntity(blank);
     gameEngine.addEntity(back1);
     gameEngine.addEntity(back2);
@@ -145,4 +168,6 @@ ASSET_MANAGER.downloadAll(function () {
         gameEngine.addEntity(mist);
     }
     gameEngine.addEntity(bunny);
+
+    gameEngine.addEntity(pause);
 });
