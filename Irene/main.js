@@ -135,7 +135,7 @@ ASSET_MANAGER.downloadAll(function () {
 
     //Rabbits
     var bunny = new Bunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png")); 
-    console.log(bunny.x + " " + bunny.y);
+    
 
     //Monsters
     var wraith = new Monster(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Monster/wraith.png"), 360, 0, 88.3, 105, .15, 4, true, true, 2, -50, 330);
@@ -162,6 +162,8 @@ ASSET_MANAGER.downloadAll(function () {
     //game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, x, y) {
     var hole = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/hole.png"), 0, 41, 78, 41, 0.15, 7, true, false, 1.5, 1, 350, 510);
 
+    var score = new Scoring(gameEngine, ctx);
+
     gameEngine.addEntity(back1);
     gameEngine.addEntity(back2);
     gameEngine.addEntity(back3);
@@ -184,6 +186,8 @@ ASSET_MANAGER.downloadAll(function () {
         gameEngine.addEntity(mist);
     }
     gameEngine.addEntity(bunny);
+
+    gameEngine.addEntity(score);
 });
 
 

@@ -30,4 +30,5 @@ Background.prototype.draw = function () {
 };
 
  Background.prototype.update = function () {
+    //  console.log("time: " + this.game.clockTick);
 };

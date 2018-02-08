@@ -1,5 +1,7 @@
-//if the box collide
+//if the boxes collide
 function collide(a,b){
+    var rabbit;
+    var mushroom;
     var dxA = a.x + a.width;
     var dyA = a.y + a.height;
     var dxB = b.x + b.width;
@@ -8,4 +10,6 @@ function collide(a,b){
     if(a.x < dxB && a.y < dyB &&
     dxA > b.x && dyA > b.y){ return true;}
     else { return false;}
+
+
 }
