@@ -145,9 +145,10 @@ ASSET_MANAGER.downloadAll(function () {
     var back5 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_1.png"), 4);
     var back6 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_0.png"), 8);
 
-    var pause = new Pause(gameEngine, ctx, "./imgs/pause.png");
+    var pause = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/temp_pause.png"), 0);
 
-    gameEngine.addEntity(blank);
+    //gameEngine.addEntity(blank);
+    gameEngine.addEntity(pause);
     gameEngine.addEntity(back1);
     gameEngine.addEntity(back2);
     gameEngine.addEntity(back3);
@@ -169,5 +170,5 @@ ASSET_MANAGER.downloadAll(function () {
     }
     gameEngine.addEntity(bunny);
 
-    gameEngine.addEntity(pause);
+    
 });
