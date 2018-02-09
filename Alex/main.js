@@ -56,7 +56,9 @@ Animation.prototype.isDone = function () {
 function Pause(game, ctx, spriteSheet) {
     this.game = game;
     this.ctx = ctx;
-    this.animation = new Animation(spriteSheet, 16, 16, 480, 480, 1, 1, false, false);
+    this.flag = false;
+    this.entities_copy = [];
+    this.animation = new Animation(spriteSheet, 16, 16, 480, 480, Infinity, 1, false, false);
     Entity.call(this, this.game, 0, 0);
 }
 
@@ -64,11 +66,36 @@ Pause.prototype = new Entity();
 Pause.prototype.constructor = Pause;
 
 Pause.prototype.update = function () {
-    Entity.prototype.update.call(this);
+    if ((this.game.click.x > 960 && this.game.click.x < 1008) &&
+        this.game.click.y > 8 && this.game.click.y < 56) {
+            this.entities_copy[this.game.entities.length - 1] = this.game.entities[this.game.entities.length - 1];
+            console.log(this.entities_copy)
+        if (!this.flag) {
+            for(var i = 0; i < this.game.entities.length - 1; i++) {
+                this.entities_copy[i] = this.game.entities[i];
+                this.game.entities[i].removeFromWorld = true;
+            }
+            
+            //console.log(this.game.entities);
+            //console.log(this.entities_copy);
+        } else {
+            console.log(this.entities_copy)
+            for(var i = 0; i < this.entities_copy.length; i++) {
+                this.game.entities[i] = this.entities_copy[i];
+                this.game.entities[i].removeFromWorld = false;
+                this.entities_copy[i] = null;
+            }
+            console.log(this.game.entities);
+            console.log(this.entities_copy);
+        }
+        this.game.click.x = null;
+        this.game.click.y = null;
+        this.flag = !this.flag;
+    }
 };
 
 Pause.prototype.draw = function (ctx) {
-    this.animation.drawFrame(this.game.clockTick, this.ctx, 0, 0);
+    this.animation.drawFrame(this.game.clockTick, this.ctx, 960, 8, .1);
     Entity.prototype.draw.call(this);
 };
 
@@ -145,10 +172,10 @@ ASSET_MANAGER.downloadAll(function () {
     var back5 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_1.png"), 4);
     var back6 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_0.png"), 8);
 
-    var pause = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/temp_pause.png"), 0);
+    var pause = new Pause(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/pause.png"), 0);
 
     //gameEngine.addEntity(blank);
-    gameEngine.addEntity(pause);
+    gameEngine.addEntity(blank);
     gameEngine.addEntity(back1);
     gameEngine.addEntity(back2);
     gameEngine.addEntity(back3);
@@ -170,5 +197,6 @@ ASSET_MANAGER.downloadAll(function () {
     }
     gameEngine.addEntity(bunny);
 
-    
+    gameEngine.addEntity(pause);
+
 });

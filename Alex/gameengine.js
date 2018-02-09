@@ -59,13 +59,27 @@ GameEngine.prototype.start = function () {
 
 GameEngine.prototype.startInput = function () {
     console.log('Starting input');
-    var that = this;
 
+    var getXandY = function (e) {
+        var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
+        var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
+
+        return { x: x, y: y };
+    }
+
+    var that = this;
+    that.click = {x: Infinity, y: Infinity};
     this.ctx.canvas.addEventListener("keydown", function (e) {
         if (String.fromCharCode(e.which) === ' ') that.space = true;
         if (e.code === "KeyP") that.pause = true;
         //console.log(e);
         e.preventDefault();
+    }, false);
+
+    this.ctx.canvas.addEventListener("click", function(e) {
+        that.click = getXandY(e);
+        //console.log("X: " + e.clientX + ", Y: " + e.clientY);
+        console.log(that.click);
     }, false);
 
     console.log('Input started');
