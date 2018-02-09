@@ -1,4 +1,4 @@
-function Background(game, ctx, spritesheet, speed) {
+function Background(game, ctx, spritesheet, speed, pause) {
     this.speed = speed; 
     this.backgroundWidth = 1018;
     this.x = 0;
@@ -9,6 +9,7 @@ function Background(game, ctx, spritesheet, speed) {
     this.pause = false;
     this.flag = false;
     this.entities_copy = [];
+    this.pause = pause;
 	this.draw = function() {
         this.x += this.speed;
          // Scrolling left
@@ -28,28 +29,19 @@ Background.prototype.draw = function () {
 };
 
 Background.prototype.update = function () {
-    if (this.game.pause) {
-        this.pause = !this.pause;
-        this.flag = true;
-        this.entities_copy[0] = this.game.entities[0]
-    }
-     
-    if (this.pause && this.flag) {
-        for(var i = 1; i < this.game.entities.length; i++) {
-            this.entities_copy[i] = this.game.entities[i];
-            this.game.entities[i].removeFromWorld = true;
-        }
-        //console.log(this.game.entities);
-        console.log(this.entities_copy);
-        //console.log(entities_copy);
-        this.flag = false;
-    } else if (!this.pause && this.flag) {
-        console.log(this.entities_copy);
-        for(var i = 1; i < this.entities_copy.length; i++) {
-            this.game.entities[i] = this.entities_copy[i];
+    if ((this.game.click.x >= 380 && this.game.click.x <= 610) && (this.game.click.y >= 290 && this.game.click.y <= 330)) {
+        for(var i = 1; i < this.pause.entities_copy.length; i++) {
+            this.game.entities[i] = this.pause.entities_copy[i];
             this.game.entities[i].removeFromWorld = false;
         }
-        console.log(this.game.entities);
-        this.flag = false;
+        for (var i = 0; i < this.pause.entities_copy.length; i++) {
+            this.pause.entities_copy.pop();
+        }
+        console.log(this.pause.entities_copy);
+        console.log(this.game.entities)
+        this.flag = !this.flag;
+        this.game.click.x = null;
+        this.game.click.y = null;
     }
+    
 };

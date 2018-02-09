@@ -65,33 +65,21 @@ function Pause(game, ctx, spriteSheet) {
 Pause.prototype = new Entity();
 Pause.prototype.constructor = Pause;
 
+//end undo
 Pause.prototype.update = function () {
     if ((this.game.click.x > 960 && this.game.click.x < 1008) &&
         this.game.click.y > 8 && this.game.click.y < 56) {
-            this.entities_copy[this.game.entities.length - 1] = this.game.entities[this.game.entities.length - 1];
-            console.log(this.entities_copy)
-        if (!this.flag) {
-            for(var i = 0; i < this.game.entities.length - 1; i++) {
-                this.entities_copy[i] = this.game.entities[i];
-                this.game.entities[i].removeFromWorld = true;
-            }
-            
-            //console.log(this.game.entities);
-            //console.log(this.entities_copy);
-        } else {
-            console.log(this.entities_copy)
-            for(var i = 0; i < this.entities_copy.length; i++) {
-                this.game.entities[i] = this.entities_copy[i];
-                this.game.entities[i].removeFromWorld = false;
-                this.entities_copy[i] = null;
-            }
-            console.log(this.game.entities);
-            console.log(this.entities_copy);
+        var temp = this.game.entities[this.game.entities.length - 1];
+        this.entities_copy[0] = this.game.entities[0];
+        for(var i = 1; i < this.game.entities.length; i++) {
+            this.entities_copy[i] = this.game.entities[i];
+            this.game.entities[i].removeFromWorld = true;
         }
-        this.game.click.x = null;
-        this.game.click.y = null;
         this.flag = !this.flag;
     }
+    this.game.click.x = null;
+    this.game.click.y = null;
+    
 };
 
 Pause.prototype.draw = function (ctx) {
@@ -147,6 +135,8 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.init(ctx);
     gameEngine.start();
 
+    var pause = new Pause(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/pause.png"), 0);
+
     //Rabbits
     var bunny = new Bunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png"));
 
@@ -164,7 +154,7 @@ ASSET_MANAGER.downloadAll(function () {
     var stumpy = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/stumpy.png"), 0, 60, 74, 60, .17, 4, true, true, 4, 1.5, "walk");
 
     //Background
-    var blank = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/blank.png"), 0);
+    var pause_back = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/temp_pause.png"), 0, pause);
     var back1 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_5.png"), 0);
     var back2 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_4.png"), .5);
     var back3 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_3.png"), 1);
@@ -172,10 +162,8 @@ ASSET_MANAGER.downloadAll(function () {
     var back5 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_1.png"), 4);
     var back6 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_0.png"), 8);
 
-    var pause = new Pause(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/pause.png"), 0);
-
     //gameEngine.addEntity(blank);
-    gameEngine.addEntity(blank);
+    gameEngine.addEntity(pause_back);
     gameEngine.addEntity(back1);
     gameEngine.addEntity(back2);
     gameEngine.addEntity(back3);
