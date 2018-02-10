@@ -180,7 +180,7 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.start();
 
     //Pause
-    var pause = new Pause(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/pause.png"), 0);
+    //var pause = new Pause(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/pause.png"), 0);
 
     //Rabbits
     var bunny = new Bunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png")); 
@@ -216,7 +216,7 @@ ASSET_MANAGER.downloadAll(function () {
     //Scoring
     var score = new Scoring(gameEngine, ctx);
 
-    gameEngine.addEntity(pause_back);
+    //gameEngine.addEntity(pause_back);
     gameEngine.addEntity(back1);
     gameEngine.addEntity(back2);
     gameEngine.addEntity(back3);
