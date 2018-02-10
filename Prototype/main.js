@@ -170,6 +170,9 @@ ASSET_MANAGER.downloadAll(function () {
     var hole = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/hole.png"), 0, 41, 78, 41, 0.15, 7, true, false, 1.5, 1, 350, 510);
     var bush = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/bush.png"),0, 0, 150, 71, .15, 1, true, true,0, 1, 320, 510);
 
+    //Scoring
+    var score = new Scoring(gameEngine, ctx);
+
     gameEngine.addEntity(back1);
     gameEngine.addEntity(back2);
     gameEngine.addEntity(back3);
