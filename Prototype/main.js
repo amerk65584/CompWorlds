@@ -197,6 +197,7 @@ ASSET_MANAGER.downloadAll(function () {
     } else {
         gameEngine.addEntity(mist);
     }
+    
     gameEngine.addEntity(bunny);
 
     gameEngine.addEntity(score);
