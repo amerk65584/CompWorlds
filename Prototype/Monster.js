@@ -31,5 +31,6 @@ Monster.prototype.update = function () {
 
 Monster.prototype.draw = function() {
     this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, this.scale);
+    this.ctx.strokeRect(this.x, this.y,this.frameWidth * 1.75,this.frameHeight * 1.9);
     Entity.prototype.draw.call(this);
 }

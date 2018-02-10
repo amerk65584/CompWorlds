@@ -32,7 +32,7 @@ Pickup.prototype.update = function () {
 }
 
 Pickup.prototype.draw = function (ctx) {
-   
-    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-    Entity.prototype.draw.call(this);
+   this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+   this.ctx.strokeRect(this.x, this.y,this.frameWidth,this.frameHeight); 
+   Entity.prototype.draw.call(this);
 }
