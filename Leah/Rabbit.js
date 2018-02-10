@@ -42,9 +42,11 @@ Bunny.prototype.update = function () {
 Bunny.prototype.draw = function (ctx) {
     if (this.jumping) {
         this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y - 40);
+        ctx.strokeRect(this.x, this.y-50,57,55);
     }
     else {
         this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+        ctx.strokeRect(this.x, this.y,57,47); 
     }
     Entity.prototype.draw.call(this);
 }
