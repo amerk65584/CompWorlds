@@ -103,6 +103,8 @@ ASSET_MANAGER.queueDownload("./imgs/Monster/knight.png");
 ASSET_MANAGER.queueDownload("./imgs/Enemies/crowFly.png");
 ASSET_MANAGER.queueDownload("./imgs/Enemies/stumpy.png");
 ASSET_MANAGER.queueDownload("./imgs/Enemies/bearWalk.png");
+ASSET_MANAGER.queueDownload("./imgs/Enemies/snake.png");
+ASSET_MANAGER.queueDownload("./imgs/Enemies/snail.png");
 
 //Pickups
 ASSET_MANAGER.queueDownload("./imgs/Pickups/carrot.png");
@@ -118,7 +120,7 @@ ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_5.png");
 
 //Platform
 ASSET_MANAGER.queueDownload("./imgs/Platforms/hole.png");
-
+ASSET_MANAGER.queueDownload("./imgs/Platforms/bush.png");
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -148,6 +150,8 @@ ASSET_MANAGER.downloadAll(function () {
     var crow = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/crowFly.png"), 0, 0, 50, 50, .10, 5, true, true, 4, 1.5, "fly", 400, 250);
     var bear = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/bearWalk.png"), 0, 0, 98, 65, 0.15, 5, true, true, 4, 1.5, "walk", 550, 450);
     var stumpy = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/stumpy.png"), 0, 60, 74, 60, .17, 4, true, true, 4, 1.5, "walk", 700, 450); //600, 470
+    var snake = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snake.png"), 0, 0, 95, 87, 0.15, 12, true, true, 3, 1, "walk", 550, 450);
+    var snail = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snail.png"), 0, 0, 45, 36, 0.15, 4, true, true, 3, 0.7, "walk", 400, 500);
 
     //Background
     var back1 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_5.png"), 0);
@@ -160,6 +164,7 @@ ASSET_MANAGER.downloadAll(function () {
     //Platforms
     //game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, x, y) {
     var hole = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/hole.png"), 0, 41, 78, 41, 0.15, 7, true, false, 1.5, 1, 350, 510);
+    var bush = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/bush.png"),0, 0, 150, 71, .15, 1, true, true,0, 1, 320, 510);
 
     gameEngine.addEntity(back1);
     gameEngine.addEntity(back2);
@@ -169,10 +174,13 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.addEntity(back6);
 
     gameEngine.addEntity(hole);
+    gameEngine.addEntity(bush);
 
     gameEngine.addEntity(bear);
     gameEngine.addEntity(crow);
     gameEngine.addEntity(stumpy);
+    gameEngine.addEntity(snake);
+    gameEngine.addEntity(snail);
 
     gameEngine.addEntity(mushroom);
     gameEngine.addEntity(carrot);
