@@ -18,7 +18,7 @@ function Monster(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight
     this.scale = scale;
     this.animation = new Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse);
     this.x = x; //10;
-    this.y = y; //510 - frameHeight;
+    this.y = 550 - frameHeight * scale; //510 - frameHeight;
     Entity.call(this, game, this.x, this.y);
 } 
 

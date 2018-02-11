@@ -23,6 +23,7 @@ function Platform(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeigh
     this.reverse = reverse;
     this.speed = speed;
     this.scale = scale;
+    this.boundingBox = {x: frameWidth, y: frameHeight};
     this.animation = new Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse);
     this.x = x;
     this.y = y;
