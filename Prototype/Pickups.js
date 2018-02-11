@@ -27,8 +27,8 @@ Pickup.prototype = new Entity();
 Pickup.prototype.constructor = Pickup;
 
 Pickup.prototype.update = function () {
-    // this.x -= this.game.clockTick * this.speed * 200;
-    // if (this.x < -120) this.x = 1018;
+    this.x -= this.game.clockTick * this.speed * 200;
+    if (this.x < -120) this.x = 1018;
    Entity.prototype.update.call(this);
 }
 
