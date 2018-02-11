@@ -92,6 +92,7 @@ DeadBunny.prototype.update = function () {
 /*********************
  * temp Pause Button *
  *********************/
+//Temp button code
 function Pause(game, ctx, spriteSheet) {
     this.game = game;
     this.ctx = ctx;
@@ -127,6 +128,7 @@ Pause.prototype.draw = function (ctx) {
 };
 
 
+
 /*************************
  * Main Code Begins Here *
  *************************/
@@ -152,6 +154,7 @@ ASSET_MANAGER.queueDownload("./imgs/Pickups/carrot.png");
 ASSET_MANAGER.queueDownload("./imgs/Pickups/mushroom.png");
 
 //Background
+ASSET_MANAGER.queueDownload("./imgs/temp_pause.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_0.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_1.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_2.png");
@@ -180,7 +183,7 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.start();
 
     //Pause
-    //var pause = new Pause(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/pause.png"), 0);
+    var pause = new Pause(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/pause.png"), 0);
 
     //Rabbits
     var bunny = new Bunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png")); 
@@ -201,6 +204,7 @@ ASSET_MANAGER.downloadAll(function () {
     var snail = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snail.png"), 0, 0, 45, 36, 0.15, 4, true, true, 3, 0.7, "walk", 400, 500);
 
     //Background
+    var pause_back = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/temp_pause.png"), 0, pause);
     var back1 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_5.png"), 0);
     var back2 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_4.png"), .5);
     var back3 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_3.png"), 1);
@@ -217,6 +221,7 @@ ASSET_MANAGER.downloadAll(function () {
     var score = new Scoring(gameEngine, ctx);
 
     //gameEngine.addEntity(pause_back);
+    gameEngine.addEntity(pause_back);
     gameEngine.addEntity(back1);
     gameEngine.addEntity(back2);
     gameEngine.addEntity(back3);
@@ -245,6 +250,7 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.addEntity(bunny);
 
     gameEngine.addEntity(score);
+    gameEngine.addEntity(pause);
 });
 
 
