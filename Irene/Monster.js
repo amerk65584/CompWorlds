@@ -32,7 +32,8 @@ Monster.prototype.update = function () {
 Monster.prototype.draw = function() {
     if (this.game.running) {
         this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, this.scale);
-        this.ctx.strokeRect(this.x, this.y,this.frameWidth * 1.75,this.frameHeight * 1.9);
+        this.ctx.strokeStyle = "red";
+        this.ctx.strokeRect(this.x, this.y,this.frameWidth * 1.50,this.frameHeight * 1.9);
         Entity.prototype.draw.call(this);
     }
 }
