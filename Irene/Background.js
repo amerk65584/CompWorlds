@@ -56,12 +56,13 @@ Background.prototype.draw = function () {
      
     /** HIGH SCORE BUTTON DURING THE START OF THE GAME **/
     if ((this.game.click.x >= 551 && this.game.click.x <= 725) && (this.game.click.y >= 360 && this.game.click.y <= 427) && !this.game.running) {
-        //console.log(this.game.entities);
+        //somehow need to go to the highscore page --> highscore asset manager has been added
+        //without breaking alex's startgame and pause code
         console.log("STARTING THE HIGHSCORE PAGE");
     }
+
     /** OPTION BUTTON DURING THE START OF THE GAME **/
     if ((this.game.click.x >= 323 && this.game.click.x <= 493) && (this.game.click.y >= 359 && this.game.click.y <= 422) && !this.game.running) {
-        //console.log(this.game.entities);
         console.log("STARTING THE OPTION PAGE");
     }
 };

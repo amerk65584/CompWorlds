@@ -156,6 +156,7 @@ ASSET_MANAGER.queueDownload("./imgs/Pickups/mushroom.png");
 //Background
 ASSET_MANAGER.queueDownload("./imgs/temp_pause.png");
 ASSET_MANAGER.queueDownload("./imgs/stat_game_bg.png");
+ASSET_MANAGER.queueDownload("./imgs/highscore.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_0.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_1.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_2.png");
@@ -213,6 +214,7 @@ ASSET_MANAGER.downloadAll(function () {
 
     //Background
     var pause_back = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/temp_pause.png"), 0, pause);
+    var highscore = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/highscore.png"), 0);
     var start = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/stat_game_bg.png"), 0);
     var back1 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_5.png"), 0);
     var back2 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_4.png"), .5);
@@ -235,6 +237,7 @@ ASSET_MANAGER.downloadAll(function () {
 
     //gameEngine.addEntity(pause_back);
     gameEngine.addEntity(pause_back);
+    gameEngine.addEntity(highscore);
     /************************************************
      * NEVER EVER EVER EVER ADD AN ENTITY BEFORE THIS
      *************************************************/
