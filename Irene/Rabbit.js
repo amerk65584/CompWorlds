@@ -47,12 +47,14 @@ Bunny.prototype.draw = function (ctx) {
     if (this.game.running) {
         if (this.jumping) {
             this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y - 40);
-            ctx.strokeRect(this.x, this.y-40,62,57);
+            this.ctx.strokeStyle = "yellow";
+            this.ctx.strokeRect(this.x, this.y-40,62,57);
             this.boundingBox.y = this.ground - this.height;
         }
         else {
             this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-            ctx.strokeRect(this.x, this.y,58,57); 
+            this.ctx.strokeStyle = "yellow";
+            this.ctx.strokeRect(this.x, this.y,58,57); 
         }
         Entity.prototype.draw.call(this);
     }
