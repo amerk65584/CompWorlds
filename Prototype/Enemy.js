@@ -42,13 +42,18 @@ Enemy.prototype = new Entity();
 Enemy.prototype.constructor = Enemy;
 
 Enemy.prototype.update = function () {
-    this.x -= this.game.clockTick * this.speed * 100;
-    if (this.x < -120) this.x = 1018;
-   Entity.prototype.update.call(this);
+    if (this.game.running) {
+        this.x -= this.game.clockTick * this.speed * 100;
+        if (this.x < -120) this.x = 1018;
+        Entity.prototype.update.call(this);
+    }
+    
 }
 
 Enemy.prototype.draw = function () {
-    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, this.scale);
-    this.ctx.strokeRect(this.x, this.y, this.boundingBox.x, this.boundingBox.y);
-    Entity.prototype.draw.call(this);
+    if (this.game.running) {
+        this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, this.scale);
+        this.ctx.strokeRect(this.x, this.y, this.boundingBox.x, this.boundingBox.y);
+        Entity.prototype.draw.call(this);
+    }
 }

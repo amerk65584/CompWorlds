@@ -34,13 +34,17 @@ Platform.prototype = new Entity();
 Platform.prototype.constructor = Platform;
 
 Platform.prototype.update = function () {
-    this.x -= this.game.clockTick * this.speed * 200;
-    if (this.x < -120) this.x = 1018;
-   Entity.prototype.update.call(this);
+    if (this.game.running) {
+        this.x -= this.game.clockTick * this.speed * 200;
+        if (this.x < -120) this.x = 1018;
+        Entity.prototype.update.call(this);
+    }
 }
 
 Platform.prototype.draw = function (ctx) {
-   this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-   this.ctx.strokeRect(this.x, this.y,this.frameWidth,this.frameHeight);
-   Entity.prototype.draw.call(this);
+    if (this.game.running) {
+        this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+        this.ctx.strokeRect(this.x, this.y,this.frameWidth,this.frameHeight);
+        Entity.prototype.draw.call(this);
+    } 
 }

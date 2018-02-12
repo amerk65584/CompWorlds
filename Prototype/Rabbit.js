@@ -20,42 +20,49 @@ Bunny.prototype = new Entity();
 Bunny.prototype.constructor = Bunny;
 
 Bunny.prototype.update = function () {
-    if (this.game.space) this.jumping = true;
-    if (this.jumping) {
-        if (this.jumpAnimation.isDone()) {
-            this.jumpAnimation.elapsedTime = 0;
-            this.jumping = false;
+    if (this.game.running) {
+        if (this.game.space) this.jumping = true;
+        if (this.jumping) {
+            if (this.jumpAnimation.isDone()) {
+                this.jumpAnimation.elapsedTime = 0;
+                this.jumping = false;
+            }
+            var jumpDistance = (this.jumpAnimation.elapsedTime / this.jumpAnimation.totalTime) * 1.09;
+            var totalHeight = 100;
+
+            if (jumpDistance > 0.5)
+                jumpDistance = 1 - jumpDistance;
+
+            //var height = jumpDistance * 2 * totalHeight;
+            var height = totalHeight*(-6 * (jumpDistance * jumpDistance - jumpDistance));
+            this.y = this.ground - height;
+            //console.log("Y axis" + this.y);
         }
-        var jumpDistance = (this.jumpAnimation.elapsedTime / this.jumpAnimation.totalTime) * 1.09;
-        var totalHeight = 100;
-
-        if (jumpDistance > 0.5)
-            jumpDistance = 1 - jumpDistance;
-
-        //var height = jumpDistance * 2 * totalHeight;
-        var height = totalHeight*(-6 * (jumpDistance * jumpDistance - jumpDistance));
-        this.y = this.ground - height;
-        //console.log("Y axis" + this.y);
+        //this.collide();
+        Entity.prototype.update.call(this);
     }
-    //this.collide();
-    Entity.prototype.update.call(this);
 }
 
 Bunny.prototype.draw = function (ctx) {
-    if (this.jumping) {
-        this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y - 40);
-        ctx.strokeRect(this.x, this.y-40,62,57);
-        this.boundingBox.y = this.ground - this.height;
+    if (this.game.running) {
+        if (this.jumping) {
+            this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y - 40);
+            ctx.strokeRect(this.x, this.y-40,62,57);
+            this.boundingBox.y = this.ground - this.height;
+        }
+        else {
+            this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+            ctx.strokeRect(this.x, this.y,58,57); 
+        }
+        Entity.prototype.draw.call(this);
     }
-    else {
-        this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-        ctx.strokeRect(this.x, this.y,58,57); 
-    }
-    Entity.prototype.draw.call(this);
+    
 }
 
 Bunny.prototype.collide = function() {
-    for (var i = 0; i < this.game.entities.length; i++) {
-        //var entity = this.get.entities.
+    if (this.game.running) {
+        for (var i = 0; i < this.game.entities.length; i++) {
+            //var entity = this.get.entities.
+        }
     }
 }
