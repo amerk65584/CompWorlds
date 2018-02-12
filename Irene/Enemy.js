@@ -18,10 +18,11 @@ function Enemy(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, 
     this.speed = speed;
     this.scale = scale;
     this.type = type;
+    this.boundingBox = {x: frameWidth, y: frameHeight};
     switch (type) {
         case "walk":
             this.x = x; //0 - frameWidth;
-            this.y = y; //510 - frameHeight;
+            this.y = 550 - frameHeight; //510 - frameHeight;
             break;
         case "fly":
             this.x = x; //0 - frameWidth;
@@ -41,13 +42,18 @@ Enemy.prototype = new Entity();
 Enemy.prototype.constructor = Enemy;
 
 Enemy.prototype.update = function () {
-    this.x -= this.game.clockTick * this.speed * 100;
-    if (this.x < -120) this.x = 1018;
-   Entity.prototype.update.call(this);
+    if (this.game.running) {
+        this.x -= this.game.clockTick * this.speed * 100;
+        if (this.x < -120) this.x = 1018;
+        Entity.prototype.update.call(this);
+    }
+    
 }
 
 Enemy.prototype.draw = function () {
-    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, this.scale);
-    this.ctx.strokeRect(this.x, this.y,this.frameWidth * 1.3,this.frameHeight * 1.3);
-    Entity.prototype.draw.call(this);
+    if (this.game.running) {
+        this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, this.scale);
+        this.ctx.strokeRect(this.x, this.y, this.boundingBox.x, this.boundingBox.y);
+        Entity.prototype.draw.call(this);
+    }
 }
