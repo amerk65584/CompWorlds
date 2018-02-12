@@ -222,7 +222,7 @@ ASSET_MANAGER.downloadAll(function () {
     //Platforms
     //game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, x, y) {
     var hole = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/hole.png"), 0, 41, 78, 41, 0.15, 7, true, false, 1.5, 1, 350, 510);
-    var bush = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/bush.png"),0, 0, 150, 71, .15, 1, true, true,0, 1, 320, 510);
+    var sign = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sign.png"), 0, 0, 63, 93, 0.15, 1, true, false, 1.5, 1, 315, 425);
     var bush = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/bush.png"),0, 0, 150, 71, .15, 1, true, true,0, 1, 320, 510);
     
     var sstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sm_stump.png"), 41, 43, 65, 83, 0.15, 1, true, false, 1.5, 3, 850, 445); //move= 1 //460 = up/down
