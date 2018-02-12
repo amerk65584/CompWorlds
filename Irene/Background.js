@@ -32,6 +32,7 @@ Background.prototype.draw = function () {
 };
 
  Background.prototype.update = function () {
+     /** CONTINUE BUTTON ON THE PAUSE MODE **/
     if (this.visible && this.game.running) {
         if ((this.game.click.x >= 410 && this.game.click.x <= 590) && (this.game.click.y >= 285 && this.game.click.y <= 360)) {
             for(var i = 1; i < this.pause.entities_copy.length; i++) {
@@ -46,9 +47,21 @@ Background.prototype.draw = function () {
             this.game.click.y = null;
         }
     }
+    /** START GAME BUTTON DURING THE START OF THE GAME **/
     if ((this.game.click.x >= 430 && this.game.click.x <= 615) && (this.game.click.y >= 260 && this.game.click.y <= 335) && !this.game.running) {
         console.log(this.game.entities);
         this.game.running = true;
         this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
+    }
+     
+    /** HIGH SCORE BUTTON DURING THE START OF THE GAME **/
+    if ((this.game.click.x >= 551 && this.game.click.x <= 725) && (this.game.click.y >= 360 && this.game.click.y <= 427) && !this.game.running) {
+        //console.log(this.game.entities);
+        console.log("STARTING THE HIGHSCORE PAGE");
+    }
+    /** OPTION BUTTON DURING THE START OF THE GAME **/
+    if ((this.game.click.x >= 323 && this.game.click.x <= 493) && (this.game.click.y >= 359 && this.game.click.y <= 422) && !this.game.running) {
+        //console.log(this.game.entities);
+        console.log("STARTING THE OPTION PAGE");
     }
 };

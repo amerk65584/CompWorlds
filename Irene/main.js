@@ -143,6 +143,7 @@ ASSET_MANAGER.queueDownload("./imgs/Monster/wraith.png");
 
 //Enemies
 ASSET_MANAGER.queueDownload("./imgs/Enemies/crowFly.png");
+ASSET_MANAGER.queueDownload("./imgs/Enemies/hawk.png");
 ASSET_MANAGER.queueDownload("./imgs/Enemies/stumpy.png");
 ASSET_MANAGER.queueDownload("./imgs/Enemies/bearWalk.png");
 ASSET_MANAGER.queueDownload("./imgs/Enemies/snake.png");
@@ -204,6 +205,7 @@ ASSET_MANAGER.downloadAll(function () {
 
     //Enemies
     var crow = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/crowFly.png"), 0, 0, 50, 50, .10, 5, true, true, 4, 1.5, "fly", 400, 250);
+    var hawk = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/hawk.png"), 0, 0, 87, 87, .10, 9, true, true, 4, 1.5, "fly", 450, 250);
     var bear = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/bearWalk.png"), 0, 0, 98, 65, 0.15, 5, true, true, 4, 1.5, "walk", 550, 450);
     var stumpy = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/stumpy.png"), 0, 60, 74, 60, .17, 4, true, true, 4, 1.5, "walk", 700, 450); //600, 470
     var snake = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snake.png"), 0, 0, 95, 87, 0.15, 12, true, true, 3, 1, "walk", 550, 450);
@@ -253,6 +255,7 @@ ASSET_MANAGER.downloadAll(function () {
 
     gameEngine.addEntity(bear);
     gameEngine.addEntity(crow);
+    gameEngine.addEntity(hawk);
     gameEngine.addEntity(stumpy);
     gameEngine.addEntity(snake);
 
