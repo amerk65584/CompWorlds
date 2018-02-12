@@ -165,6 +165,7 @@ ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_5.png");
 //Platform
 ASSET_MANAGER.queueDownload("./imgs/Platforms/hole.png");
 ASSET_MANAGER.queueDownload("./imgs/Platforms/bush.png");
+ASSET_MANAGER.queueDownload("./imgs/Platforms/sign.png");
 
 ASSET_MANAGER.queueDownload("./imgs/Platforms/sm_stump.png");
 ASSET_MANAGER.queueDownload("./imgs/Platforms/med_stump.png");
@@ -222,6 +223,7 @@ ASSET_MANAGER.downloadAll(function () {
     //game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, x, y) {
     var hole = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/hole.png"), 0, 41, 78, 41, 0.15, 7, true, false, 1.5, 1, 350, 510);
     var bush = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/bush.png"),0, 0, 150, 71, .15, 1, true, true,0, 1, 320, 510);
+    var bush = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/bush.png"),0, 0, 150, 71, .15, 1, true, true,0, 1, 320, 510);
     
     var sstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sm_stump.png"), 41, 43, 65, 83, 0.15, 1, true, false, 1.5, 3, 850, 445); //move= 1 //460 = up/down
     var mstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/med_stump.png"), 115, 88, 65, 101, 0.15, 1, true, false, 1.5, 3, 1050, 429);
@@ -242,6 +244,7 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.addEntity(back5);
     //gameEngine.addEntity(back6);
 
+    gameEngine.addEntity(sign);
     gameEngine.addEntity(snail);
     gameEngine.addEntity(hole);
     gameEngine.addEntity(sstump);
