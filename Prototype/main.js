@@ -281,6 +281,7 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.addEntity(pause);
     gameEngine.addEntity(tutorial);
     gameEngine.addEntity(start);
+    gameEngine.backup();
 });
 
 

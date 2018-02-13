@@ -11,6 +11,7 @@ function Background(game, ctx, spritesheet, speed, pause, visible) {
     this.game = game;
     this.ctx = ctx;
     this.entities_copy = [];
+    this.initialGame = [];
     this.pause = pause;
     this.visible = false;
 	this.draw = function() {
@@ -32,6 +33,7 @@ Background.prototype.draw = function () {
 };
 
  Background.prototype.update = function () {
+     //Pause
     if (this.visible && this.game.running) {
         if ((this.game.click.x >= 410 && this.game.click.x <= 590) && (this.game.click.y >= 285 && this.game.click.y <= 360)) {
             for(var i = 1; i < this.pause.entities_copy.length; i++) {
@@ -45,24 +47,26 @@ Background.prototype.draw = function () {
             this.game.click.x = null;
             this.game.click.y = null;
         }
+        //Quit to menu from pause
+        if (this.game.click.x >= 395 && this.game.click.y >= 365 && this.game.click.x <= 605 && this.game.click.y <= 450) {
+            this.game.reset();
+        }
     }
+    //Start game
     if ((this.game.click.x >= 430 && this.game.click.x <= 615) && (this.game.click.y >= 260 && this.game.click.y <= 335) && !this.game.running) {
         this.game.running = true;
-        
         this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
-        console.log(this.game.entities)
         this.game.entities[this.game.entities.length - 2].removeFromWorld = true;
-        console.log(this.game.entities)
     }
+    //Tutorial
     if (this.game.click.x >= 320 && this.game.click.y >= 350 && this.game.click.x <= 500 && this.game.click.y <= 430 && !this.game.running) {
         this.game.main = this.game.entities[this.game.entities.length - 1];
         this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
     }
+    //Back to Menu from Tutorial
     if (this.game.click.x >= 43 && this.game.click.y >= 555 && this.game.click.x <= 195 && this.game.click.y <= 632 && this.game.main) {
-        console.log(this.game.entities)
         var main = new Background(this.game, this.ctx, this.game.main.spritesheet, this.game.main.speed, this.game.main.pause, this.game.main.visible);
         this.game.addEntity(main);
-        console.log(this.game.entities)
         this.game.main = null;
     }
 };

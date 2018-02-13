@@ -30,6 +30,7 @@ Timer.prototype.tick = function () {
 
 function GameEngine() {
     this.entities = [];
+    this.entities_copy = [];
     this.showOutlines = false;
     this.ctx = null;
     this.click = null;
@@ -124,6 +125,24 @@ GameEngine.prototype.loop = function () {
     this.update();
     this.draw();
     this.space = null;
+}
+
+GameEngine.prototype.backup = function () {
+    for (var i = 0; i < this.entities.length; i++) {
+        this.entities_copy[i] = this.entities[i];
+    }
+}
+
+GameEngine.prototype.reset = function () {
+    this.running = false;
+    for (var i = this.entities.length - 1; i >= 0; --i) {
+        this.entities.splice(i, 1);
+    }
+    for (var i = 0; i < this.entities_copy.length; i++) {
+        this.entities[i] = this.entities_copy[i];
+    }
+    console.log(this.entities);
+    this.backup();
 }
 
 function Entity(game, x, y) {
