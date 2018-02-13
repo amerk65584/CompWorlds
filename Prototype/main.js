@@ -157,6 +157,7 @@ ASSET_MANAGER.queueDownload("./imgs/Pickups/mushroom.png");
 ASSET_MANAGER.queueDownload("./imgs/tutorial.png");
 ASSET_MANAGER.queueDownload("./imgs/temp_pause.png");
 ASSET_MANAGER.queueDownload("./imgs/stat_game_bg.png");
+ASSET_MANAGER.queueDownload("./imgs/highscore.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_0.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_1.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_2.png");
@@ -216,6 +217,7 @@ ASSET_MANAGER.downloadAll(function () {
     var pause_back = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/temp_pause.png"), 0, pause);
     var start = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/stat_game_bg.png"), 0);
     var tutorial = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/tutorial.png"), 0);
+    var highscore = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/highscore.png"), 0);
     var back1 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_5.png"), 0);
     var back2 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_4.png"), .5);
     var back3 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_3.png"), 1);
@@ -280,6 +282,7 @@ ASSET_MANAGER.downloadAll(function () {
     
     gameEngine.addEntity(pause);
     gameEngine.addEntity(tutorial);
+    gameEngine.addEntity(highscore);
     gameEngine.addEntity(start);
     gameEngine.backup();
 });

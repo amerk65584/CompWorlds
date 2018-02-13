@@ -40,6 +40,7 @@ function GameEngine() {
     this.surfaceHeight = null;
     this.running = false;
     this.main = null;
+    this.highscore = null;
 }
 
 GameEngine.prototype.init = function (ctx) {
