@@ -154,6 +154,7 @@ ASSET_MANAGER.queueDownload("./imgs/Pickups/carrot.png");
 ASSET_MANAGER.queueDownload("./imgs/Pickups/mushroom.png");
 
 //Background
+ASSET_MANAGER.queueDownload("./imgs/tutorial.png");
 ASSET_MANAGER.queueDownload("./imgs/temp_pause.png");
 ASSET_MANAGER.queueDownload("./imgs/stat_game_bg.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_0.png");
@@ -214,6 +215,7 @@ ASSET_MANAGER.downloadAll(function () {
     //Background
     var pause_back = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/temp_pause.png"), 0, pause);
     var start = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/stat_game_bg.png"), 0);
+    var tutorial = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/tutorial.png"), 0);
     var back1 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_5.png"), 0);
     var back2 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_4.png"), .5);
     var back3 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_3.png"), 1);
@@ -225,7 +227,6 @@ ASSET_MANAGER.downloadAll(function () {
     //game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, x, y) {
     var hole = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/hole.png"), 0, 41, 78, 41, 0.15, 7, true, false, 1.5, 1, 350, 510);
     var sign = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sign.png"), 0, 0, 63, 93, 0.15, 1, true, false, 1.5, 1, 315, 425);
-    var bush = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/bush.png"),0, 0, 150, 71, .15, 1, true, true,0, 1, 320, 510);
     
     var sstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sm_stump.png"), 50, 56, 90, 112, 0.15, 1, true, false, 1.5, 1, 850, 420); //move= 1 //460 = up/down
     var mstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/med_stump.png"), 172.5, 132, 100, 153, 0.15, 1, true, false, 1.5, 1, 1050, 380);
@@ -269,15 +270,16 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.addEntity(carrot);
     gameEngine.addEntity(wraith);
     gameEngine.addEntity(bunny);
-    gameEngine.addEntity(bush);
     gameEngine.addEntity(back6);
     gameEngine.addEntity(score);
+    
 
     /********************************************************************* 
      * NEVER EVER EVER EVER ADD AN ENTITY AFTER THIS
     **********************************************************************/
-
+    
     gameEngine.addEntity(pause);
+    gameEngine.addEntity(tutorial);
     gameEngine.addEntity(start);
 });
 

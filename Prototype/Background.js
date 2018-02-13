@@ -47,8 +47,22 @@ Background.prototype.draw = function () {
         }
     }
     if ((this.game.click.x >= 430 && this.game.click.x <= 615) && (this.game.click.y >= 260 && this.game.click.y <= 335) && !this.game.running) {
-        console.log(this.game.entities);
         this.game.running = true;
+        
         this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
+        console.log(this.game.entities)
+        this.game.entities[this.game.entities.length - 2].removeFromWorld = true;
+        console.log(this.game.entities)
+    }
+    if (this.game.click.x >= 320 && this.game.click.y >= 350 && this.game.click.x <= 500 && this.game.click.y <= 430 && !this.game.running) {
+        this.game.main = this.game.entities[this.game.entities.length - 1];
+        this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
+    }
+    if (this.game.click.x >= 43 && this.game.click.y >= 555 && this.game.click.x <= 195 && this.game.click.y <= 632 && this.game.main) {
+        console.log(this.game.entities)
+        var main = new Background(this.game, this.ctx, this.game.main.spritesheet, this.game.main.speed, this.game.main.pause, this.game.main.visible);
+        this.game.addEntity(main);
+        console.log(this.game.entities)
+        this.game.main = null;
     }
 };
