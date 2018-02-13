@@ -204,8 +204,8 @@ ASSET_MANAGER.downloadAll(function () {
 
     //Enemies
     var crow = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/crowFly.png"), 0, 0, 50, 50, .10, 5, true, true, 4, 1.5, "fly", 400, 250);
-    var bear = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/bearWalk.png"), 0, 0, 98, 65, 0.15, 5, true, true, 4, 1.5, "walk", 550, 450);
-    var stumpy = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/stumpy.png"), 0, 60, 74, 60, .17, 4, true, true, 4, 1.5, "walk", 700, 450); //600, 470
+    var bear = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/bearWalk.png"), 0, 0, 196, 108, 0.15, 5, true, true, 4, 1, "walk", 550, 450);
+    var stumpy = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/stumpy.png"), 0, 90, 111, 85, .17, 4, true, true, 4, 1, "walk", 700, 450); //600, 470
     var snake = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snake.png"), 0, 0, 95, 87, 0.15, 12, true, true, 3, 1, "walk", 550, 450);
     var snail = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snail.png"), 0, 0, 45, 36, 0.15, 4, true, true, 3, 0.7, "walk", 450, 500);
 
@@ -225,9 +225,9 @@ ASSET_MANAGER.downloadAll(function () {
     var sign = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sign.png"), 0, 0, 63, 93, 0.15, 1, true, false, 1.5, 1, 315, 425); /////
     var bush = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/bush.png"),0, 0, 150, 71, .15, 1, true, true,0, 1, 320, 510);
     
-    var sstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sm_stump.png"), 41, 43, 65, 83, 0.15, 1, true, false, 1.5, 3, 850, 445); //move= 1 //460 = up/down
-    var mstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/med_stump.png"), 115, 88, 65, 101, 0.15, 1, true, false, 1.5, 3, 1050, 429);
-    var lstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/lg_stump.png"), 53, 15, 64, 129, 0.15, 1, true, false, 1.5, 3, 1200, 405);
+    var sstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sm_stump.png"), 50, 56, 90, 112, 0.15, 1, true, false, 1.5, 1, 850, 420); //move= 1 //460 = up/down
+    var mstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/med_stump.png"), 172.5, 132, 100, 153, 0.15, 1, true, false, 1.5, 1, 1050, 380);
+    var lstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/lg_stump.png"), 76, 22, 98, 194, 0.15, 1, true, false, 1.5, 1, 1250, 345);
   
 
 
