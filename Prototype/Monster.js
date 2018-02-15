@@ -19,6 +19,7 @@ function Monster(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight
     this.animation = new Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse);
     this.x = x; //10;
     this.y = 550 - frameHeight * scale; //510 - frameHeight;
+    this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth, this.frameHeight);
     Entity.call(this, game, this.x, this.y);
 } 
 
@@ -32,7 +33,7 @@ Monster.prototype.update = function () {
 Monster.prototype.draw = function() {
     if (this.game.running) {
         this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, this.scale);
-        this.ctx.strokeRect(this.x, this.y,this.frameWidth * 1.75,this.frameHeight * 1.9);
+        this.ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, this.boundingBox.width * 1.75,this.boundingBox.height * 1.9);
         Entity.prototype.draw.call(this);
     }
 }

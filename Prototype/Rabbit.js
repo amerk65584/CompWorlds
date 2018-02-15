@@ -13,6 +13,7 @@ function Bunny(game, ctx, spriteSheet) {
     this.jumpAnimation = new Animation(spriteSheet, 70, 0, 62, 57, 1, 1, false, true);
     this.x = 200;
     this.ground = 550 - 57; // changed from 400
+    this.boundingBox = new BoundingBox(this.x, this.ground - 57, this.frameWidth, this.frameHeight);
     Entity.call(this, game, 200, 480); // changed from 400
 }
 
