@@ -189,7 +189,10 @@ ASSET_MANAGER.downloadAll(function () {
     var gameEngine = new GameEngine();
     gameEngine.init(ctx);
     gameEngine.start();
+    initialize(gameEngine, ctx);
+});
 
+function initialize (gameEngine, ctx) {
     //Pause
     var score = new Scoring(gameEngine, ctx);
     var pause = new Pause(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/pause.png"), 0);
@@ -284,8 +287,7 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.addEntity(tutorial);
     gameEngine.addEntity(highscore);
     gameEngine.addEntity(start);
-    gameEngine.backup();
-});
+}
 
 
 // //Death screen

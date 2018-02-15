@@ -83,7 +83,6 @@ GameEngine.prototype.startInput = function () {
     this.ctx.canvas.addEventListener("click", function(e) {
         that.click = getXandY(e);
         //console.log("X: " + e.clientX + ", Y: " + e.clientY);
-        console.log(that.click);
     }, false);
 
     console.log('Input started');
@@ -128,22 +127,12 @@ GameEngine.prototype.loop = function () {
     this.space = null;
 }
 
-GameEngine.prototype.backup = function () {
-    for (var i = 0; i < this.entities.length; i++) {
-        this.entities_copy[i] = this.entities[i];
-    }
-}
-
 GameEngine.prototype.reset = function () {
     this.running = false;
     for (var i = this.entities.length - 1; i >= 0; --i) {
         this.entities.splice(i, 1);
     }
-    for (var i = 0; i < this.entities_copy.length; i++) {
-        this.entities[i] = this.entities_copy[i];
-    }
-    console.log(this.entities);
-    this.backup();
+    initialize(this, this.ctx);
 }
 
 function Entity(game, x, y) {
