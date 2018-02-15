@@ -205,8 +205,8 @@ function initialize (gameEngine, ctx) {
     //var mist = new Monster(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Monster/knight.png"), 800, 105, 104, 105, .15, 6, true, true, 2, -120, 330);
 
     //Pickups
-    var mushroom = new Pickup(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Pickups/mushroom.png"), .5, .5, 33, 33, .15, 2, true, true, 1.8, 1, 335, 515); //300
-    var carrot = new Pickup(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Pickups/carrot.png"), 0, 0, 39, 62, .15, 5, true, true, 2, 1, 350, 500);
+    var mushroom = new Pickup(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Pickups/mushroom.png"), .5, .5, 33, 33, .15, 2, true, true, 1.8, 1, 335, 505); //300
+    var carrot = new Pickup(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Pickups/carrot.png"), 0, 0, 39, 62, .15, 5, true, true, 2, 1, 350, 475);
 
     //Enemies
     var crow = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/crowFly.png"), 0, 0, 73, 73, .10, 5, true, true, 4, 1, "fly", 400, 250);
@@ -250,20 +250,20 @@ function initialize (gameEngine, ctx) {
     gameEngine.addEntity(back3);
     gameEngine.addEntity(back4);
     gameEngine.addEntity(back5);
-    //gameEngine.addEntity(back6);
+    gameEngine.addEntity(back6);
 
-    gameEngine.addEntity(sign);
-    gameEngine.addEntity(snail);
-    gameEngine.addEntity(hole);
-    gameEngine.addEntity(sstump);
-    gameEngine.addEntity(mstump);
-    gameEngine.addEntity(lstump);
+    // gameEngine.addEntity(sign);
+    // gameEngine.addEntity(snail);
+    // gameEngine.addEntity(hole);
+    // gameEngine.addEntity(sstump);
+    // gameEngine.addEntity(mstump);
+    // gameEngine.addEntity(lstump);
 
-    gameEngine.addEntity(bear);
-    gameEngine.addEntity(crow);
-    gameEngine.addEntity(hawk);
-    gameEngine.addEntity(stumpy);
-    gameEngine.addEntity(snake);
+    // gameEngine.addEntity(bear);
+    // gameEngine.addEntity(crow);
+    // gameEngine.addEntity(hawk);
+    // gameEngine.addEntity(stumpy);
+    // gameEngine.addEntity(snake);
 
     // if (getRandomInt(0, 1) === 0) {
     //     gameEngine.addEntity(wraith);
@@ -275,7 +275,6 @@ function initialize (gameEngine, ctx) {
     gameEngine.addEntity(carrot);
     gameEngine.addEntity(wraith);
     gameEngine.addEntity(bunny);
-    gameEngine.addEntity(back6);
     gameEngine.addEntity(score);
     
 
