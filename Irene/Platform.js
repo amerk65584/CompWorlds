@@ -44,8 +44,7 @@ Platform.prototype.update = function () {
 Platform.prototype.draw = function (ctx) {
     if (this.game.running) {
         this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-        this.ctx.strokeStyle = "green";
-        this.ctx.strokeRect(this.x, this.y,this.frameWidth * 0.9 ,this.frameHeight);
+        this.ctx.strokeRect(this.x, this.y,this.frameWidth,this.frameHeight);
         Entity.prototype.draw.call(this);
     } 
 }

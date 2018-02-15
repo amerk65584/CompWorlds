@@ -44,17 +44,15 @@ Bunny.prototype.update = function () {
 }
 
 Bunny.prototype.draw = function (ctx) {
-    this.ctx.strokeStyle = "yellow";
     if (this.game.running) {
         if (this.jumping) {
             this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y - 40);
-            
-            this.ctx.strokeRect(this.x, this.y-40,62,57);
+            ctx.strokeRect(this.x, this.y-40,62,57);
             this.boundingBox.y = this.ground - this.height;
         }
         else {
             this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-            this.ctx.strokeRect(this.x, this.y,58,57); 
+            ctx.strokeRect(this.x, this.y,58,57); 
         }
         Entity.prototype.draw.call(this);
     }

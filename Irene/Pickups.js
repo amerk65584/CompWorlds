@@ -37,7 +37,6 @@ Pickup.prototype.update = function () {
 Pickup.prototype.draw = function (ctx) {
     if (this.game.running) {
         this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-        this.ctx.strokeStyle = "blue";
         this.ctx.strokeRect(this.x, this.y,this.frameWidth,this.frameHeight); 
         Entity.prototype.draw.call(this);
     }
