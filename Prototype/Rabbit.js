@@ -73,6 +73,9 @@ Bunny.prototype.collide = function() {
             this.boundingBox.y < this.game.entities[i].boundingBox.y + this.game.entities[i].boundingBox.height &&
             this.boundingBox.height + this.boundingBox.y > this.game.entities[i].boundingBox.y) {
                 console.log("hit!");
+                /*********************
+                 * Pickup interaction
+                 ********************/
                 if (this.game.entities[i] instanceof Pickup) {
                     this.game.entities[i].x = i * 200;
                     this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
@@ -85,15 +88,24 @@ Bunny.prototype.collide = function() {
                     } else if (this.game.entities[i].type === "car") {
                         this.monster.retreat();  
                     }
+                /*********************
+                 * enemy interaction
+                 ********************/
                 } else if (this.game.entities[i] instanceof Enemy) {
                     this.game.entities[i].x = i * 200;
                     this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
                         this.game.entities[i].width, this.game.entities[i].height);
                     this.monster.move();
+                /*********************
+                 * Platform interaction
+                 ********************/
                 } else if (this.game.entities[i] instanceof Platform) {
                     this.game.entities[i].x = i * 200;
                     this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
                         this.game.entities[i].width, this.game.entities[i].height);
+                /*********************
+                 * Monster interaction
+                 ********************/
                 } else if (this.game.entities[i] instanceof Monster) {
                     this.game.reset();
                     initialize(this.game, this.ctx);    
