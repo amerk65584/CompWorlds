@@ -37,7 +37,7 @@ Bunny.prototype.update = function () {
             //var height = jumpDistance * 2 * totalHeight;
             var height = totalHeight*(-6 * (jumpDistance * jumpDistance - jumpDistance));
             this.y = this.ground - height;
-            this.boundingBox = new BoundingBox(this.x, this.y, 58, 57);
+            this.boundingBox = new BoundingBox(this.x, this.y - 43, 58, 57);
             //console.log("Y axis" + this.y);
         } else {
             this.boundingBox = new BoundingBox(this.x, this.y, 58, 57);
@@ -51,11 +51,11 @@ Bunny.prototype.draw = function (ctx) {
     if (this.game.running) {
         if (this.jumping) {
             this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y - 40);
-            ctx.strokeRect(this.x, this.y-40,62,57);
+            ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, 58, 57);
         }
         else {
             this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-            ctx.strokeRect(this.x, this.y,58,57); 
+            ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, 58, 57);
         }
         Entity.prototype.draw.call(this);
     }
@@ -73,13 +73,17 @@ Bunny.prototype.collide = function() {
             this.boundingBox.height + this.boundingBox.y > this.game.entities[i].boundingBox.y) {
                 console.log("hit!");
                 if (this.game.entities[i] instanceof Pickup) {
-                    this.game.entities[i].x = 2000;
+                    this.game.entities[i].x = i * 200;
                     this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
                                                                         this.game.entities[i].width, this.game.entities[i].height);
                 } else if (this.game.entities[i] instanceof Enemy) {
-        
+                    this.game.entities[i].x = i * 200;
+                    this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
+                                                                        this.game.entities[i].width, this.game.entities[i].height);
                 } else if (this.game.entities[i] instanceof Platform) {
-                    
+                    this.game.entities[i].x = i * 200;
+                    this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
+                                                                        this.game.entities[i].width, this.game.entities[i].height);
                 } else if (this.game.entities[i] instanceof Monster) {
                         
                 } else {
