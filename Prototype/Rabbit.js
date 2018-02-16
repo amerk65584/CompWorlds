@@ -77,6 +77,14 @@ Bunny.prototype.collide = function() {
                     this.game.entities[i].x = i * 200;
                     this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
                         this.game.entities[i].width, this.game.entities[i].height);
+                    /****************************
+                     * Code for pickups here!
+                     ****************************/
+                    if (this.game.entities[i].type === "mush") {
+                        this.monster.move();
+                    } else if (this.game.entities[i].type === "car") {
+                        this.monster.retreat();  
+                    }
                 } else if (this.game.entities[i] instanceof Enemy) {
                     this.game.entities[i].x = i * 200;
                     this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 

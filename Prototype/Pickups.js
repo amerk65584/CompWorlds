@@ -2,7 +2,7 @@
  * Pickups *
  ***********/
 
-function Pickup(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, x, y) {
+function Pickup(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, x, y, type) {
     this.game = game;
     this.ctx = ctx;
     this.spriteSheet = spriteSheet;
@@ -21,6 +21,7 @@ function Pickup(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight,
     this.x = x;
     this.y = y;
     this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth, this.frameHeight);
+    this.type = type;
     Entity.call(this, this.game, this.x, this.y); // y == the sprites gound
 }
 

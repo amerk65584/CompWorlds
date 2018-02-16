@@ -40,5 +40,10 @@ Monster.prototype.draw = function() {
 
 Monster.prototype.move = function() {
     this.x += 10;
-    this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth * 2, this.frameHeight * 2)
+    this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth * 2, this.frameHeight * 2);
+}
+
+Monster.prototype.retreat = function() {
+    this.x -= 10;
+    this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth * 2, this.frameHeight * 2);
 }
