@@ -2,7 +2,8 @@
  * Rabbit *
  **********/
 
-function Bunny(game, ctx, spriteSheet) {
+function Bunny(game, ctx, spriteSheet, monster) {
+    this.monster = monster;
     this.game = game;
     this.ctx = ctx;
     this.spriteSheet = spriteSheet;
@@ -75,17 +76,19 @@ Bunny.prototype.collide = function() {
                 if (this.game.entities[i] instanceof Pickup) {
                     this.game.entities[i].x = i * 200;
                     this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
-                                                                        this.game.entities[i].width, this.game.entities[i].height);
+                        this.game.entities[i].width, this.game.entities[i].height);
                 } else if (this.game.entities[i] instanceof Enemy) {
                     this.game.entities[i].x = i * 200;
                     this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
-                                                                        this.game.entities[i].width, this.game.entities[i].height);
+                        this.game.entities[i].width, this.game.entities[i].height);
+                    this.monster.move();
                 } else if (this.game.entities[i] instanceof Platform) {
                     this.game.entities[i].x = i * 200;
                     this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
-                                                                        this.game.entities[i].width, this.game.entities[i].height);
+                        this.game.entities[i].width, this.game.entities[i].height);
                 } else if (this.game.entities[i] instanceof Monster) {
-                        
+                    this.game.reset();
+                    initialize(this.game, this.ctx);    
                 } else {
                     continue;
                 }

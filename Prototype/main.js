@@ -197,12 +197,12 @@ function initialize (gameEngine, ctx) {
     var score = new Scoring(gameEngine, ctx);
     var pause = new Pause(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/pause.png"), 0);
 
-    //Rabbits
-    var bunny = new Bunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png")); 
-
     //Monsters
-    var wraith = new Monster(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Monster/wraith.png"), 360, 0, 88.3, 105, .15, 4, true, true, 2, -50, 330);
+    var wraith = new Monster(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Monster/wraith.png"), 360, 0, 88.3, 105, .15, 4, true, true, 2, -88.3 * 2, 330);
     //var mist = new Monster(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Monster/knight.png"), 800, 105, 104, 105, .15, 6, true, true, 2, -120, 330);
+
+    //Rabbits
+    var bunny = new Bunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png"), wraith); 
 
     //Pickups
     var mushroom = new Pickup(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Pickups/mushroom.png"), .5, .5, 33, 33, .15, 2, true, true, 1.8, 1, 1000, 505); //300
