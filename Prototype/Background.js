@@ -95,4 +95,21 @@ Background.prototype.draw = function () {
         this.game.main = null;
         this.screen = "main";
     }
+    //Play Again from Death
+    if (this.game.click.x >= 107 && this.game.click.y >= 520 && this.game.click.x <= 315 && this.game.click.y <= 610 && this.game.running && this.screen === "dead") {
+        this.game.click.x = null;
+        this.game.click.y = null;
+        this.game.reset();
+        this.game.running = true;
+        this.screen = "game";
+        this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
+        this.game.entities[this.game.entities.length - 2].removeFromWorld = true;
+        this.game.entities[this.game.entities.length - 3].removeFromWorld = true;
+    }
+    //Quit to Menu from Death
+    if (this.game.click.x >= 725 && this.game.click.y >= 515 && this.game.click.x <= 980 && this.game.click.y <= 605 && this.game.running && this.screen === "dead") {
+        this.game.click.x = null;
+        this.game.click.y = null;
+        this.game.reset();
+    }
 };

@@ -64,7 +64,7 @@ Bunny.prototype.draw = function (ctx) {
 }
 
 Bunny.prototype.collide = function() {
-    for (var i = 0; i < this.game.entities.length; i++) {
+    for (var i = 9; i < this.game.entities.length; i++) {
         if (!(this.game.entities[i] instanceof Background) && 
         !(this.game.entities[i] instanceof Pause) &&
         !(this.game.entities[i] instanceof Scoring)) {
@@ -72,7 +72,6 @@ Bunny.prototype.collide = function() {
             this.boundingBox.x + this.boundingBox.width > this.game.entities[i].boundingBox.x &&
             this.boundingBox.y < this.game.entities[i].boundingBox.y + this.game.entities[i].boundingBox.height &&
             this.boundingBox.height + this.boundingBox.y > this.game.entities[i].boundingBox.y) {
-                console.log("hit!");
                 /*********************
                  * Pickup interaction
                  ********************/
@@ -107,8 +106,13 @@ Bunny.prototype.collide = function() {
                  * Monster interaction
                  ********************/
                 } else if (this.game.entities[i] instanceof Monster) {
-                    this.game.reset();
-                    initialize(this.game, this.ctx);    
+                    this.game.entities[0].removeFromWorld = true;
+                    this.game.entities[1].screen = "dead";
+                    this.game.entities[2].dead = true;
+                    for (var i = 3; i < this.game.entities.length; i++) {
+                        this.game.entities[i].removeFromWorld = true;
+                    }
+                    console.log(this.game.entities);
                 } else {
                     continue;
                 }

@@ -82,7 +82,7 @@ GameEngine.prototype.startInput = function () {
 
     this.ctx.canvas.addEventListener("click", function(e) {
         that.click = getXandY(e);
-        //console.log("X: " + e.clientX + ", Y: " + e.clientY);
+        console.log("X: " + e.clientX + ", Y: " + e.clientY);
     }, false);
 
     console.log('Input started');
@@ -121,10 +121,10 @@ GameEngine.prototype.update = function () {
 }
 
 GameEngine.prototype.loop = function () {
-    this.clockTick = this.timer.tick();
-    this.update();
-    this.draw();
-    this.space = null;
+        this.clockTick = this.timer.tick();
+        this.update();
+        this.draw();
+        this.space = null;
 }
 
 GameEngine.prototype.reset = function () {

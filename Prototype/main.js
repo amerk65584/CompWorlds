@@ -177,6 +177,10 @@ ASSET_MANAGER.queueDownload("./imgs/Platforms/lg_stump.png");
 //Buttons
 ASSET_MANAGER.queueDownload("./imgs/pause.png");
 
+//Game Over
+ASSET_MANAGER.queueDownload("./imgs/Gameover/deadBunny.png");
+ASSET_MANAGER.queueDownload("./imgs/Gameover/deathBackground.png");
+
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -237,10 +241,14 @@ function initialize (gameEngine, ctx) {
     var mstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/med_stump.png"), 172.5, 132, 100, 153, 0.15, 1, true, false, 1.5, 1, 2000, 380);
     var lstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/lg_stump.png"), 76, 22, 98, 194, 0.15, 1, true, false, 1.5, 1, 2200, 345);
   
-
+    //Game Over
+    var death = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Gameover/deathBackground.png"), 0);
+    var corpse = new DeadBunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Gameover/deadBunny.png"));
 
     //gameEngine.addEntity(pause_back);
     gameEngine.addEntity(pause_back);
+    gameEngine.addEntity(death);
+    gameEngine.addEntity(corpse);
     /************************************************
      * NEVER EVER EVER EVER ADD AN ENTITY BEFORE THIS
      *************************************************/
@@ -287,6 +295,9 @@ function initialize (gameEngine, ctx) {
     gameEngine.addEntity(highscore);
     gameEngine.addEntity(start);
 }
+/*
+    gameEngine.addEntity(corpse);
+*/
 
 
 // //Death screen
