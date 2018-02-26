@@ -13,12 +13,12 @@ DeadBunny.prototype.draw = function () {
 }
 
 DeadBunny.prototype.update = function () {
-    if (this.dead) {
+    if (this.dead) {       
         if (this.animation.elapsedTime > this.animation.totalTime * 3 / 4) {
-            this.animation.startX = 195;
-            this.animation.frameDuration = 9999;
-            this.animation.frames = 1;
-            this.animation.loop = true;
+        this.animation.startX = 195;
+        this.animation.frameDuration = 9999;
+        this.animation.frames = 1;
+        this.animation.loop = true;
         }
         Entity.prototype.draw.call(this);
     }

@@ -20,7 +20,7 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDu
     this.elapsedTime = 0;
     this.loop = loop;
     this.reverse = reverse;
-    myMusic = new Audio("./sounds/gameMusic.wav")
+    myMusic = new Audio("./sounds/lobbyMusic1.mp3")
 }
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {

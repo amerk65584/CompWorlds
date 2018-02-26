@@ -108,7 +108,6 @@ Background.prototype.draw = function () {
         this.game.reset();
         this.game.running = true;
         this.screen = "game";
-        myMusic.reset();
         this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
         this.game.entities[this.game.entities.length - 2].removeFromWorld = true;
         this.game.entities[this.game.entities.length - 3].removeFromWorld = true;
