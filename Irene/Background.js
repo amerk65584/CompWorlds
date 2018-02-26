@@ -13,7 +13,7 @@ function Background(game, ctx, spritesheet, speed, pause, visible) {
     this.entities_copy = [];
     this.initialGame = [];
     this.pause = pause;
-    this.screen = "";
+    this.screen = "main";
     var temp;
     this.visible = null;
 	this.draw = function() {
@@ -36,7 +36,7 @@ Background.prototype.draw = function () {
 
  Background.prototype.update = function () {
      //Pause
-    if (this.visible && this.game.running) {
+    if (this.visible && this.game.running && this.screen === "game") {
         if ((this.game.click.x >= 410 && this.game.click.x <= 590) && (this.game.click.y >= 285 && this.game.click.y <= 360)) {
             for(var i = 1; i < this.pause.entities_copy.length; i++) {
                 this.game.entities[i] = this.pause.entities_copy[i];
@@ -51,18 +51,21 @@ Background.prototype.draw = function () {
         }
         //Quit to menu from pause
         if (this.game.click.x >= 395 && this.game.click.y >= 365 && this.game.click.x <= 605 && this.game.click.y <= 450) {
+            this.game.click.x = null;
+            this.game.click.y = null;
             this.game.reset();
         }
     }
     //Start game
-    if ((this.game.click.x >= 430 && this.game.click.x <= 615) && (this.game.click.y >= 260 && this.game.click.y <= 335) && !this.game.running && this.screen === "") {
+    if ((this.game.click.x >= 430 && this.game.click.x <= 615) && (this.game.click.y >= 260 && this.game.click.y <= 335) && !this.game.running && this.screen === "main") {
         this.game.running = true;
+        this.screen = "game";
         this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
         this.game.entities[this.game.entities.length - 2].removeFromWorld = true;
         this.game.entities[this.game.entities.length - 3].removeFromWorld = true;
     }
     //Tutorial
-    if (this.game.click.x >= 320 && this.game.click.y >= 350 && this.game.click.x <= 500 && this.game.click.y <= 430 && !this.game.running && this.screen === "") {
+    if (this.game.click.x >= 320 && this.game.click.y >= 350 && this.game.click.x <= 500 && this.game.click.y <= 430 && !this.game.running && this.screen === "main") {
         this.screen = "tut";
         this.game.main = this.game.entities[this.game.entities.length - 1];
         this.game.highscore = this.game.entities[this.game.entities.length - 2];
@@ -77,10 +80,10 @@ Background.prototype.draw = function () {
         this.game.addEntity(main);
         this.game.main = null;
         this.game.highscore = null;
-        this.screen = "";
+        this.screen = "main";
     }
     //HighScore
-    if (this.game.click.x >= 550 && this.game.click.y >= 355 && this.game.click.x <= 730 && this.game.click.y <= 430 && !this.game.running && this.screen === "") {
+    if (this.game.click.x >= 550 && this.game.click.y >= 355 && this.game.click.x <= 730 && this.game.click.y <= 430 && !this.game.running && this.screen === "main") {
         this.screen = "high";
         this.game.main = this.game.entities[this.game.entities.length - 1];
         this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
@@ -90,6 +93,23 @@ Background.prototype.draw = function () {
         var main = new Background(this.game, this.ctx, this.game.main.spritesheet, this.game.main.speed, this.game.main.pause, this.game.main.visible);
         this.game.addEntity(main);
         this.game.main = null;
-        this.screen = "";
+        this.screen = "main";
+    }
+    //Play Again from Death
+    if (this.game.click.x >= 107 && this.game.click.y >= 520 && this.game.click.x <= 315 && this.game.click.y <= 610 && this.game.running && this.screen === "dead") {
+        this.game.click.x = null;
+        this.game.click.y = null;
+        this.game.reset();
+        this.game.running = true;
+        this.screen = "game";
+        this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
+        this.game.entities[this.game.entities.length - 2].removeFromWorld = true;
+        this.game.entities[this.game.entities.length - 3].removeFromWorld = true;
+    }
+    //Quit to Menu from Death
+    if (this.game.click.x >= 725 && this.game.click.y >= 515 && this.game.click.x <= 980 && this.game.click.y <= 605 && this.game.running && this.screen === "dead") {
+        this.game.click.x = null;
+        this.game.click.y = null;
+        this.game.reset();
     }
 };

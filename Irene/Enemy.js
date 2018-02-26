@@ -18,7 +18,7 @@ function Enemy(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, 
     this.speed = speed;
     this.scale = scale;
     this.type = type;
-    this.boundingBox = {x: frameWidth, y: frameHeight};
+    
     switch (type) {
         case "walk":
             this.x = x; //0 - frameWidth;
@@ -33,7 +33,7 @@ function Enemy(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, 
             this.y = 0;
             break;
     }
-    
+    this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth, this.frameHeight);
     this.animation = new Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse);
     Entity.call(this, game, this.x, this.y);
 }
@@ -44,16 +44,17 @@ Enemy.prototype.constructor = Enemy;
 Enemy.prototype.update = function () {
     if (this.game.running) {
         this.x -= this.game.clockTick * this.speed * 100;
-        if (this.x < -120) this.x = 1018;
+        if (this.x < -120) {
+            this.x = 1018;
+        }
+        this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth, this.frameHeight);
         Entity.prototype.update.call(this);
     }
-    
 }
 
 Enemy.prototype.draw = function () {
     if (this.game.running) {
         this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, this.scale);
-        this.ctx.strokeRect(this.x, this.y, this.boundingBox.x, this.boundingBox.y);
         Entity.prototype.draw.call(this);
     }
 }

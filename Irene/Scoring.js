@@ -1,14 +1,13 @@
 /*********************
 * Scoring Object *
 *********************/
-function Scoring(game, ctx, scorefile) {
+function Scoring(game, ctx) {
     this.x = 0;
     this.y = 0;
     this.score = 0;
     this.fps = 60;
     this.game = game;
     this.ctx = ctx;
-    this.file = scorefile;
 }
 Scoring.prototype.draw = function(){
     if (this.game.running) {
@@ -19,7 +18,5 @@ Scoring.prototype.draw = function(){
     }
 };
 Scoring.prototype.update = function(){
-    if (this.game.running){
-        this.score += (1/this.fps);
-    }
+    if (this.game.running) this.score += (1/60) * 10;
 };
