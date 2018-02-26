@@ -31,7 +31,6 @@ Bunny.prototype.update = function () {
             }
             var jumpDistance = (this.jumpAnimation.elapsedTime / this.jumpAnimation.totalTime) * 1.09;
             var totalHeight = 100;
-
             if (jumpDistance > 0.5)
                 jumpDistance = 1 - jumpDistance;
 
@@ -52,11 +51,11 @@ Bunny.prototype.draw = function (ctx) {
     if (this.game.running) {
         if (this.jumping) {
             this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y - 40);
-            ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, 58, 57);
+            //ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, 58, 57);
         }
         else {
             this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-            ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, 58, 57);
+            //ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, 58, 57);
         }
         Entity.prototype.draw.call(this);
     }

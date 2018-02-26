@@ -55,7 +55,6 @@ Enemy.prototype.update = function () {
 Enemy.prototype.draw = function () {
     if (this.game.running) {
         this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, this.scale);
-        this.ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, this.boundingBox.width, this.boundingBox.height);
         Entity.prototype.draw.call(this);
     }
 }

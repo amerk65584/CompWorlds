@@ -33,17 +33,16 @@ Monster.prototype.update = function () {
 Monster.prototype.draw = function() {
     if (this.game.running) {
         this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, this.scale);
-        this.ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, this.boundingBox.width,this.boundingBox.height);
         Entity.prototype.draw.call(this);
     }
 }
 
 Monster.prototype.move = function() {
     this.x += 10;
-    this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth * 2, this.frameHeight * 2);
+    this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth * 2 - 20, this.frameHeight * 2);
 }
 
 Monster.prototype.retreat = function() {
     this.x -= 10;
-    this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth * 2, this.frameHeight * 2);
+    this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth * 2 - 20, this.frameHeight * 2);
 }

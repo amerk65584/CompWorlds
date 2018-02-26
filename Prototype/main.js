@@ -217,8 +217,8 @@ function initialize (gameEngine, ctx) {
     var hawk = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/hawk.png"), 0, -15, 130, 130, .10, 9, true, true, 4, 1, "fly", 500, 150);
     var bear = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/bearWalk.png"), -10, 0, 196, 108, 0.15, 5, true, true, 4, 1, "walk", 1300, 450);
     var stumpy = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/stumpy.png"), 0, 90, 111, 85, .17, 4, true, true, 4, 1, "walk", 1400, 450); //600, 470
-    var snake = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snake.png"), 0, 0, 95, 87, 0.15, 12, true, true, 3, 1, "walk", 1500, 450);
-    var snail = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snail.png"), 0, 0, 45, 36, 0.15, 4, true, true, 3, 0.7, "walk", 1600, 500);
+    var snake = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snake.png"), 0, 0, 95, 87, 0.15, 12, true, true, 4, 1, "walk", 1500, 450);
+    var snail = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snail.png"), 0, 0, 45, 36, 0.15, 4, true, true, 4, 0.7, "walk", 1600, 500);
 
     //Background
     var pause_back = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/temp_pause.png"), 0, pause);

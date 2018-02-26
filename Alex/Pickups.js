@@ -1,4 +1,8 @@
-function Pickup(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale) {
+/***********
+ * Pickups *
+ ***********/
+
+function Pickup(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, x, y, type) {
     this.game = game;
     this.ctx = ctx;
     this.spriteSheet = spriteSheet;
@@ -12,25 +16,32 @@ function Pickup(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight,
     this.reverse = reverse;
     this.speed = speed;
     this.scale = scale;
+    this.boundingBox = {x: frameWidth, y: frameHeight};
     this.animation = new Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse);
-    this.x = 300;
-    this.y = 495;
-    Entity.call(this, this.game, this.x, this.y); // changed from 400
-    // this.draw = function() {
-    //     this.x += this.speed;
-    //     this.ctx.drawImage(ASSET_MANAGER.getAsset("./crowFly.png"), -(this.x), this.y);
-    // }
+    this.x = x;
+    this.y = y;
+    this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth, this.frameHeight);
+    this.type = type;
+    Entity.call(this, this.game, this.x, this.y); // y == the sprites gound
 }
 
 Pickup.prototype = new Entity();
 Pickup.prototype.constructor = Pickup;
 
 Pickup.prototype.update = function () {
-   Entity.prototype.update.call(this);
+    if (this.game.running) {
+        this.x -= this.game.clockTick * this.speed * 200;
+        if (this.x < -120) {
+            this.x = 1018;
+        }
+        this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth, this.frameHeight);
+        Entity.prototype.update.call(this);
+    }
 }
 
 Pickup.prototype.draw = function (ctx) {
-   
-    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-    Entity.prototype.draw.call(this);
+    if (this.game.running) {
+        this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+        Entity.prototype.draw.call(this);
+    }
 }

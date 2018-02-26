@@ -1,4 +1,9 @@
-function Enemy(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, type) {
+/*********
+ * Enemy *
+ *********/
+
+
+function Enemy(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, type, x, y) {
     this.game = game;
     this.ctx = ctx;
     this.spriteSheet = spriteSheet;
@@ -13,21 +18,22 @@ function Enemy(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, 
     this.speed = speed;
     this.scale = scale;
     this.type = type;
+    
     switch (type) {
         case "walk":
-            this.x = 0 - frameWidth;
-            this.y = 510 - frameHeight;
+            this.x = x; //0 - frameWidth;
+            this.y = 550 - frameHeight; //510 - frameHeight;
             break;
         case "fly":
-            this.x = 0 - frameWidth;
-            this.y = frameHeight;
+            this.x = x; //0 - frameWidth;
+            this.y = y; //frameHeight;
             break;
         default:
             this.x = 0;
             this.y = 0;
             break;
     }
-    
+    this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth, this.frameHeight);
     this.animation = new Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse);
     Entity.call(this, game, this.x, this.y);
 }
@@ -36,12 +42,19 @@ Enemy.prototype = new Entity();
 Enemy.prototype.constructor = Enemy;
 
 Enemy.prototype.update = function () {
-    this.x -= this.game.clockTick * this.speed * 100;
-    if (this.x < -120) this.x = 1018;
-   Entity.prototype.update.call(this);
+    if (this.game.running) {
+        this.x -= this.game.clockTick * this.speed * 100;
+        if (this.x < -120) {
+            this.x = 1018;
+        }
+        this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth, this.frameHeight);
+        Entity.prototype.update.call(this);
+    }
 }
 
 Enemy.prototype.draw = function () {
-    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, this.scale);
-    Entity.prototype.draw.call(this);
+    if (this.game.running) {
+        this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, this.scale);
+        Entity.prototype.draw.call(this);
+    }
 }
