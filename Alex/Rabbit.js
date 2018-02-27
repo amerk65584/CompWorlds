@@ -43,12 +43,16 @@ Bunny.prototype.update = function () {
             this.y = this.ground - height;
             this.boundingBox = new BoundingBox(this.x, this.y - 43, 58, 57);
             //console.log("Y axis" + this.y);
-        }
+        } 
         if (this.falling) {
             this.lastBottom = this.boundingBox.bottom;
-            this.y += this.game.clockTick / this.jumpAnimation.totalTime * 4 * this.totalHeight;
+            //this.y += this.game.clockTick / this.jumpAnimation.totalTime * 4 * this.totalHeight;
+            this.ground = 550 - 57;
+            this.y = this.ground;
             this.boundingBox = new BoundingBox(this.x, this.y, this.jumpAnimation.frameWidth, this.jumpAnimation.frameHeight);
-        }
+            this.falling = false;
+        } 
+        console.log(this.jumping + ", " + this.falling)
         this.collide();
         Entity.prototype.update.call(this);
     }
@@ -57,8 +61,6 @@ Bunny.prototype.update = function () {
 Bunny.prototype.draw = function (ctx) {
     if (this.game.running) {
         if (this.jumping) {
-            this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y - 40);
-        } else if (this.falling) {
             this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y - 40);
         } else {
             this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
@@ -106,13 +108,19 @@ Bunny.prototype.collide = function() {
                 } else if (this.game.entities[i] instanceof Platform) {
                     if (this.lastBottom < this.game.entities[i].boundingBox.top) {
                         this.jumping = false;
+                        this.falling = false;
                         this.ground = this.game.entities[i].boundingBox.top - this.animation.frameHeight + 10;
                         this.y = this.game.entities[i].boundingBox.top - this.animation.frameHeight + 10;
                         this.jumpAnimation.elapsedTime = 0;
+                        console.log(this.boundingBox.left - this.game.entities[i].boundingBox.right)
+                        if (!this.jumping && !this.falling) {
+                            if (this.boundingBox.left - this.game.entities[i].boundingBox.right > -5) {
+                                console.log("hi");
+                                this.falling = true;
+                            }
+                        }
                     }
-                    if (!this.jumping && !this.falling) {
-                        if (this.boundingBox.left > this.boundingBox.right) this.falling = true;
-                    }
+                    
                 /*********************
                  * Monster interaction
                  ********************/

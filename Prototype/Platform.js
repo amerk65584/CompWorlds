@@ -48,6 +48,7 @@ Platform.prototype.update = function () {
 Platform.prototype.draw = function (ctx) {
     if (this.game.running) {
         this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+        ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, this.frameWidth, this.frameHeight);
         Entity.prototype.draw.call(this);
     } 
 }

@@ -263,10 +263,11 @@ function initialize (gameEngine, ctx) {
     // gameEngine.addEntity(sign);
     // gameEngine.addEntity(snail);
     // gameEngine.addEntity(hole);
-    gameEngine.addEntity(sstump);
-    gameEngine.addEntity(mstump);
-    gameEngine.addEntity(lstump);
+    // gameEngine.addEntity(sstump);
+    // gameEngine.addEntity(mstump);
+    // gameEngine.addEntity(lstump);
 
+    
     gameEngine.addEntity(bear);
     gameEngine.addEntity(crow);
     gameEngine.addEntity(hawk);
@@ -282,9 +283,10 @@ function initialize (gameEngine, ctx) {
     gameEngine.addEntity(mushroom);
     gameEngine.addEntity(carrot);
     gameEngine.addEntity(wraith);
+
+    
     gameEngine.addEntity(bunny);
     gameEngine.addEntity(score);
-    
 
     /********************************************************************* 
      * NEVER EVER EVER EVER ADD AN ENTITY AFTER THIS

@@ -5,7 +5,7 @@ function Scoring(game, ctx) {
     this.x = 0;
     this.y = 0;
     this.score = 0;
-    this.fps = 6;
+    this.fps = 60;
     this.game = game;
     this.ctx = ctx;
 }
@@ -18,5 +18,5 @@ Scoring.prototype.draw = function(){
     }
 };
 Scoring.prototype.update = function(){
-    if (this.game.running) this.score += (1/this.fps) * 10;
+    if (this.game.running) this.score += (1/this.fps);
 };
