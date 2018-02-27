@@ -9,7 +9,7 @@
 //     Entity.call(this, game, 350, 500); // x and y
 // }
 
-function Platform(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, x, y) {
+function Platform(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, x, y, name) {
     this.game = game;
     this.ctx = ctx;
     this.spriteSheet = spriteSheet;
@@ -27,6 +27,7 @@ function Platform(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeigh
     this.animation = new Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse);
     this.x = x;
     this.y = y;
+    this.name = "temp";
     this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth, this.frameHeight);
     Entity.call(this, this.game, this.x, this.y); // y == the sprites gound
 }
@@ -48,7 +49,6 @@ Platform.prototype.update = function () {
 Platform.prototype.draw = function (ctx) {
     if (this.game.running) {
         this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-        ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, this.frameWidth, this.frameHeight);
         Entity.prototype.draw.call(this);
     } 
 }

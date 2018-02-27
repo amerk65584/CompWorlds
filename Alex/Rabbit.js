@@ -52,7 +52,6 @@ Bunny.prototype.update = function () {
             this.boundingBox = new BoundingBox(this.x, this.y, this.jumpAnimation.frameWidth, this.jumpAnimation.frameHeight);
             this.falling = false;
         } 
-        console.log(this.jumping + ", " + this.falling)
         this.collide();
         Entity.prototype.update.call(this);
     }
@@ -112,10 +111,8 @@ Bunny.prototype.collide = function() {
                         this.ground = this.game.entities[i].boundingBox.top - this.animation.frameHeight + 10;
                         this.y = this.game.entities[i].boundingBox.top - this.animation.frameHeight + 10;
                         this.jumpAnimation.elapsedTime = 0;
-                        console.log(this.boundingBox.left - this.game.entities[i].boundingBox.right)
                         if (!this.jumping && !this.falling) {
                             if (this.boundingBox.left - this.game.entities[i].boundingBox.right > -5) {
-                                console.log("hi");
                                 this.falling = true;
                             }
                         }
