@@ -84,9 +84,9 @@ Bunny.prototype.collide = function() {
                  * Pickup interaction
                  ********************/
                 if (this.game.entities[i] instanceof Pickup) {
-                    this.game.entities[i].x = i * 200;
-                    this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
-                        this.game.entities[i].width, this.game.entities[i].height);
+                    // this.game.entities[i].x = i * 200;
+                    // this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
+                    //     this.game.entities[i].width, this.game.entities[i].height);
                     /****************************
                      * Code for pickups here!
                      ****************************/
@@ -94,6 +94,10 @@ Bunny.prototype.collide = function() {
                         this.monster.move();
                     } else if (this.game.entities[i].type === "car") {
                         this.monster.retreat();  
+                    } else if (this.game.entities[i].type === "gold") {
+                        this.game.entities[i].removeFromWorld = true;
+                        --i;
+                        console.log("hi");
                     }
                 /*********************
                  * enemy interaction
@@ -120,6 +124,10 @@ Bunny.prototype.collide = function() {
                                 }
                             }
                         }
+                    }
+                    if (this.game.entities[i].name === "bonus") {
+                        console.log("hi");
+                        bonus(this.game, this.ctx);
                     }
                 /*********************
                  * Monster interaction

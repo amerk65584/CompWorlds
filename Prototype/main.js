@@ -150,10 +150,12 @@ ASSET_MANAGER.queueDownload("./imgs/Enemies/snake.png");
 ASSET_MANAGER.queueDownload("./imgs/Enemies/snail.png");
 
 //Pickups
+ASSET_MANAGER.queueDownload("./imgs/Pickups/goldCarrot.png");
 ASSET_MANAGER.queueDownload("./imgs/Pickups/carrot.png");
 ASSET_MANAGER.queueDownload("./imgs/Pickups/mushroom.png");
 
 //Background
+ASSET_MANAGER.queueDownload("./imgs/Background/cave.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tutorial.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/temp_pause.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/stat_game_bg.png");
@@ -191,9 +193,10 @@ ASSET_MANAGER.downloadAll(function () {
     var ctx = canvas.getContext('2d');
 
     var gameEngine = new GameEngine();
+    initialize(gameEngine, ctx);
     gameEngine.init(ctx);
     gameEngine.start();
-    initialize(gameEngine, ctx);
+
 });
 
 function initialize (gameEngine, ctx) {
@@ -221,6 +224,7 @@ function initialize (gameEngine, ctx) {
     var snail = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snail.png"), 0, 0, 45, 36, 0.15, 4, true, true, 4, 1, "walk", 1600, 500);
 
     //Background
+    var cave = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/cave.png"), 4);
     var pause_back = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/temp_pause.png"), 0, pause);
     var start = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/stat_game_bg.png"), 0);
     var tutorial = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tutorial.png"), 0);
@@ -253,6 +257,7 @@ function initialize (gameEngine, ctx) {
      * NEVER EVER EVER EVER ADD AN ENTITY BEFORE THIS
      *************************************************/
 
+    gameEngine.addEntity(cave);
     gameEngine.addEntity(back1);
     gameEngine.addEntity(back2);
     gameEngine.addEntity(back3);
@@ -282,7 +287,7 @@ function initialize (gameEngine, ctx) {
 
     // gameEngine.addEntity(mushroom);
     // gameEngine.addEntity(carrot);
-    // gameEngine.addEntity(wraith);
+    gameEngine.addEntity(wraith);
 
     
     gameEngine.addEntity(bunny);
@@ -298,8 +303,15 @@ function initialize (gameEngine, ctx) {
     gameEngine.addEntity(start);
 }
 
-function bonus (game, ctx) {
-
+function bonus(game, ctx) {
+    for (var i = 4; i < game.entities.length - 3; i++) {
+        game.entities[i].removeFromWorld = true;
+    }
+    for (var i = 0; i < 10; i++) {
+        var gold = new Pickup(game, ctx, ASSET_MANAGER.getAsset("./imgs/Pickups/goldCarrot.png"), 0, 0, 39, 62, .15, 5, true, true, 2, 1, i * 100 + 1000, 475, "gold");
+        game.insertEntity(gold);
+    }
+    console.log(game.entities);
 }
 /*
     gameEngine.addEntity(corpse);

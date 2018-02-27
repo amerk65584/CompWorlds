@@ -4,7 +4,7 @@ function DeadBunny(game, ctx, spriteSheet) {
     this.y = 450;
     this.isDone = false;
     this.game = game;
-    this.ctx = game.ctx;
+    this.ctx = ctx;
     this.dead = false;
 }
 

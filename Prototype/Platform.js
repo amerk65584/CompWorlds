@@ -27,7 +27,7 @@ function Platform(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeigh
     this.animation = new Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse);
     this.x = x;
     this.y = y;
-    this.name = "temp";
+    this.name = name;
     this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth, this.frameHeight);
     Entity.call(this, this.game, this.x, this.y); // y == the sprites gound
 }

@@ -42,6 +42,7 @@ Pickup.prototype.update = function () {
 Pickup.prototype.draw = function (ctx) {
     if (this.game.running) {
         this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+        this.ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, this.boundingBox.width, this.boundingBox.height);
         Entity.prototype.draw.call(this);
     }
 }

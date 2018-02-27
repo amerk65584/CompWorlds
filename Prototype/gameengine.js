@@ -93,6 +93,11 @@ GameEngine.prototype.addEntity = function (entity) {
     this.entities.push(entity);
 }
 
+GameEngine.prototype.insertEntity = function (entity) {
+    console.log('inserted entity');
+    this.entities.splice(this.entities.length - 4, 0, entity);
+}
+
 GameEngine.prototype.draw = function () {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.ctx.save();
