@@ -56,7 +56,7 @@ Background.prototype.draw = function () {
             this.game.reset();
         }
     }
-    //Start Game
+    //Start Game Normal
     if (this.game.click.x >= 320 && this.game.click.y >= 307 && this.game.click.x <= 506 && this.game.click.y <= 386 && !this.game.running && this.screen === "main") {
         this.game.running = true;
         this.screen = "game";
@@ -64,6 +64,7 @@ Background.prototype.draw = function () {
         this.game.entities[this.game.entities.length - 2].removeFromWorld = true;
         this.game.entities[this.game.entities.length - 3].removeFromWorld = true;
     }    
+    //Start Game Hard
     if (this.game.click.x >= 515 && this.game.click.y >= 307 && this.game.click.x <= 700 && this.game.click.y <= 386 && !this.game.running && this.screen === "main") {
         this.game.running = true;
         this.screen = "game";
