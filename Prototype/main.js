@@ -158,7 +158,7 @@ ASSET_MANAGER.queueDownload("./imgs/Pickups/mushroom.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/cave.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tutorial.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/temp_pause.png");
-ASSET_MANAGER.queueDownload("./imgs/Background/stat_game_bg.png");
+ASSET_MANAGER.queueDownload("./imgs/Background/start_game_bg.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/highscore.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_0.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_1.png");
@@ -168,7 +168,7 @@ ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_4.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_5.png");
 
 //Platform
-ASSET_MANAGER.queueDownload("./imgs/Platforms/hole_portal.png");
+ASSET_MANAGER.queueDownload("./imgs/Platforms/hole.png");
 ASSET_MANAGER.queueDownload("./imgs/Platforms/bush.png");
 ASSET_MANAGER.queueDownload("./imgs/Platforms/sign.png");
 
@@ -193,10 +193,9 @@ ASSET_MANAGER.downloadAll(function () {
     var ctx = canvas.getContext('2d');
 
     var gameEngine = new GameEngine();
-    initialize(gameEngine, ctx);
     gameEngine.init(ctx);
     gameEngine.start();
-
+    initialize(gameEngine, ctx);
 });
 
 function initialize (gameEngine, ctx) {
@@ -209,7 +208,7 @@ function initialize (gameEngine, ctx) {
     //var mist = new Monster(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Monster/knight.png"), 800, 105, 104, 105, .15, 6, true, true, 2, -120, 330);
 
     //Rabbits
-    var bunny = new Bunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png"), wraith); 
+    var bunny = new Bunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png"), wraith, score); 
 
     //Pickups
     var mushroom = new Pickup(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Pickups/mushroom.png"), .5, .5, 33, 33, .15, 2, true, true, 1.8, 1, 1000, 505, "mush"); //300
@@ -217,16 +216,16 @@ function initialize (gameEngine, ctx) {
 
     //Enemies
     var crow = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/crowFly.png"), 0, 0, 73, 73, .10, 5, true, true, 4, 1, "fly", 400, 300);
-    var hawk = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/hawk.png"), 0, -15, 130, 130, .10, 9, true, true, 4, 1, "fly", 500, 200);
+    var hawk = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/hawk.png"), 0, -15, 130, 130, .10, 9, true, true, 4, 1, "fly", 500, 350);
     var bear = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/bearWalk.png"), -10, 0, 196, 108, 0.15, 5, true, true, 4, 1, "walk", 1300, 450);
     var stumpy = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/stumpy.png"), 0, 90, 111, 85, .17, 4, true, true, 4, 1, "walk", 1400, 450); //600, 470
     var snake = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snake.png"), 0, 0, 95, 87, 0.15, 12, true, true, 4, 1, "walk", 1500, 450);
-    var snail = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snail.png"), 0, 0, 45, 36, 0.15, 4, true, true, 4, 1, "walk", 1600, 500);
+    var snail = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snail.png"), 0, 0, 45, 36, 0.15, 4, true, true, 4, 0.7, "walk", 1600, 500);
 
     //Background
     var cave = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/cave.png"), 4);
     var pause_back = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/temp_pause.png"), 0, pause);
-    var start = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/stat_game_bg.png"), 0);
+    var start = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/start_game_bg.png"), 0);
     var tutorial = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tutorial.png"), 0);
     var highscore = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/highscore.png"), 0);
     var back1 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_5.png"), 0);
@@ -238,12 +237,12 @@ function initialize (gameEngine, ctx) {
 
     //Platforms
     //game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, x, y) {
-    var hole = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/hole_portal.png"), 0, 0, 85, 41, 0.15, 1, true, false, 1.5, 1, 350, 510, "bonus");
+    var hole = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/hole.png"), 0, 41, 78, 41, 0.15, 7, true, false, 1.5, 1, 350, 510, "bonus");
     var sign = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sign.png"), 0, 0, 63, 93, 0.15, 1, true, false, 1.5, 1, 315, 425);
     
-    var sstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sm_stump.png"), 50, 56, 90, 112, 0.15, 1, true, false, 1.5, 1, 1800, 420, "stump"); //move= 1 //460 = up/down
-    var mstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/med_stump.png"), 172.5, 132, 100, 153, 0.15, 1, true, false, 1.5, 1, 2000, 380., "stump");
-    var lstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/lg_stump.png"), 76, 22, 98, 194, 0.15, 1, true, false, 1.5, 1, 2200, 345, "stump");
+    var sstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sm_stump.png"), 50, 56, 90, 112, 0.15, 1, true, false, 1.5, 1, 1800, 420); //move= 1 //460 = up/down
+    var mstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/med_stump.png"), 172.5, 132, 100, 153, 0.15, 1, true, false, 1.5, 1, 2000, 380);
+    var lstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/lg_stump.png"), 76, 22, 98, 194, 0.15, 1, true, false, 1.5, 1, 2200, 345);
   
     //Game Over
     var death = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Gameover/deathBackground.png"), 0);
@@ -287,7 +286,7 @@ function initialize (gameEngine, ctx) {
 
     // gameEngine.addEntity(mushroom);
     // gameEngine.addEntity(carrot);
-    gameEngine.addEntity(wraith);
+    // gameEngine.addEntity(wraith);
 
     
     gameEngine.addEntity(bunny);
@@ -303,27 +302,13 @@ function initialize (gameEngine, ctx) {
     gameEngine.addEntity(start);
 }
 
-function bonus(game, ctx) {
+function bonus (game, ctx) {
     for (var i = 4; i < game.entities.length - 3; i++) {
         game.entities[i].removeFromWorld = true;
     }
+    var gold;
     for (var i = 0; i < 10; i++) {
-        var gold = new Pickup(game, ctx, ASSET_MANAGER.getAsset("./imgs/Pickups/goldCarrot.png"), 0, 0, 39, 62, .15, 5, true, true, 2, 1, i * 100 + 1000, 475, "gold");
-        game.insertEntity(gold);
+        gold = new Pickup(game, ctx, ASSET_MANAGER.getAsset("./imgs/Pickups/goldCarrot.png"), 0, 0, 39, 62, .15, 5, true, true, 2, 1, 1000 + 100 * i, 475, "gold");
+        game.addEntity(gold);
     }
-    console.log(game.entities);
 }
-/*
-    gameEngine.addEntity(corpse);
-*/
-
-
-// //Death screen
-// ASSET_MANAGER.queueDownload("./imgs/Gameover/deathBackground.jpg");
-// ASSET_MANAGER.queueDownload("./imgs/Gameover/game_over.png");
-// ASSET_MANAGER.queueDownload("./imgs/Gameover/deadBunny.png");
-
-// //Gameover
-// gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/Gameover/deathBackground.jpg"), 0));
-// gameEngine.addEntity(new Background(gameEngine, ASSET_MANAGER.getAsset("./img/Gameover/game_over.png"), 0));
-// gameEngine.addEntity(new DeadBunny(gameEngine, ASSET_MANAGER.getAsset("./img/Gameover/deadBunny.png")));

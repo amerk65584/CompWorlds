@@ -56,16 +56,23 @@ Background.prototype.draw = function () {
             this.game.reset();
         }
     }
-    //Start game
-    if ((this.game.click.x >= 430 && this.game.click.x <= 615) && (this.game.click.y >= 260 && this.game.click.y <= 335) && !this.game.running && this.screen === "main") {
+    //Start Game
+    if (this.game.click.x >= 320 && this.game.click.y >= 307 && this.game.click.x <= 506 && this.game.click.y <= 386 && !this.game.running && this.screen === "main") {
         this.game.running = true;
         this.screen = "game";
         this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
         this.game.entities[this.game.entities.length - 2].removeFromWorld = true;
         this.game.entities[this.game.entities.length - 3].removeFromWorld = true;
-    }
+    }    
+    if (this.game.click.x >= 515 && this.game.click.y >= 307 && this.game.click.x <= 700 && this.game.click.y <= 386 && !this.game.running && this.screen === "main") {
+        this.game.running = true;
+        this.screen = "game";
+        this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
+        this.game.entities[this.game.entities.length - 2].removeFromWorld = true;
+        this.game.entities[this.game.entities.length - 3].removeFromWorld = true;
+    }   
     //Tutorial
-    if (this.game.click.x >= 320 && this.game.click.y >= 350 && this.game.click.x <= 500 && this.game.click.y <= 430 && !this.game.running && this.screen === "main") {
+    if (this.game.click.x >= 320 && this.game.click.y >= 400 && this.game.click.x <= 505 && this.game.click.y <= 475 && !this.game.running && this.screen === "main") {
         this.screen = "tut";
         this.game.main = this.game.entities[this.game.entities.length - 1];
         this.game.highscore = this.game.entities[this.game.entities.length - 2];
@@ -83,7 +90,7 @@ Background.prototype.draw = function () {
         this.screen = "main";
     }
     //HighScore
-    if (this.game.click.x >= 550 && this.game.click.y >= 355 && this.game.click.x <= 730 && this.game.click.y <= 430 && !this.game.running && this.screen === "main") {
+    if (this.game.click.x >= 516 && this.game.click.y >= 400 && this.game.click.x <= 600 && this.game.click.y <= 475 && !this.game.running && this.screen === "main") {
         this.screen = "high";
         this.game.main = this.game.entities[this.game.entities.length - 1];
         this.game.entities[this.game.entities.length - 1].removeFromWorld = true;

@@ -2,11 +2,12 @@
  * Rabbit *
  **********/
 
-function Bunny(game, ctx, spriteSheet, monster) {
+function Bunny(game, ctx, spriteSheet, monster, score) {
     this.monster = monster;
     this.game = game;
     this.ctx = ctx;
     this.spriteSheet = spriteSheet;
+    this.score = score;
     this.jumping = false;
     this.falling = false;
     this.pooping = false;
@@ -72,10 +73,11 @@ Bunny.prototype.draw = function (ctx) {
 }
 
 Bunny.prototype.collide = function() {
-    for (var i = 9; i < this.game.entities.length; i++) {
+    for (var i = 0; i < this.game.entities.length; i++) {
         if (!(this.game.entities[i] instanceof Background) && 
         !(this.game.entities[i] instanceof Pause) &&
-        !(this.game.entities[i] instanceof Scoring)) {
+        !(this.game.entities[i] instanceof Scoring) &&
+        !(this.game.entities[i] instanceof DeadBunny)) {
             if (this.boundingBox.x < this.game.entities[i].boundingBox.x + this.game.entities[i].boundingBox.width &&
             this.boundingBox.x + this.boundingBox.width > this.game.entities[i].boundingBox.x &&
             this.boundingBox.y < this.game.entities[i].boundingBox.y + this.game.entities[i].boundingBox.height &&
@@ -96,8 +98,7 @@ Bunny.prototype.collide = function() {
                         this.monster.retreat();  
                     } else if (this.game.entities[i].type === "gold") {
                         this.game.entities[i].removeFromWorld = true;
-                        --i;
-                        console.log("hi");
+                        this.score.score += 10;
                     }
                 /*********************
                  * enemy interaction
@@ -126,7 +127,6 @@ Bunny.prototype.collide = function() {
                         }
                     }
                     if (this.game.entities[i].name === "bonus") {
-                        console.log("hi");
                         bonus(this.game, this.ctx);
                     }
                 /*********************
