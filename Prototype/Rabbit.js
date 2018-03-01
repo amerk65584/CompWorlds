@@ -29,9 +29,8 @@ Bunny.prototype.constructor = Bunny;
 
 Bunny.prototype.update = function () {
     if (this.game.running) {
-        console.log(this.y)
         this.black.x = 1585;
-        this.black.y = 20 - this.y;
+        this.black.y = -970 + this.y;
         if (this.game.space) this.jumping = true;
         if (this.jumping) {
             if (this.jumpAnimation.isDone()) {

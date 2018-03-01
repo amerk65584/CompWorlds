@@ -240,9 +240,9 @@ function initialize (gameEngine, ctx) {
 
     //Platforms
     //game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, x, y) {
-    var hole = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/hole_portal.png"), 0, 0, 85, 41, 0.15, 1, true, false, 1.2, 1, 700, 510, "bonus");
-    var sign = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sign.png"), 0, 0, 63, 93, 0.15, 1, true, false, 1.2, 1, 715, 425);
-    var snail = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snail.png"), 0, 0, 45, 36, 0.15, 4, true, true, 2.4, 0.7, "walk", 650, 500, "snail");
+    var hole = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/hole_portal.png"), 0, 0, 85, 41, 0.15, 1, true, false, 1.2, 1, 4000, 510, "bonus");
+    var sign = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sign.png"), 0, 0, 63, 93, 0.15, 1, true, false, 1.2, 1, 4015, 425);
+    var snail = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snail.png"), 0, 0, 45, 36, 0.15, 4, true, true, 2.4, 0.7, "walk", 3950, 500, "snail");
 
     var sstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sm_stump.png"), 50, 56, 90, 112, 0.15, 1, true, false, 1.5, 1, 1800, 420, "stump"); //move= 1 //460 = up/down
     var mstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/med_stump.png"), 172.5, 132, 100, 153, 0.15, 1, true, false, 1.5, 1, 2100, 380, "stump");
@@ -271,19 +271,19 @@ function initialize (gameEngine, ctx) {
     gameEngine.addEntity(back5);
     gameEngine.addEntity(back6);
 
-    // gameEngine.addEntity(sign);
-    // gameEngine.addEntity(snail);
-    // gameEngine.addEntity(hole);
-    // gameEngine.addEntity(sstump);
-    // gameEngine.addEntity(mstump);
-    // gameEngine.addEntity(lstump);
+    gameEngine.addEntity(sign);
+    gameEngine.addEntity(snail);
+    gameEngine.addEntity(hole);
+    gameEngine.addEntity(sstump);
+    gameEngine.addEntity(mstump);
+    gameEngine.addEntity(lstump);
 
     
-    // gameEngine.addEntity(bear);
-    // gameEngine.addEntity(crow);
-    // gameEngine.addEntity(hawk);
-    // gameEngine.addEntity(stumpy);
-    // gameEngine.addEntity(snake);
+    gameEngine.addEntity(bear);
+    gameEngine.addEntity(crow);
+    gameEngine.addEntity(hawk);
+    gameEngine.addEntity(stumpy);
+    gameEngine.addEntity(snake);
 
     // if (getRandomInt(0, 1) === 0) {
     //     gameEngine.addEntity(wraith);
@@ -291,9 +291,9 @@ function initialize (gameEngine, ctx) {
     //     gameEngine.addEntity(mist);
     // }
 
-    // gameEngine.addEntity(mushroom);
-    // gameEngine.addEntity(carrot);
-    // gameEngine.addEntity(wraith);
+    gameEngine.addEntity(mushroom);
+    gameEngine.addEntity(carrot);
+    gameEngine.addEntity(wraith);
 
     
     gameEngine.addEntity(bunny);
