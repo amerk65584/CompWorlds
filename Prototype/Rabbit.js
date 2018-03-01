@@ -65,8 +65,11 @@ Bunny.prototype.draw = function (ctx) {
     if (this.game.running) {
         if (this.jumping) {
             this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y - 40);
+            this.ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, this.boundingBox.width, this.boundingBox.height);
         } else {
             this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+            this.ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, this.boundingBox.width, this.boundingBox.height);
+
         }
         Entity.prototype.draw.call(this);
     }
@@ -127,7 +130,8 @@ Bunny.prototype.collide = function() {
                             this.y = this.game.entities[i].boundingBox.top - this.animation.frameHeight + 10;
                             this.jumpAnimation.elapsedTime = 0;
                             if (!this.jumping && !this.falling) {
-                                if (this.boundingBox.left - this.game.entities[i].boundingBox.right > -5) {
+                                console.log(this.boundingBox.left + ", " + this.game.entities[i].boundingBox.right)
+                                if (this.game.entities[i].boundingBox.right - this.boundingBox.left < 5) {
                                     console.log("Hi")
                                     this.falling = true;
                                 }
