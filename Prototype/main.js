@@ -168,7 +168,7 @@ ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_4.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_5.png");
 
 //Platform
-ASSET_MANAGER.queueDownload("./imgs/Platforms/hole.png");
+ASSET_MANAGER.queueDownload("./imgs/Platforms/hole_portal.png");
 ASSET_MANAGER.queueDownload("./imgs/Platforms/bush.png");
 ASSET_MANAGER.queueDownload("./imgs/Platforms/sign.png");
 
@@ -220,7 +220,6 @@ function initialize (gameEngine, ctx) {
     var bear = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/bearWalk.png"), -10, 0, 196, 108, 0.15, 5, true, true, 4, 1, "walk", 1300, 450);
     var stumpy = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/stumpy.png"), 0, 90, 111, 85, .17, 4, true, true, 4, 1, "walk", 1400, 450); //600, 470
     var snake = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snake.png"), 0, 0, 95, 87, 0.15, 12, true, true, 4, 1, "walk", 1500, 450);
-    var snail = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snail.png"), 0, 0, 45, 36, 0.15, 4, true, true, 4, 0.7, "walk", 1600, 500);
 
     //Background
     var cave = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/cave.png"), 4);
@@ -237,12 +236,13 @@ function initialize (gameEngine, ctx) {
 
     //Platforms
     //game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, x, y) {
-    var hole = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/hole.png"), 0, 41, 78, 41, 0.15, 7, true, false, 1.5, 1, 350, 510, "bonus");
-    var sign = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sign.png"), 0, 0, 63, 93, 0.15, 1, true, false, 1.5, 1, 315, 425);
-    
-    var sstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sm_stump.png"), 50, 56, 90, 112, 0.15, 1, true, false, 1.5, 1, 1800, 420); //move= 1 //460 = up/down
-    var mstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/med_stump.png"), 172.5, 132, 100, 153, 0.15, 1, true, false, 1.5, 1, 2000, 380);
-    var lstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/lg_stump.png"), 76, 22, 98, 194, 0.15, 1, true, false, 1.5, 1, 2200, 345);
+    var hole = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/hole_portal.png"), 0, 0, 85, 41, 0.15, 1, true, false, 1.2, 1, 700, 510, "bonus");
+    var sign = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sign.png"), 0, 0, 63, 93, 0.15, 1, true, false, 1.2, 1, 715, 425);
+    var snail = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snail.png"), 0, 0, 45, 36, 0.15, 4, true, true, 2.4, 0.7, "walk", 650, 500, "snail");
+
+    var sstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sm_stump.png"), 50, 56, 90, 112, 0.15, 1, true, false, 1.5, 1, 1800, 420, "stump"); //move= 1 //460 = up/down
+    var mstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/med_stump.png"), 172.5, 132, 100, 153, 0.15, 1, true, false, 1.5, 1, 2000, 380, "stump");
+    var lstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/lg_stump.png"), 76, 22, 98, 194, 0.15, 1, true, false, 1.5, 1, 2200, 345, "stump");
   
     //Game Over
     var death = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Gameover/deathBackground.png"), 0);
@@ -267,9 +267,9 @@ function initialize (gameEngine, ctx) {
     // gameEngine.addEntity(sign);
     // gameEngine.addEntity(snail);
     // gameEngine.addEntity(hole);
-    // gameEngine.addEntity(sstump);
-    // gameEngine.addEntity(mstump);
-    // gameEngine.addEntity(lstump);
+    gameEngine.addEntity(sstump);
+    gameEngine.addEntity(mstump);
+    gameEngine.addEntity(lstump);
 
     
     // gameEngine.addEntity(bear);

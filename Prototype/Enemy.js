@@ -3,7 +3,7 @@
  *********/
 
 
-function Enemy(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, type, x, y) {
+function Enemy(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, type, x, y, name) {
     this.game = game;
     this.ctx = ctx;
     this.spriteSheet = spriteSheet;
@@ -18,7 +18,7 @@ function Enemy(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, 
     this.speed = speed;
     this.scale = scale;
     this.type = type;
-    
+    this.name = name;
     switch (type) {
         case "walk":
             this.x = x; //0 - frameWidth;
