@@ -65,11 +65,8 @@ Bunny.prototype.draw = function (ctx) {
     if (this.game.running) {
         if (this.jumping) {
             this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y - 40);
-            this.ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, this.boundingBox.width, this.boundingBox.height);
         } else {
             this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-            this.ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, this.boundingBox.width, this.boundingBox.height);
-
         }
         Entity.prototype.draw.call(this);
     }
@@ -90,16 +87,20 @@ Bunny.prototype.collide = function() {
                  * Pickup interaction
                  ********************/
                 if (this.game.entities[i] instanceof Pickup) {
-                    // this.game.entities[i].x = i * 200;
-                    // this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
-                    //     this.game.entities[i].width, this.game.entities[i].height);
+                    
                     /****************************
                      * Code for pickups here!
                      ****************************/
                     if (this.game.entities[i].type === "mush") {
                         this.monster.move();
+                        this.game.entities[i].x = i * 200;
+                        this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
+                            this.game.entities[i].width, this.game.entities[i].height);
                     } else if (this.game.entities[i].type === "car") {
                         this.monster.retreat();  
+                        this.game.entities[i].x = i * 200;
+                        this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
+                            this.game.entities[i].width, this.game.entities[i].height);
                     } else if (this.game.entities[i].type === "gold") {
                         this.game.entities[i].removeFromWorld = true;
                         this.score.score += 10;
@@ -138,9 +139,17 @@ Bunny.prototype.collide = function() {
                         }
                     }
                     if (this.game.entities[i].name === "bonus") {
+                        // this.game.entities[12].x = 1000;
+                        // this.game.entities[11].x = 1015;
+                        // this.game.entities[10].x = 950;
+                        this.game.entities.splice(12, 1);
+                        this.game.entities.splice(11, 1);
+                        this.game.entities.splice(10, 1);
+                        backup(this.game, this.ctx);
                         bonus(this.game, this.ctx);
                     }
                     if (this.game.entities[i].name === "end") {
+                        restore(this.game, this.ctx);
                     }
                 /*********************
                  * Monster interaction

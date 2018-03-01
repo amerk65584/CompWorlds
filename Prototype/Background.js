@@ -4,7 +4,7 @@
 
 function Background(game, ctx, spritesheet, speed, pause, visible) {
     this.speed = speed; 
-    this.backgroundWidth = 1018;
+    this.backgroundWidth = 1017;
     this.x = 0;
     this.y = 0;
     this.spritesheet = spritesheet;

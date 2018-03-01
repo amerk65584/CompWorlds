@@ -5,6 +5,8 @@
 /*********************
  * Animantion Object *
  *********************/
+var copy = [];
+var score = null;
 
 function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse) {
     this.spriteSheet = spriteSheet;
@@ -273,11 +275,11 @@ function initialize (gameEngine, ctx) {
     // gameEngine.addEntity(lstump);
 
     
-    // gameEngine.addEntity(bear);
-    // gameEngine.addEntity(crow);
-    // gameEngine.addEntity(hawk);
-    // gameEngine.addEntity(stumpy);
-    // gameEngine.addEntity(snake);
+    gameEngine.addEntity(bear);
+    gameEngine.addEntity(crow);
+    gameEngine.addEntity(hawk);
+    gameEngine.addEntity(stumpy);
+    gameEngine.addEntity(snake);
 
     // if (getRandomInt(0, 1) === 0) {
     //     gameEngine.addEntity(wraith);
@@ -285,9 +287,9 @@ function initialize (gameEngine, ctx) {
     //     gameEngine.addEntity(mist);
     // }
 
-    // gameEngine.addEntity(mushroom);
-    // gameEngine.addEntity(carrot);
-    // gameEngine.addEntity(wraith);
+    gameEngine.addEntity(mushroom);
+    gameEngine.addEntity(carrot);
+    gameEngine.addEntity(wraith);
 
     
     gameEngine.addEntity(bunny);
@@ -307,11 +309,31 @@ function bonus (game, ctx) {
     for (var i = 4; i < game.entities.length - 3; i++) {
         game.entities[i].removeFromWorld = true;
     }
-    var portal = new Platform(game, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/portal.png"), 0, 0, 200, 367, 0.15, 1, true, false, 1.2, 1, 700, 300, "end")
+    var portal = new Platform(game, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/portal.png"), 0, 0, 200, 367, 0.15, 1, true, false, 1.2, 1, 2000, 300, "end")
     game.addEntity(portal);
     var gold;
     for (var i = 0; i < 10; i++) {
         gold = new Pickup(game, ctx, ASSET_MANAGER.getAsset("./imgs/Pickups/goldCarrot.png"), 0, 0, 39, 62, .15, 5, true, true, 2, 1, 1000 + 100 * i, 475, "gold");
         game.addEntity(gold);
+    }
+}
+
+function backup (game, ctx) {
+    for(var i = 0; i < game.entities.length; i++) {
+        copy[i] = game.entities[i];
+    }
+}
+
+function restore (game, ctx) {
+    reset(game, ctx);
+    for (var i = 0; i < copy.length; i++) {
+        game.entities[i] = copy[i];
+        game.entities[i].removeFromWorld = false;
+    }
+}
+
+function reset(game, ctx) {
+    for (var i = 0; i < game.entities.length; i++) {
+        game.entities[i].removeFromWorld = true;
     }
 }

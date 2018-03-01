@@ -26,7 +26,6 @@ function Platform(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeigh
     this.boundingBox = {x: frameWidth, y: frameHeight};
     this.animation = new Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse);
     this.x = x;
-    this.setX = x;
     this.y = y;
     this.name = name;
     this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth, this.frameHeight);
@@ -40,7 +39,6 @@ Platform.prototype.update = function () {
     if (this.game.running) {
         this.x -= this.game.clockTick * this.speed * 200;
         if (this.x < -120) {
-            this.x = this.setX;
         }
         this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth, this.frameHeight);
         Entity.prototype.update.call(this);
@@ -50,7 +48,6 @@ Platform.prototype.update = function () {
 Platform.prototype.draw = function (ctx) {
     if (this.game.running) {
         this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-        this.ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, this.boundingBox.width, this.boundingBox.height);
         Entity.prototype.draw.call(this);
     } 
 }
