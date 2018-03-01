@@ -148,11 +148,7 @@ Bunny.prototype.collide = function() {
                         // this.game.entities[12].x = 1000;
                         // this.game.entities[11].x = 1015;
                         // this.game.entities[10].x = 950;
-                        this.game.entities.splice(12, 1);
-                        this.game.entities.splice(11, 1);
-                        this.game.entities.splice(10, 1);
-                        backup(this.game, this.ctx);
-                        bonus(this.game, this.ctx);
+                        bonus(this.game, this.ctx);                        
                     }
                     if (this.game.entities[i].name === "end") {
                         restore(this.game, this.ctx);

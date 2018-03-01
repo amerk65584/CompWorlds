@@ -42,6 +42,7 @@ function GameEngine() {
     this.main = null;
     this.highscore = null;
     this.tutorial = null;
+    this.hard = false;
 }
 
 GameEngine.prototype.init = function (ctx) {

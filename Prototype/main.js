@@ -312,7 +312,14 @@ function initialize (gameEngine, ctx) {
 }
 
 function bonus (game, ctx) {
-    for (var i = 4; i < game.entities.length - 3; i++) {
+    // game.entities[10].x = 4000;
+    // game.entities[10].x = 4015;
+    // game.entities[10].x = 3950;
+    game.entities.splice(10, 1);
+    game.entities.splice(10, 1);
+    game.entities.splice(10, 1);
+    backup(game, ctx);
+    for (var i = 4; i < 21; i++) {
         game.entities[i].removeFromWorld = true;
     }
     var portal = new Platform(game, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/portal.png"), 0, 0, 200, 367, 0.15, 1, true, false, 1.2, 1, 2000, 300, "end")

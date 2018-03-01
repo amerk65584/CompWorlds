@@ -65,6 +65,7 @@ Background.prototype.draw = function () {
         this.game.entities[this.game.entities.length - 3].removeFromWorld = true;
         this.game.entities[this.game.entities.length - 4].removeFromWorld = true;
         this.game.entities[this.game.entities.length - 7].removeFromWorld = true;
+        this.game.hard = false;
     }    
     //Start Game Hard
     if (this.game.click.x >= 515 && this.game.click.y >= 307 && this.game.click.x <= 700 && this.game.click.y <= 386 && !this.game.running && this.screen === "main") {
@@ -74,6 +75,7 @@ Background.prototype.draw = function () {
         this.game.entities[this.game.entities.length - 2].removeFromWorld = true;
         this.game.entities[this.game.entities.length - 3].removeFromWorld = true;
         this.game.entities[this.game.entities.length - 4].removeFromWorld = true;
+        this.game.hard = true;
     }   
     //Tutorial
     if (this.game.click.x >= 320 && this.game.click.y >= 400 && this.game.click.x <= 505 && this.game.click.y <= 475 && !this.game.running && this.screen === "main") {
