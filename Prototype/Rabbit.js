@@ -129,12 +129,11 @@ Bunny.prototype.collide = function() {
                             this.plane = this.game.entities[i].boundingBox.top - this.animation.frameHeight + 10;
                             this.y = this.game.entities[i].boundingBox.top - this.animation.frameHeight + 10;
                             this.jumpAnimation.elapsedTime = 0;
-                            if (!this.jumping && !this.falling) {
-                                console.log(this.boundingBox.left + ", " + this.game.entities[i].boundingBox.right)
-                                if (this.game.entities[i].boundingBox.right - this.boundingBox.left < 5) {
-                                    console.log("Hi")
-                                    this.falling = true;
-                                }
+                        }
+                        if (!this.jumping && !this.falling) {
+                            if (this.game.entities[i].boundingBox.right - 200 < 5) {
+                                console.log("Hi")
+                                this.falling = true;
                             }
                         }
                     }
