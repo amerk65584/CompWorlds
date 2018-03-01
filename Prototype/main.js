@@ -241,8 +241,8 @@ function initialize (gameEngine, ctx) {
     var snail = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snail.png"), 0, 0, 45, 36, 0.15, 4, true, true, 2.4, 0.7, "walk", 650, 500, "snail");
 
     var sstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sm_stump.png"), 50, 56, 90, 112, 0.15, 1, true, false, 1.5, 1, 1800, 420, "stump"); //move= 1 //460 = up/down
-    var mstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/med_stump.png"), 172.5, 132, 100, 153, 0.15, 1, true, false, 1.5, 1, 2000, 380, "stump");
-    var lstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/lg_stump.png"), 76, 22, 98, 194, 0.15, 1, true, false, 1.5, 1, 2200, 345, "stump");
+    var mstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/med_stump.png"), 172.5, 132, 100, 153, 0.15, 1, true, false, 1.5, 1, 2100, 380, "stump");
+    var lstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/lg_stump.png"), 76, 22, 98, 194, 0.15, 1, true, false, 1.5, 1, 2400, 345, "stump");
   
     //Game Over
     var death = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Gameover/deathBackground.png"), 0);

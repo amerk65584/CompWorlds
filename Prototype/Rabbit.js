@@ -15,6 +15,7 @@ function Bunny(game, ctx, spriteSheet, monster, score) {
     this.animation = new Animation(spriteSheet, 240, 114, 58, 57, 0.15, 4, true, true);
     this.jumpAnimation = new Animation(spriteSheet, 70, 0, 62, 57, 1, 1, false, true);
     this.x = 200;
+    this.totalHeight = 100;
     this.ground = 550 - 57; // changed from 400
     this.plane = this.ground;
     this.lastBottom = null;
@@ -34,13 +35,12 @@ Bunny.prototype.update = function () {
                 this.jumping = false;
             }
             var jumpDistance = (this.jumpAnimation.elapsedTime / this.jumpAnimation.totalTime) * 1.09;
-            var totalHeight = 100;
 
             if (jumpDistance > 0.5)
                 jumpDistance = 1 - jumpDistance;
 
             //var height = jumpDistance * 2 * totalHeight;
-            var height = totalHeight*(-6 * (jumpDistance * jumpDistance - jumpDistance));
+            var height = this.totalHeight*(-6 * (jumpDistance * jumpDistance - jumpDistance));
             this.lastBottom = this.boundingBox.bottom;
             this.y = this.plane - height;
             this.boundingBox = new BoundingBox(this.x, this.y - 43, 58, 57);
@@ -48,7 +48,7 @@ Bunny.prototype.update = function () {
         } 
         if (this.falling) {
             this.lastBottom = this.boundingBox.bottom;
-            this.y = this.ground;
+            this.y += this.game.clockTick / this.jumpAnimation.totalTime * 4 * this.totalHeight;
             this.plane = this.ground;
             this.falling = false;
             this.boundingBox = new BoundingBox(this.x, this.y, this.jumpAnimation.frameWidth, this.jumpAnimation.frameHeight);
