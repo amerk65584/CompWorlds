@@ -335,6 +335,7 @@ function backup (game, ctx) {
     for(var i = 0; i < game.entities.length; i++) {
         copy[i] = game.entities[i];
     }
+    console.log(copy);
 }
 
 function restore (game, ctx) {
@@ -343,6 +344,7 @@ function restore (game, ctx) {
         game.entities[i] = copy[i];
         game.entities[i].removeFromWorld = false;
     }
+    console.log(game.entities)
 }
 
 function reset(game, ctx) {

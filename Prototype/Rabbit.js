@@ -130,7 +130,6 @@ Bunny.prototype.collide = function() {
                 } else if (this.game.entities[i] instanceof Platform) {
                     if (this.game.entities[i].name === "stump") {
                         if (this.lastBottom < this.game.entities[i].boundingBox.top && this.jumping) {
-                            console.log("hi")
                             this.jumping = false;
                             this.falling = false;
                             this.plane = this.game.entities[i].boundingBox.top - this.animation.frameHeight + 10;
@@ -139,15 +138,11 @@ Bunny.prototype.collide = function() {
                         }
                         if (!this.jumping && !this.falling) {
                             if (this.game.entities[i].boundingBox.right - 200 < 5) {
-                                console.log("Hi")
                                 this.falling = true;
                             }
                         }
                     }
                     if (this.game.entities[i].name === "bonus") {
-                        // this.game.entities[12].x = 1000;
-                        // this.game.entities[11].x = 1015;
-                        // this.game.entities[10].x = 950;
                         bonus(this.game, this.ctx);                        
                     }
                     if (this.game.entities[i].name === "end") {
