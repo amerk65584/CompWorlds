@@ -168,6 +168,7 @@ ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_4.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/tree_layer_5.png");
 
 //Platform
+ASSET_MANAGER.queueDownload("./imgs/Platforms/portal.png");
 ASSET_MANAGER.queueDownload("./imgs/Platforms/hole_portal.png");
 ASSET_MANAGER.queueDownload("./imgs/Platforms/bush.png");
 ASSET_MANAGER.queueDownload("./imgs/Platforms/sign.png");
@@ -264,12 +265,12 @@ function initialize (gameEngine, ctx) {
     gameEngine.addEntity(back5);
     gameEngine.addEntity(back6);
 
-    // gameEngine.addEntity(sign);
-    // gameEngine.addEntity(snail);
-    // gameEngine.addEntity(hole);
-    gameEngine.addEntity(sstump);
-    gameEngine.addEntity(mstump);
-    gameEngine.addEntity(lstump);
+    gameEngine.addEntity(sign);
+    gameEngine.addEntity(snail);
+    gameEngine.addEntity(hole);
+    // gameEngine.addEntity(sstump);
+    // gameEngine.addEntity(mstump);
+    // gameEngine.addEntity(lstump);
 
     
     // gameEngine.addEntity(bear);
@@ -306,6 +307,8 @@ function bonus (game, ctx) {
     for (var i = 4; i < game.entities.length - 3; i++) {
         game.entities[i].removeFromWorld = true;
     }
+    var portal = new Platform(game, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/portal.png"), 0, 0, 200, 367, 0.15, 1, true, false, 1.2, 1, 700, 300, "end")
+    game.addEntity(portal);
     var gold;
     for (var i = 0; i < 10; i++) {
         gold = new Pickup(game, ctx, ASSET_MANAGER.getAsset("./imgs/Pickups/goldCarrot.png"), 0, 0, 39, 62, .15, 5, true, true, 2, 1, 1000 + 100 * i, 475, "gold");

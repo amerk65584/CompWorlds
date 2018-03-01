@@ -140,6 +140,8 @@ Bunny.prototype.collide = function() {
                     if (this.game.entities[i].name === "bonus") {
                         bonus(this.game, this.ctx);
                     }
+                    if (this.game.entities[i].name === "end") {
+                    }
                 /*********************
                  * Monster interaction
                  ********************/
