@@ -270,9 +270,9 @@ function initialize (gameEngine, ctx) {
     gameEngine.addEntity(sign);
     gameEngine.addEntity(snail);
     gameEngine.addEntity(hole);
-    // gameEngine.addEntity(sstump);
-    // gameEngine.addEntity(mstump);
-    // gameEngine.addEntity(lstump);
+    gameEngine.addEntity(sstump);
+    gameEngine.addEntity(mstump);
+    gameEngine.addEntity(lstump);
 
     
     gameEngine.addEntity(bear);

@@ -50,7 +50,10 @@ Bunny.prototype.update = function () {
             this.lastBottom = this.boundingBox.bottom;
             this.y += this.game.clockTick / this.jumpAnimation.totalTime * 4 * this.totalHeight;
             this.plane = this.ground;
-            this.falling = false;
+            if (this.y > this.ground) {
+                this.y = this.ground;
+                this.falling = false;
+            }
             this.boundingBox = new BoundingBox(this.x, this.y, this.jumpAnimation.frameWidth, this.jumpAnimation.frameHeight);
         } 
         if (!this.jumping && !this.falling) {
