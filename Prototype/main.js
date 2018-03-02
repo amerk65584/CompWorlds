@@ -138,6 +138,7 @@ var ASSET_MANAGER = new AssetManager();
 
 //Rabbit
 ASSET_MANAGER.queueDownload("./imgs/Rabbit/Rev_Bunny.png");
+ASSET_MANAGER.queueDownload("./imgs/Rabbit/cheer_Bunny.png");
 
 //Monsters
 ASSET_MANAGER.queueDownload("./imgs/Monster/wraith.png");
@@ -253,8 +254,10 @@ function initialize (gameEngine, ctx) {
     var corpse = new DeadBunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Gameover/deadBunny.png"));
 
     //Rabbits
-    var bunny = new Bunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png"), wraith, score, vignette); 
+    var bunny = new Bunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png"), wraith, score, vignette);
 
+    //var cheer = new Pickup(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/cheer_Bunny.png"), 251, 284, 58, 58, .45, 2, true, false, 2, .02, 475, 475, "notgold"); 
+    
     //gameEngine.addEntity(pause_back);
     gameEngine.addEntity(pause_back);
     gameEngine.addEntity(death);
@@ -278,12 +281,12 @@ function initialize (gameEngine, ctx) {
     gameEngine.addEntity(mstump);
     gameEngine.addEntity(lstump);
 
-    
     gameEngine.addEntity(bear);
     gameEngine.addEntity(crow);
     gameEngine.addEntity(hawk);
     gameEngine.addEntity(stumpy);
     gameEngine.addEntity(snake);
+    //gameEngine.addEntity(cheer);
 
     // if (getRandomInt(0, 1) === 0) {
     //     gameEngine.addEntity(wraith);
@@ -329,6 +332,8 @@ function bonus (game, ctx) {
         gold = new Pickup(game, ctx, ASSET_MANAGER.getAsset("./imgs/Pickups/goldCarrot.png"), 0, 0, 39, 62, .15, 5, true, true, 2, 1, 1000 + 100 * i, 475, "gold");
         game.addEntity(gold);
     }
+    // var cheer = new Pickup(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/cheer_Bunny.png"), 251, 284, 58, 58, .45, 2, true, false, 2, .02, 475, 475, "notgold"); 
+    // game.addEntity(cheer);
 }
 
 function backup (game, ctx) {
