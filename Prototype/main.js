@@ -256,7 +256,7 @@ function initialize (gameEngine, ctx) {
     //Rabbits
     var bunny = new Bunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png"), wraith, score, vignette);
 
-    //var cheer = new Pickup(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/cheer_Bunny.png"), 251, 284, 58, 58, .45, 2, true, false, 2, .02, 475, 475, "notgold"); 
+    //var cheer = new CheerBunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/cheer_Bunny.png"), 251, 284, 58, 58, .45, 2, true, false, 2, .02, 475, 475, "notgold"); 
     
     //gameEngine.addEntity(pause_back);
     gameEngine.addEntity(pause_back);
@@ -332,7 +332,7 @@ function bonus (game, ctx) {
         gold = new Pickup(game, ctx, ASSET_MANAGER.getAsset("./imgs/Pickups/goldCarrot.png"), 0, 0, 39, 62, .15, 5, true, true, 2, 1, 1000 + 100 * i, 475, "gold");
         game.addEntity(gold);
     }
-    // var cheer = new Pickup(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/cheer_Bunny.png"), 251, 284, 58, 58, .45, 2, true, false, 2, .02, 475, 475, "notgold"); 
+    // var cheer = new CheerBunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/cheer_Bunny.png"), 251, 284, 58, 58, .45, 2, true, false, 2, .02, 475, 475, "notgold"); 
     // game.addEntity(cheer);
 }
 
