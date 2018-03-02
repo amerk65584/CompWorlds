@@ -64,34 +64,6 @@ Animation.prototype.isDone = function () {
 
 
 /*********************
- * Dead Bunny Object *
- *********************/
-
-function DeadBunny(game, spritesheet) {
-    this.animation = new Animation(spritesheet, 0, 0, 65, 60, 1, 4, false, false);
-    this.spriteSheet = spritesheet;
-    this.x = 485;
-    this.y = 450;
-    this.isDone = false;
-    this.game = game;
-    this.ctx = game.ctx;
-}
-
-DeadBunny.prototype.draw = function () {
-    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-}
-
-DeadBunny.prototype.update = function () {
-    if (this.animation.elapsedTime > this.animation.totalTime * 3 / 4) {
-        this.animation.startX = 195;
-        this.animation.frameDuration = 9999;
-        this.animation.frames = 1;
-        this.animation.loop = true;
-    }
-    Entity.prototype.draw.call(this);
-}
-
-/*********************
  * temp Pause Button *
  *********************/
 //Temp button code
