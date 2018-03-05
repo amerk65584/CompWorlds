@@ -2,6 +2,7 @@
  * Rabbit *
  **********/
 var myJump;
+var myCoin;
 var hasPlayed = false;
 
 function Bunny(game, ctx, spriteSheet, monster, score, black) {
@@ -24,6 +25,7 @@ function Bunny(game, ctx, spriteSheet, monster, score, black) {
     this.lastBottom = null;
     this.boundingBox = new BoundingBox(this.x, this.ground, 58, 57);
     myJump = new Audio("./sounds/jump_08.wav");
+    myCoin = new Audio("./sounds/coin.wav");
     Entity.call(this, game, 200, 480); // changed from 400
 }
 
@@ -118,9 +120,11 @@ Bunny.prototype.collide = function() {
                         this.game.entities[i].x = i * 200;
                         this.game.entities[i].boundingBox = new BoundingBox(this.game.entities[i].x, this.game.entities[i].y, 
                             this.game.entities[i].width, this.game.entities[i].height);
+                        myCoin.play();
                     } else if (this.game.entities[i].type === "gold") {
                         this.game.entities[i].removeFromWorld = true;
                         this.score.score += 10;
+                        myCoin.play();
                     }
                 /*********************
                  * enemy interaction
