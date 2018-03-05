@@ -7,6 +7,7 @@
  *********************/
 var copy = [];
 var score = null;
+var myMusic;
 
 function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse) {
     this.spriteSheet = spriteSheet;
@@ -20,6 +21,7 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDu
     this.elapsedTime = 0;
     this.loop = loop;
     this.reverse = reverse;
+    myMusic = new Audio("./sounds/gameMusic.wav");
 }
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
@@ -173,6 +175,8 @@ ASSET_MANAGER.downloadAll(function () {
     var gameEngine = new GameEngine();
     gameEngine.init(ctx);
     gameEngine.start();
+    myMusic.loop = true;
+    myMusic.play();
     initialize(gameEngine, ctx);
 });
 

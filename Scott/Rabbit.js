@@ -1,7 +1,8 @@
 /**********
  * Rabbit *
  **********/
-
+var myJump;
+var hasPlayed = false;
 
 function Bunny(game, ctx, spriteSheet, monster) {
     this.monster = monster;
@@ -16,6 +17,7 @@ function Bunny(game, ctx, spriteSheet, monster) {
     this.x = 200;
     this.ground = 550 - 57; // changed from 400
     this.boundingBox = new BoundingBox(this.x, this.ground - 57, 58, 57);
+    myJump = new Audio("./sounds/jump_08.wav");
     Entity.call(this, game, 200, 480); // changed from 400
 }
 function OnJump(){
@@ -29,18 +31,10 @@ Bunny.prototype = new Entity();
 Bunny.prototype.constructor = Bunny;
 
 Bunny.prototype.update = function () {
-    var myJump;
-    var hasPlayed = false;
-    myJump = new Audio("./sounds/jump_08.wav");
     if (this.game.running) {
         if (this.game.space) this.jumping = true;
         if (this.jumping) {
-            function OnJump(){
-                if(!hasPlayed){
-                    myJump.play();
-                    hasPlayed = true;
-                }
-            }
+            OnJump();
             if (this.jumpAnimation.isDone()) {
                 this.jumpAnimation.elapsedTime = 0;
                 this.jumping = false;
