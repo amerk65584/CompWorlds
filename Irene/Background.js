@@ -1,6 +1,14 @@
+
 /*********************
  * Background Object *
  *********************/
+var high = false;
+
+function readFile(){
+    jQuery.get('scores.txt', function(txt){
+        $('#output'.text(txt));
+    });
+}
 
 function Background(game, ctx, spritesheet, speed, pause, visible) {
     this.speed = speed; 
@@ -26,7 +34,22 @@ function Background(game, ctx, spritesheet, speed, pause, visible) {
 
 		// Reset after image runs off screen
 		if (this.x >= this.backgroundWidth)
-			this.x = 0;
+            this.x = 0;
+
+        if (high) {
+            this.ctx.fillStyle = "Black";
+            this.ctx.font = "20pt Comic Sans MS";
+            this.ctx.fillText("1. 1053", 450, 210);
+            this.ctx.fillText("2. 978", 450, 240);
+            this.ctx.fillText("3. 748", 450, 270);
+            this.ctx.fillText("4. 738", 450, 300);
+            this.ctx.fillText("5. 710", 450, 330);
+            this.ctx.fillText("6. 631", 450, 360);
+            this.ctx.fillText("7. 628", 450, 390);
+            this.ctx.fillText("8. 597", 450, 420);
+            this.ctx.fillText("9. 582", 450, 450);
+            this.ctx.fillText("10. 572", 450, 480);
+        }
 	};
 }
 
@@ -85,15 +108,22 @@ Background.prototype.draw = function () {
     //HighScore
     if (this.game.click.x >= 550 && this.game.click.y >= 355 && this.game.click.x <= 730 && this.game.click.y <= 430 && !this.game.running && this.screen === "main") {
         this.screen = "high";
+        high = true;
+        // console.log(this.game.entities);
+        console.log("y")
         this.game.main = this.game.entities[this.game.entities.length - 1];
         this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
+
+        
     }
-    //Back to Menu from Tutorial
+    //Back to Menu from Highscore
     if (this.game.click.x >= 43 && this.game.click.y >= 555 && this.game.click.x <= 195 && this.game.click.y <= 632 && this.game.main && this.screen === "high") {
         var main = new Background(this.game, this.ctx, this.game.main.spritesheet, this.game.main.speed, this.game.main.pause, this.game.main.visible);
         this.game.addEntity(main);
         this.game.main = null;
         this.screen = "main";
+        high = false;
+        console.log("n")
     }
     //Play Again from Death
     if (this.game.click.x >= 107 && this.game.click.y >= 520 && this.game.click.x <= 315 && this.game.click.y <= 610 && this.game.running && this.screen === "dead") {
